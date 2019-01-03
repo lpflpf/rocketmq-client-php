@@ -3,7 +3,7 @@ RM              = rm -f
 CPP_FLAGS       = -Wall -c -I. -O2 -std=c++11
 
 #Edit these lines to correspond with your own directories
-LIBRARY_DIR		= /usr/local/lib/php/extensions/no-debug-non-zts-20180731 
+LIBRARY_DIR		= `php-config --extension-dir` 
 
 LD              = g++
 LD_FLAGS        = -Wall -shared -O2
