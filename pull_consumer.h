@@ -1,8 +1,10 @@
-#include "common.h"
 #ifndef ROCKETMQ_CLIENT_PHP_PULL_CONSUMER_H
 #define ROCKETMQ_CLIENT_PHP_PULL_CONSUMER_H
+
+#include "common.h"
 #include <rocketmq/DefaultMQPullConsumer.h>
 #include "message.h"
+
 void PrintPullResult(rocketmq::PullResult* result) {
 	std::cout << result->toString() << std::endl;
 	if (result->pullStatus == rocketmq::FOUND) {
@@ -25,6 +27,29 @@ uint64_t getMessageQueueOffset(rocketmq::MQMessageQueue mq) {
 	return 0;
 }
 
+class MessageQueue : public Php::Base 
+{
+	private:
+		rocketmq::MQMessageQueue queue;
+		rocketmq::DefaultMQPullConsumer *consumer;
+		int64_t offset;
+
+	public:
+		MessageQueue(rocketmq::MQMessageQueue queue){
+			this->queue = queue;
+			offset = 0;
+		}
+
+		Php::Value getMessageQueueOffset(){
+			return offset;
+		}
+
+		void pull (Php::Parameters param){
+			std::string tag  = Php::Value(param[0]);
+			rocketmq::PullResult result = consumer->pull(this->queue, tag, this->offset, 32);
+		}
+
+};
 
 
 class MConsumer : public Php::Base 

@@ -30,37 +30,37 @@ class Message: public Php::Base {
 		Php::Value getBornHostNameString(){
 			return this->message.getBornHostNameString();
 		}
-	    Php::Value getStoreTimestamp(){
+		Php::Value getStoreTimestamp(){
 			return (int64_t)this->message.getStoreTimestamp();
 		}
-	    Php::Value getStoreHost(){
+		Php::Value getStoreHost(){
 			return this->message.getStoreHost().sa_data;
 		}
-	    Php::Value getStoreHostString(){
+		Php::Value getStoreHostString(){
 			return this->message.getStoreHostString();
 		}
-	    Php::Value getMsgId(){
+		Php::Value getMsgId(){
 			return this->message.getMsgId();
 		}
-	    Php::Value getOffsetMsgId(){
+		Php::Value getOffsetMsgId(){
 			return this->message.getOffsetMsgId();
 		}
-	    Php::Value getBodyCRC(){
+		Php::Value getBodyCRC(){
 			return this->message.getBodyCRC();
 		}
-	    Php::Value getQueueOffset(){
+		Php::Value getQueueOffset(){
 			return (int64_t)this->message.getQueueOffset();
 		}
-	    Php::Value getCommitLogOffset(){
+		Php::Value getCommitLogOffset(){
 			return (int64_t)this->message.getCommitLogOffset();
 		}
-	    Php::Value getStoreSize(){
+		Php::Value getStoreSize(){
 			return this->message.getStoreSize();
 		}
-	    Php::Value getReconsumeTimes(){
+		Php::Value getReconsumeTimes(){
 			return this->message.getReconsumeTimes();
 		}
-	    Php::Value getPreparedTransactionOffset(){
+		Php::Value getPreparedTransactionOffset(){
 			return (int64_t)this->message.getPreparedTransactionOffset();
 		}
 
