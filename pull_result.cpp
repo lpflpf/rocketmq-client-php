@@ -1,42 +1,36 @@
 #include "pull_result.h"		
 
-PullResult::PullResult(rocketmq::PullResult *result){
+PullResult::PullResult(rocketmq::PullResult result){
 	this->result = result;
 }
 
 Php::Value PullResult::getPullStatus(){
-	return this->result->pullStatus;
+	return this->result.pullStatus;
 }
 
 Php::Value PullResult::getNextBeginOffset(){
-	return (int64_t)this->result->nextBeginOffset;
+	return (int64_t)this->result.nextBeginOffset;
 }
 
 Php::Value PullResult::getMinOffset(){
-	return (int64_t)this->result->minOffset;
+	return (int64_t)this->result.minOffset;
 }
 
 Php::Value PullResult::getMaxOffset(){
-	return (int64_t)this->result->maxOffset;
+	return (int64_t)this->result.maxOffset;
 }
 
-Php::Value PullResult::current(){
-	return Php::Object("Message", new Message(this->result->msgFoundList[this->position]));
-}
+void registerPullResult(Php::Namespace &rocketMQNamespace){
+		Php::Class<PullResult> pullResultClass("PullResult");
 
-void PullResult::rewind(){
-	this->position = 0;
-}
+		pullResultClass.method<&PullResult::getCount>("getCount");
+		pullResultClass.method<&PullResult::getMessage>("getMessage", {
+				Php::ByVal("index", Php::Type::Numeric),
+				});
+		pullResultClass.method<&PullResult::getPullStatus>("getPullStatus");
+		pullResultClass.method<&PullResult::getNextBeginOffset>("getNextBeginOffset");
+		pullResultClass.method<&PullResult::getMinOffset>("getMinOffset");
+		pullResultClass.method<&PullResult::getMaxOffset>("getMaxOffset");
 
-Php::Value PullResult::key(){
-	return this->position;
+		rocketMQNamespace.add(pullResultClass);
 }
-
-void PullResult::next(){
-	this->position += 1;
-}
-
-Php::Value PullResult::valid(){
-	return (unsigned int64_t)this->position < this->result->msgFoundList.size();
-}
-

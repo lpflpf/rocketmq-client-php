@@ -4,15 +4,30 @@
 #include <rocketmq/PullResult.h>
 #include <phpcpp.h>
 #include "message.h"
+#define PULL_RESULT_CLASS_NAME   NAMESPACE_NAME"\\PullResult"
 
-class PullResult:public Php::Base {
+class PullResult: public Php::Base
+{
 	private:
-		rocketmq::PullResult *result;
+		rocketmq::PullResult result;
 		int64_t position = 0;
 	public :
-		PullResult(rocketmq::PullResult *result);
+		~PullResult(){ }
+	   	PullResult(rocketmq::PullResult result);
+		Php::Value getCount(){
+			return (int64_t)this->result.msgFoundList.size();
+		}
 
-		Php::Value getPullStatus();
+		Php::Value getMessage(Php::Parameters &param){
+			Php::Value idx_val = param[0];
+			int idx = idx_val;
+
+			if (idx < (int)this->result.msgFoundList.size()){
+				Php::Value msg(Php::Object(MESSAGE_CLASS_NAME, new Message(this->result.msgFoundList[idx])));
+				return msg;
+			}
+			return nullptr;
+		}
 
 		Php::Value getNextBeginOffset();
 
@@ -20,14 +35,8 @@ class PullResult:public Php::Base {
 
 		Php::Value getMaxOffset();
 
-		Php::Value current();
-
-		void rewind();
-
-		Php::Value key();
-
-		void next();
-
-		Php::Value valid();
+		Php::Value getPullStatus();
 };
+
+void registerPullResult(Php::Namespace &rocketMQNamespace);
 #endif

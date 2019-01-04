@@ -4,31 +4,10 @@
 #include "common.h"
 #include <rocketmq/DefaultMQPullConsumer.h>
 #include "message.h"
-
-void PrintPullResult(rocketmq::PullResult* result) {
-	std::cout << result->toString() << std::endl;
-	if (result->pullStatus == rocketmq::FOUND) {
-		std::cout << result->toString() << std::endl;
-		std::vector<rocketmq::MQMessageExt>::iterator it =
-			result->msgFoundList.begin();
-	}
-}
+#include "message_queue.h"
 
 
-std::map<rocketmq::MQMessageQueue, uint64_t> g_offseTable;
-void putMessageQueueOffset(rocketmq::MQMessageQueue mq, uint64_t offset) {
-	g_offseTable[mq] = offset;
-}
-uint64_t getMessageQueueOffset(rocketmq::MQMessageQueue mq) {
-	std::map<rocketmq::MQMessageQueue, uint64_t>::iterator it = g_offseTable.find(mq);
-	if (it != g_offseTable.end()) {
-		return it->second;
-	}
-	return 0;
-}
-
-
-class MConsumer : public Php::Base 
+class PullConsumer:public Php::Base
 {
 	private:
 		std::string groupName;
@@ -36,10 +15,9 @@ class MConsumer : public Php::Base
 		std::string topic;
 		rocketmq::DefaultMQPullConsumer *consumer;
 		std::vector<rocketmq::MQMessageQueue> mqs;
-
 	public:
-		MConsumer(){}
-		virtual ~MConsumer(){}
+		PullConsumer(){}
+		virtual ~PullConsumer(){}
 		virtual void __construct(){}
 
 		void start(){
@@ -50,43 +28,17 @@ class MConsumer : public Php::Base
 			this->consumer->start();
 		}
 
-		void fetch(){
-			bool noNewMsg = false;
+		Php::Value getQueues(){
 			this->consumer->fetchSubscribeMessageQueues(this->topic, this->mqs);
+			Php::Value result;
+			int idx = 0;
+
 			std::vector<rocketmq::MQMessageQueue>::iterator iter = mqs.begin();
 			for (; iter != mqs.end(); ++iter) {
-				std::cout << "mq:" << (*iter).toString() << std::endl;
 				rocketmq::MQMessageQueue mq = (*iter);
-				do {
-					try {
-						rocketmq::PullResult result = consumer->pull(mq, "*", getMessageQueueOffset(mq), 32);
-						std::cout << result.msgFoundList.size() << std::endl; 
-						if (result.pullStatus != rocketmq::BROKER_TIMEOUT) {
-							putMessageQueueOffset(mq, result.nextBeginOffset);
-							PrintPullResult(&result);
-						} else {
-							std::cout << "broker timeout occur" << std::endl;
-						}
-						switch (result.pullStatus) {
-							case rocketmq::FOUND:
-							case rocketmq::NO_MATCHED_MSG:
-							case rocketmq::OFFSET_ILLEGAL:
-							case rocketmq::BROKER_TIMEOUT:
-								break;
-							case rocketmq::NO_NEW_MSG:
-								noNewMsg = true;
-								break;
-							default:
-								break;
-						}
-
-					} catch (rocketmq::MQClientException &e) {
-						std::cout << e << std::endl;
-					}
-
-				} while (!noNewMsg);
-
+				result[idx++] = Php::Object(MESSAGE_QUEUE_CLASS_NAME , new MessageQueue(mq, this->consumer)); 
 			}
+			return result;
 		}
 
 		void setNamesrvDomain(Php::Parameters &param){
@@ -106,7 +58,7 @@ class MConsumer : public Php::Base
 			std::string topic = val;
 			this->topic = topic;
 		}
-};
 
+};
 
 #endif

@@ -1,9 +1,12 @@
 
 #ifndef ROCKETMQ_CLIENT_PHP_MESSAGE_H
 #define ROCKETMQ_CLIENT_PHP_MESSAGE_H
-#include<phpcpp.h>
-#include<iostream>
-#include<rocketmq/MQMessageExt.h>
+#include "common.h"
+#include <phpcpp.h>
+#include <iostream>
+#include <rocketmq/MQMessageExt.h>
+
+#define MESSAGE_CLASS_NAME   NAMESPACE_NAME"\\MESSAGE"
 
 class Message: public Php::Base {
 	private:
@@ -95,5 +98,7 @@ class Message: public Php::Base {
 		Php::Value toString();
 
 };
+
+void registerMessage(Php::Namespace &rocketMQNamespace);
 
 #endif

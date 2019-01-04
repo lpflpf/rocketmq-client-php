@@ -2,7 +2,7 @@
 
 namespace RocketMQ;
 
-$consumer = new MQPushConsumer();
+$consumer = new PushConsumer();
 $consumer->setInstanceName("testGroup");
 $consumer->setTopic("TopicTest");
 $consumer->setNamesrvDomain("127.0.0.1:9876");

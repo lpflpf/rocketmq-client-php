@@ -31,4 +31,6 @@ class Producer : public Php::Base
 		}
 };
 
+void registerProducer(Php::Namespace &rocketMQNamespace);
+
 #endif

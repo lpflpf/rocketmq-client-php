@@ -1,4 +1,6 @@
 <?php
+
+namespace RocketMQ;
 $instanceName = "MessageQueue";
 
 $consumer = new MQConsumer();

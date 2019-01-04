@@ -2,7 +2,7 @@
 namespace RocketMQ;
 $instanceName = "MessageQueue";
 
-$producer = new MQProducer();
+$producer = new Producer();
 $producer->setInstanceName($instanceName);
 $producer->setNamesrvDomain("127.0.0.1:9876");
 $producer->start();

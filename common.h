@@ -3,4 +3,7 @@
 #include <string>
 #include <iostream>
 #include <phpcpp.h>
+
+#define NAMESPACE_NAME "RocketMQ"
+
 #endif

@@ -18,7 +18,7 @@ class MyMsgListener : public rocketmq::MessageListenerConcurrently {
 
 		rocketmq::ConsumeStatus consumeMessage(const std::vector<rocketmq::MQMessageExt> &msgs) {
 			for (size_t i = 0; i < msgs.size(); ++i) {
-				Php::Value msg(Php::Object("Message", new Message(msgs[i])));
+				Php::Value msg(Php::Object(MESSAGE_CLASS_NAME, new Message(msgs[i])));
 				this->callback(msg);
 			}
 
@@ -27,7 +27,7 @@ class MyMsgListener : public rocketmq::MessageListenerConcurrently {
 };
 
 
-class MPushConsumer : public Php::Base{
+class PushConsumer : public Php::Base{
 	private:
 		std::string groupName;
 		std::string namesrv_domain;
@@ -35,8 +35,8 @@ class MPushConsumer : public Php::Base{
 		rocketmq::DefaultMQPushConsumer *consumer;
 		Php::Value    callback;
 	public:
-		MPushConsumer(){}
-		virtual ~MPushConsumer(){}
+		PushConsumer(){}
+		virtual ~PushConsumer(){}
 		virtual void __construct(){}
 
 		void setNamesrvDomain(Php::Parameters &param){
