@@ -16,17 +16,17 @@ extern "C"
 		static Php::Extension extension("rocketmq", "1.0");
 
 		// define classes
-		Php::Class<MProducer> producerClass("MQProducer");
+		Php::Class<Producer> producerClass("Producer");
 
-		producerClass.method<&MProducer::__construct>("__construct");
-		producerClass.method<&MProducer::setInstanceName>("setInstanceName", {
+		producerClass.method<&Producer::__construct>("__construct");
+		producerClass.method<&Producer::setInstanceName>("setInstanceName", {
 				Php::ByVal("groupName", Php::Type::String),
 				});
-		producerClass.method<&MProducer::setNamesrvDomain>("setNamesrvDomain", {
+		producerClass.method<&Producer::setNamesrvDomain>("setNamesrvDomain", {
 				Php::ByVal("nameserver", Php::Type::String),
 				});
-		producerClass.method<&MProducer::start>("start");
-		producerClass.method<&MProducer::push>("push", {
+		producerClass.method<&Producer::start>("start");
+		producerClass.method<&Producer::push>("push", {
 				Php::ByVal("topic", Php::Type::String),
 				Php::ByVal("tag", Php::Type::String),
 				Php::ByVal("body", Php::Type::String),

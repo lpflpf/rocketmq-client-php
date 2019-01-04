@@ -1,49 +1,33 @@
 #ifndef ROCKETMQ_CLIENT_PHP_PULL_RESULT_H
 #define ROCKETMQ_CLIENT_PHP_PULL_RESULT_H
 
+#include <rocketmq/PullResult.h>
+#include <phpcpp.h>
+#include "message.h"
+
 class PullResult:public Php::Base {
 	private:
 		rocketmq::PullResult *result;
 		int64_t position = 0;
 	public :
-		PullResult(rocketmq::PullResult *result){
-			this->result = result;
-		}
+		PullResult(rocketmq::PullResult *result);
 
-		Php::Value getPullStatus(){
-			return this->result->pullStatus;
-		}
+		Php::Value getPullStatus();
 
-		Php::Value getNextBeginOffset(){
-			return (int64_t)this->result->nextBeginOffset;
-		}
+		Php::Value getNextBeginOffset();
 
-		Php::Value getMinOffset(){
-			return (int64_t)this->result->minOffset;
-		}
+		Php::Value getMinOffset();
 
-		Php::Value getMaxOffset(){
-			return (int64_t)this->result->maxOffset;
-		}
+		Php::Value getMaxOffset();
 
-		Php::Value current(){
-			return Php::Object("Message", new Message(this->result->msgFoundList[this->position]));
-		}
+		Php::Value current();
 
-		void rewind(){
-			this->position = 0;
-		}
+		void rewind();
 
-		Php::Value key(){
-			return this->position;
-		}
+		Php::Value key();
 
-		void next(){
-			this->position += 1;
-		}
+		void next();
 
-		Php::Value valid(){
-			return (unsigned int64_t)this->position < this->result->msgFoundList.size();
-		}
+		Php::Value valid();
 };
 #endif
