@@ -19,7 +19,7 @@ foreach($queues as $queue){
 
 	$newMsg = true;
 	while($newMsg){
-		$pullResult = $queue->pull("*");
+		$pullResult = $queue->pull("*", 8);
 	
 		switch ($pullResult->getPullStatus()){
 		case PullStatus::FOUND:
@@ -31,13 +31,12 @@ foreach($queues as $queue){
 			echo "->pullStatus: " . $pullResult->getPullStatus() . "\n";
 			echo "\n";
 			for($i = 0; $i < $pullResult->getCount(); $i ++){
-				echo $i . "\n";
 				$msg = $pullResult->getMessage($i);
-				echo $msg->getMsgId() . "\n";
+			//	echo $msg->getMsgId() . "\n";
 				echo $msg->getBody(). "\n";
-				echo $msg->getKeys() . "\n";
-				echo $msg->getTopic() . "\n";
-				echo "-----------------------------------------\n";
+			//	echo $msg->getKeys() . "\n";
+			//	echo $msg->getTopic() . "\n";
+			//	echo "-----------------------------------------\n";
 			}
 			break;
 		case PullStatus::NO_MATCHED_MSG:

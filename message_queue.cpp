@@ -13,9 +13,14 @@ void MessageQueue::setMessageQueueOffset(Php::Parameters &param){
 	this->offset = off;
 }
 
+// tag, size;
 Php::Value MessageQueue::pull(Php::Parameters &param){
 	std::string tag  = Php::Value(param[0]);
-	rocketmq::PullResult result = this->consumer->pull(this->queue, tag, this->offset, 32);
+	int size = 32;
+	if (param.size() >= 2){
+		size = Php::Value(param[1]);
+	}
+	rocketmq::PullResult result = this->consumer->pull(this->queue, tag, this->offset, size);
 
 	PullResult *pullResult = new PullResult(result);
 //	std::vector<rocketmq::MQMessageExt>::iterator it =
@@ -34,7 +39,10 @@ void registerMessageQueue(Php::Namespace &rocketMQNamespace){
 
 	messageQueueClass.method<&MessageQueue::getMessageQueueOffset>("getMessageQueueOffset");
 	messageQueueClass.method<&MessageQueue::setMessageQueueOffset>("setMessageQueueOffset");
-	messageQueueClass.method<&MessageQueue::pull>("pull", { Php::ByVal("tag", Php::Type::String), });
+	messageQueueClass.method<&MessageQueue::pull>("pull", { 
+			Php::ByVal("tag", Php::Type::String), 
+			Php::ByVal("size", Php::Type::Numeric, false),
+			});
 
 	rocketMQNamespace.add(messageQueueClass);
 }
