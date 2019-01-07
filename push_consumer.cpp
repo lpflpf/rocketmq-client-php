@@ -1,39 +1,30 @@
 #include "push_consumer.h"
 
 void PushConsumer::setNamesrvDomain(Php::Parameters &param){
-	Php::Value nameserver = param[0];
-	std::string tmp =  nameserver;
-	this->namesrv_domain = tmp;
+	std::string nameserver =  param[0];
+	this->namesrv_domain = nameserver;
 }
 
 void PushConsumer::setInstanceName(Php::Parameters &param){
-	Php::Value val= param[0];
-	std::string groupName= val;
+	std::string groupName= param[0];
 	this->groupName = groupName;
 }  
 
 void PushConsumer::setTryLockTimeout(Php::Parameters &param){
-	this->tryLockTimeout = (int)(Php::Value)param[0];
+	this->tryLockTimeout = param[0];
 }
 
 void PushConsumer::setConnectTimeout(Php::Parameters &param){
-	Php::Value val = param[0];
-	int connectTimeout = val;
-
-	this->connectTimeout = connectTimeout;
+	this->connectTimeout = param[0];
 }
 
 void PushConsumer::setThreadCount(Php::Parameters &param){
-	this->threadCount = (int)param[0];
+	this->threadCount = param[0];
 }
 
 void PushConsumer::subscribe(Php::Parameters &param){
-	Php::Value val = param[0];
-	std::string topic = val;
-
-	val = param[1];
-	std::string tag = val;
-
+	std::string topic = param[0];
+	std::string tag = param[1];
 	this->tag = tag;
 	this->topic = topic;
 }

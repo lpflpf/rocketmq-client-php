@@ -9,8 +9,7 @@ Php::Value MessageQueue::getMessageQueueOffset(){
 	return this->offset;
 }
 void MessageQueue::setMessageQueueOffset(Php::Parameters &param){
-	int64_t off = Php::Value(param[0]);
-	this->offset = off;
+	this->offset = param[0];
 }
 
 // tag, size;
@@ -23,12 +22,6 @@ Php::Value MessageQueue::pull(Php::Parameters &param){
 	rocketmq::PullResult result = this->consumer->pull(this->queue, tag, this->offset, size);
 
 	PullResult *pullResult = new PullResult(result);
-//	std::vector<rocketmq::MQMessageExt>::iterator it =
-//		result.msgFoundList.begin();
-//	for (; it != result.msgFoundList.end(); ++it) {
-//		std::cout << "=======================================================" << std::endl
-//			<< (*it).toString() << std::endl;
-//	}
 	Php::Value pv(Php::Object(PULL_RESULT_CLASS_NAME, pullResult));
 	return pv;
 }

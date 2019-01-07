@@ -35,14 +35,7 @@ extern "C"
 		registerPullResult(rocketMQNamespace);
 
 		// class PullConsumer 
-		Php::Class<PullConsumer> consumerClass("PullConsumer");
-		consumerClass.method<&PullConsumer::__construct>("__construct");
-		consumerClass.method<&PullConsumer::setInstanceName>("setInstanceName", { Php::ByVal("groupName", Php::Type::String), });
-		consumerClass.method<&PullConsumer::setNamesrvDomain>("setNamesrvDomain", { Php::ByVal("nameserver", Php::Type::String), });
-		consumerClass.method<&PullConsumer::setTopic>("setTopic", { Php::ByVal("topic", Php::Type::String), });
-		consumerClass.method<&PullConsumer::start>("start");
-		consumerClass.method<&PullConsumer::getQueues>("getQueues");
-
+		registerPullConsumer(rocketMQNamespace);
 
 		// class MessageQueue
 //		Php::Class<MessageQueue> messageQueueClass("MessageQueue");
@@ -55,7 +48,6 @@ extern "C"
 		// class Message 
 		registerMessage(rocketMQNamespace);
 
-		rocketMQNamespace.add(consumerClass);
 
 		// create extension
 		static Php::Extension extension("rocketmq", "1.0");

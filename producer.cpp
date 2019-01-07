@@ -1,15 +1,13 @@
 #include "producer.h"
 
 void Producer::setInstanceName(Php::Parameters &param){
-	Php::Value groupName = param[0];
-	std::string test = groupName;
-	this->groupName = test;
+	std::string groupName = param[0];
+	this->groupName = groupName;
 }
 
 void Producer::setNamesrvDomain(Php::Parameters &param){
-	Php::Value nameserver = param[0];
-	std::string tmp =  nameserver;
-	this->namesrv_domain = tmp;
+	std::string nameserver =  param[0];
+	this->namesrv_domain = nameserver;
 }
 
 void Producer::start(){
