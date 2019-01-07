@@ -1,0 +1,19 @@
+<?php
+
+class ConsumeFromWhere {
+	const CONSUME_FROM_LAST_OFFSET;
+
+	/**
+	 * @deprecated
+	 */
+
+	const CONSUME_FROM_LAST_OFFSET_AND_FROM_MIN_WHEN_BOOT_FIRST;
+
+	const CONSUME_FROM_MIN_OFFSET;
+	const CONSUME_FROM_MAX_OFFSET;
+
+	const CONSUME_FROM_FIRST_OFFSET;
+
+	const CONSUME_FROM_TIMESTAMP;
+
+}
