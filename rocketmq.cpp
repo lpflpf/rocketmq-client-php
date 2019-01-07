@@ -6,6 +6,7 @@
 #include "pull_status.h"
 #include "pull_result.h"
 #include "message_queue.h"
+#include "consume_type.h"
 
 // symbols are exported according to the "C" language
 extern "C"
@@ -23,17 +24,12 @@ extern "C"
 		// class PullStatus
 		registerPullStatus(rocketMQNamespace);
 
+		// class ConsumeType, ConsumeFromWhere, MessageModel
+		registerConsumeType(rocketMQNamespace);
+
 
 		// class PushConsumer
-		Php::Class<PushConsumer> pushConsumer("PushConsumer");
-		pushConsumer.method<&PushConsumer::__construct>("__construct");
-		pushConsumer.method<&PushConsumer::setNamesrvDomain>("setNamesrvDomain", { Php::ByVal("nameserver", Php::Type::String), });
-		pushConsumer.method<&PushConsumer::setInstanceName>("setInstanceName", { Php::ByVal("groupName", Php::Type::String), });
-		pushConsumer.method<&PushConsumer::setTopic>("setTopic", { Php::ByVal("topic", Php::Type::String), });
-		pushConsumer.method<&PushConsumer::start>("start");
-		pushConsumer.method<&PushConsumer::shutdown>("shutdown");
-		pushConsumer.method<&PushConsumer::setCallback>("setCallback", { Php::ByVal("callback", Php::Type::Callable), });
-
+		registerPushConsumer(rocketMQNamespace);
 
 		// class PullResult
 		registerPullResult(rocketMQNamespace);
@@ -59,7 +55,6 @@ extern "C"
 		// class Message 
 		registerMessage(rocketMQNamespace);
 
-		rocketMQNamespace.add(pushConsumer);
 		rocketMQNamespace.add(consumerClass);
 
 		// create extension

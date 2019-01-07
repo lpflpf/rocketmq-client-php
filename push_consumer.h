@@ -34,61 +34,38 @@ class PushConsumer : public Php::Base{
 		std::string topic;
 		rocketmq::DefaultMQPushConsumer *consumer;
 		Php::Value    callback;
+		int tryLockTimeout = 1000;
+		int connectTimeout = 400;
+		int threadCount = 1;
+		std::string tag = "*";
+
 	public:
 		PushConsumer(){}
 		virtual ~PushConsumer(){}
 		virtual void __construct(){}
 
-		void setNamesrvDomain(Php::Parameters &param){
-			Php::Value nameserver = param[0];
-			std::string tmp =  nameserver;
-			this->namesrv_domain = tmp;
-		}
+		void setNamesrvDomain(Php::Parameters &param);
 
-		void setInstanceName(Php::Parameters &param){
-			Php::Value groupName = param[0];
-			std::string test = groupName;
-			this->groupName = test;
-		}  
+		void setInstanceName(Php::Parameters &param);
 
-		void setTopic(Php::Parameters &param){
-			Php::Value val = param[0];
-			std::string topic = val;
-			this->topic = topic;
-		}
-		void setCallback(Php::Parameters &param){
-			if (!param[0].isCallable())
-				throw Php::Exception("Not a callable type.");
-			this->callback = param[0];
-		}
-		void start(){
-			this->consumer = new rocketmq::DefaultMQPushConsumer(this->groupName);
-			this->consumer->setGroupName(this->groupName);
-			this->consumer->setInstanceName(this->groupName);
-			this->consumer->setNamesrvAddr(this->namesrv_domain);
-			this->consumer->subscribe(this->topic, "*");
-			this->consumer->setConsumeThreadCount(1);
-			this->consumer->setTcpTransportTryLockTimeout(1000);
-			this->consumer->setTcpTransportConnectTimeout(400);
-			MyMsgListener msglistener;
-			msglistener.setCallback(this->callback);
-			this->consumer->registerMessageListener(&msglistener);
-			this->consumer->setConsumeFromWhere(rocketmq::CONSUME_FROM_FIRST_OFFSET);
-			std::cout << this->groupName << this->namesrv_domain << std::endl;
-			try {
-				this->consumer->start();
-			} catch (rocketmq::MQClientException &e) {
-				std::cout << e << std::endl;
-			}
-			sleep(10);
-		}
-		void shutdown(){
-			this->consumer->shutdown();
-		}
-		virtual void __destruct()
-		{
-		}
+		void setTryLockTimeout(Php::Parameters &param);
+
+		void setConnectTimeout(Php::Parameters &param);
+
+		void setThreadCount(Php::Parameters &param);
+
+		void subscribe(Php::Parameters &param);
+		
+		void setCallback(Php::Parameters &param);
+
+		void start();
+
+		void shutdown();
+
+		virtual void __destruct() { }
 
 };
+
+void registerPushConsumer(Php::Namespace &rocketMQNamespace);
 
 #endif

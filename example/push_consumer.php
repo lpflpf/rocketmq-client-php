@@ -4,7 +4,7 @@ namespace RocketMQ;
 
 $consumer = new PushConsumer();
 $consumer->setInstanceName("testGroup");
-$consumer->setTopic("TopicTest");
+$consumer->subscribe("TopicTest", "*");
 $consumer->setNamesrvDomain("127.0.0.1:9876");
 $test = "hello";
 $consumer->setCallback(function($msg)use($test){
