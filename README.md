@@ -24,3 +24,11 @@ rocketMQ 的php客户端
 5.  修改php.ini 文件，增加  
 	`extension=rocketmq.so`  
 6. 完成
+
+## Interface 
+
+### Producer
+   - setInstanceName
+   - setNamesrvDomain
+   - start
+   - push
