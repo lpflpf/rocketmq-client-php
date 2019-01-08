@@ -18,6 +18,9 @@ class PushConsumer{
 	public function setThreadCount($threadCount){
 	}
 
+	public function setListenerType($listenerType){
+	}
+
 	public function subscribe($topic, $tag){
 	}
 

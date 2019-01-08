@@ -1,7 +1,7 @@
 <?php
 
 class MessageModel{
-	const BROADCASTING;
-	const CLUSTERING;
+	const BROADCASTING = 0;
+	const CLUSTERING = 1;
 }
 

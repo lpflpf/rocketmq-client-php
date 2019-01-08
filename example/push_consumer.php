@@ -7,6 +7,7 @@ $consumer->setInstanceName("testGroup");
 $consumer->subscribe("TopicTest", "*");
 $consumer->setNamesrvDomain("127.0.0.1:9876");
 $test = "hello";
+$consumer->setListenerType(MessageListenerType::LISTENER_ORDERLY);
 $consumer->setCallback(function($msg)use($test){
 	echo "queueId:" . $msg->getQueueId() . "\n";
 	echo "bornTimestamp:" . $msg->getBornTimestamp() . "\n";

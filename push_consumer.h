@@ -6,26 +6,6 @@
 #include "message.h"
 #include <rocketmq/DefaultMQPushConsumer.h>
 
-class MyMsgListener : public rocketmq::MessageListenerConcurrently {
-	private:
-		Php::Value callback;
-	public:
-		void setCallback(Php::Value callback){
-			this->callback = callback;
-		}
-		MyMsgListener() {}
-		~MyMsgListener() {}
-
-		rocketmq::ConsumeStatus consumeMessage(const std::vector<rocketmq::MQMessageExt> &msgs) {
-			for (size_t i = 0; i < msgs.size(); ++i) {
-				Php::Value msg(Php::Object(MESSAGE_CLASS_NAME, new Message(msgs[i])));
-				this->callback(msg);
-			}
-
-			return rocketmq::CONSUME_SUCCESS;
-		}
-};
-
 
 class PushConsumer : public Php::Base{
 	private:
@@ -38,6 +18,7 @@ class PushConsumer : public Php::Base{
 		int connectTimeout = 400;
 		int threadCount = 1;
 		std::string tag = "*";
+		int msgListenerType;
 
 	public:
 		PushConsumer(){}
@@ -51,6 +32,8 @@ class PushConsumer : public Php::Base{
 		void setTryLockTimeout(Php::Parameters &param);
 
 		void setConnectTimeout(Php::Parameters &param);
+
+		void setListenerType(Php::Parameters &param);
 
 		void setThreadCount(Php::Parameters &param);
 

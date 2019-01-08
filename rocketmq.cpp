@@ -7,6 +7,8 @@
 #include "pull_result.h"
 #include "message_queue.h"
 #include "consume_type.h"
+#include "consume_status.h"
+#include "msg_listener.h"
 
 // symbols are exported according to the "C" language
 extern "C"
@@ -51,6 +53,8 @@ extern "C"
 		// class ConsumeStatus
 		registerConsumeStatus(rocketMQNamespace);
 
+		// class MessageListenerType
+		registerMessageListenerType(rocketMQNamespace);
 
 		// create extension
 		static Php::Extension extension("rocketmq", "1.0");

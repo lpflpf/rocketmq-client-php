@@ -8,7 +8,7 @@ class ConsumeStatus: public Php::Base
 	// CONSUME_SUCCESS
 	//consume fail, but will be re-consume by call messageLisenter again
 	// RECONSUME_LATER
-}
+};
 
 void registerConsumeStatus(Php::Namespace &rocketMQNamespace){
 	Php::Class<ConsumeStatus> consumeStatusClass("ConsumeStatus");
