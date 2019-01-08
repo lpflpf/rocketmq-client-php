@@ -6,8 +6,6 @@
 class Producer : public Php::Base
 {
 	private:
-		std::string groupName;
-		std::string namesrv_domain;
 		rocketmq::DefaultMQProducer *producer;
 
 	public:
@@ -15,19 +13,32 @@ class Producer : public Php::Base
 
 		virtual ~Producer() { }
 
-		virtual void __construct() { }
+		void __construct(Php::Parameters &param);
 
 		void setInstanceName(Php::Parameters &param);
+		Php::Value getInstanceName();
 
+		void setNamesrvAddr(Php::Parameters &param);
+		Php::Value getNamesrvAddr();
 		void setNamesrvDomain(Php::Parameters &param);
 
+		Php::Value getMQClientId();
+
+		void setGroupName(Php::Parameters &param);
+		Php::Value getGroupName();
+
+//		void setTcpTransportPullThreadNum(Php::Parameters &param);
+
 		void start();
+
 
 		void push(Php::Parameters &params);
 
 		virtual void __destruct(){
-			producer->shutdown();
-			delete(this->producer);
+			if (this->producer != nullptr){
+				producer->shutdown();
+				delete(this->producer);
+			}
 		}
 };
 
