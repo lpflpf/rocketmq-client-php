@@ -10,30 +10,50 @@ void registerMessageListenerType(Php::Namespace &rocketMQNamespace){
 	rocketMQNamespace.add(messageListenerTypeClass);
 }
 
-rocketmq::ConsumeStatus MsgListenerConcurrently::consumeMessage(const std::vector<rocketmq::MQMessageExt> &msgs) {
+rocketmq::ConsumeStatus commonConsumeMessage(const std::vector<rocketmq::MQMessageExt> &msgs, Php::Value callback){
 	for (size_t i = 0; i < msgs.size(); ++i) {
 		Php::Value msg(Php::Object(MESSAGE_CLASS_NAME, new Message(msgs[i])));
-		this->callback(msg);
+		int ret = callback(msg);
+		if (rocketmq::CONSUME_SUCCESS != ret){
+			return rocketmq::RECONSUME_LATER;
+		}
 	}
-
 	return rocketmq::CONSUME_SUCCESS;
+}
+
+rocketmq::ConsumeStatus MsgListenerConcurrently::consumeMessage(const std::vector<rocketmq::MQMessageExt> &msgs) {
+	return commonConsumeMessage(msgs, this->callback);
+//	for (size_t i = 0; i < msgs.size(); ++i) {
+//		Php::Value msg(Php::Object(MESSAGE_CLASS_NAME, new Message(msgs[i])));
+//		if (rocketmq::CONSUME_SUCCESS != this->callback(msg)){
+//			return rocketmq::RECONSUME_LATER;
+//		}
+//	}
+//
+//	return rocketmq::CONSUME_SUCCESS;
 }
 
 rocketmq::ConsumeStatus MsgListenerOrderly::consumeMessage(const std::vector<rocketmq::MQMessageExt> &msgs) {
-	for (size_t i = 0; i < msgs.size(); ++i) {
-		Php::Value msg(Php::Object(MESSAGE_CLASS_NAME, new Message(msgs[i])));
-		this->callback(msg);
-	}
-
-	return rocketmq::CONSUME_SUCCESS;
+	return commonConsumeMessage(msgs, this->callback);
+//	for (size_t i = 0; i < msgs.size(); ++i) {
+//		Php::Value msg(Php::Object(MESSAGE_CLASS_NAME, new Message(msgs[i])));
+//		if (rocketmq::CONSUME_SUCCESS != this->callback(msg)){
+//			return rocketmq::RECONSUME_LATER;
+//		}
+//	}
+//
+//	return rocketmq::CONSUME_SUCCESS;
 }
 
 rocketmq::ConsumeStatus MsgListener::consumeMessage(const std::vector<rocketmq::MQMessageExt> &msgs) {
-	for (size_t i = 0; i < msgs.size(); ++i) {
-		Php::Value msg(Php::Object(MESSAGE_CLASS_NAME, new Message(msgs[i])));
-		this->callback(msg);
-	}
+	return commonConsumeMessage(msgs, this->callback);
+//	for (size_t i = 0; i < msgs.size(); ++i) {
+//		Php::Value msg(Php::Object(MESSAGE_CLASS_NAME, new Message(msgs[i])));
+//		if (rocketmq::CONSUME_SUCCESS != this->callback(msg)){
+//			return rocketmq::RECONSUME_LATER;
+//		}
+//	}
 
-	return rocketmq::CONSUME_SUCCESS;
+//	return rocketmq::CONSUME_SUCCESS;
 }
 

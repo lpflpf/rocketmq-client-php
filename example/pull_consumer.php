@@ -2,6 +2,8 @@
 
 namespace RocketMQ;
 
+include("message.php");
+
 $consumer = new PullConsumer();
 $consumer->setInstanceName("testGroup");
 $consumer->setTopic("TopicTest");
@@ -32,26 +34,7 @@ foreach($queues as $queue){
 			echo "\n";
 			for($i = 0; $i < $pullResult->getCount(); $i ++){
 				$msg = $pullResult->getMessage($i);
-				echo "queueId:" . $msg->getQueueId() . "\n";
-				echo "bornTimestamp:" . $msg->getBornTimestamp() . "\n";
-				echo "bornHostNameString:" . $msg->getBornHostNameString() . "\n";
-				echo "storeTimestamp:" . $msg->getStoreTimestamp() . "\n";
-				echo "msgId:" . $msg->getMsgId() . "\n";
-				echo "offsetMsgId:" . $msg->getOffsetMsgId() . "\n";
-				echo "bodyCRC:" . $msg->getBodyCRC() . "\n";
-				echo "queueOffset:" . $msg->getQueueOffset() . "\n";
-				echo "commitLogOffset:" . $msg->getCommitLogOffset() . "\n";
-				echo "storeSize:" . $msg->getStoreSize() . "\n";
-				echo "reconsumeTimes:" . $msg->getReconsumeTimes() . "\n";
-				echo "preparedTransactionOffset:" . $msg->getPreparedTransactionOffset() . "\n";
-				echo "topic:" . $msg->getTopic() . "\n";
-				echo "tags:" . $msg->getTags() . "\n";
-				echo "keys:" . $msg->getKeys() . "\n";
-				echo "getDelayTimeLevel:" . $msg->getDelayTimeLevel() . "\n";
-				echo "flag:" . $msg->getFlag() . "\n";
-				echo "sysFlag:" . $msg->getSysFlag() . "\n";
-				echo "body:" . $msg->getBody() . "\n";
-				
+				echo_msg($msg);
 			}
 			break;
 		case PullStatus::NO_MATCHED_MSG:
