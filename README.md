@@ -6,7 +6,7 @@ A Php Client for Apache RocketMQ.
 * [rocketmq-client-cpp](https://github.com/apache/rocketmq-client-cpp)
 * [PHP-CPP](https://github.com/CopernicaMarketingSoftware/PHP-CPP)
 * linux environment.
-* >= php7
+* php7
 
 ## INSTALL
 1. install rocketmq-client-cpp
@@ -28,3 +28,30 @@ A Php Client for Apache RocketMQ.
    - setNamesrvDomain
    - start
    - push
+
+### PullConsumer
+   - setInstanceName
+   - setNamesrvDomain
+   - setTopic
+   - start
+   - getQueues
+
+### PushConsumer
+   - setNamesrvDomain
+   - setInstanceName
+   - setTryLockTimeout
+   - setConnectTimeout
+   - setThreadCount
+   - setListenerType
+   - subscribe
+   - start
+   - shutdown
+   - setCallback
+
+### PullResult
+   - getCount
+   - getMessage
+   - getPullStatus
+   - getNextBeginOffset
+   - getMinOffset
+   - getMaxOffset 
