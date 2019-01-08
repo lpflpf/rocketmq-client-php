@@ -48,6 +48,9 @@ extern "C"
 		// class Message 
 		registerMessage(rocketMQNamespace);
 
+		// class ConsumeStatus
+		registerConsumeStatus(rocketMQNamespace);
+
 
 		// create extension
 		static Php::Extension extension("rocketmq", "1.0");
