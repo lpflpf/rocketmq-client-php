@@ -16,7 +16,6 @@ extern "C"
 	// export the "get_module" function that will be called by the Zend engine
 	PHPCPP_EXPORT void *get_module() 
 	{ 
-
 		// all class in RocketMQ namespace.
 		Php::Namespace rocketMQNamespace(NAMESPACE_NAME);
 
@@ -29,7 +28,6 @@ extern "C"
 		// class ConsumeType, ConsumeFromWhere, MessageModel
 		registerConsumeType(rocketMQNamespace);
 
-
 		// class PushConsumer
 		registerPushConsumer(rocketMQNamespace);
 
@@ -40,11 +38,6 @@ extern "C"
 		registerPullConsumer(rocketMQNamespace);
 
 		// class MessageQueue
-//		Php::Class<MessageQueue> messageQueueClass("MessageQueue");
-//		messageQueueClass.method<&MessageQueue::getMessageQueueOffset>("getMessageQueueOffset");
-//		messageQueueClass.method<&MessageQueue::pull>("pull", { Php::ByVal("tag", Php::Type::String), });
-//		rocketMQNamespace.add(messageQueueClass);
-
 		registerMessageQueue(rocketMQNamespace);
 
 		// class Message 

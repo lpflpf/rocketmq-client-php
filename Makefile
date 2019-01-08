@@ -2,7 +2,6 @@ CPP             = g++
 RM              = rm -f
 CPP_FLAGS       = -Wall -c -I. -O2 -std=c++11
 
-#Edit these lines to correspond with your own directories
 LIBRARY_DIR		= `php-config --extension-dir` 
 
 LD              = g++
@@ -25,4 +24,3 @@ ${OBJECTS}:
 
 install:
 		cp -f ${RESULT} ${LIBRARY_DIR}
-#		cp -f ${PHPINIFILE}	${PHP_CONFIG_DIR}
