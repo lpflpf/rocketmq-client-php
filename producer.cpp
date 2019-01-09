@@ -1,4 +1,5 @@
 #include "producer.h"
+#include "session_credentials.h"
 
 void Producer::__construct(Php::Parameters &param){
 	std::string groupName = param[0];
@@ -55,6 +56,21 @@ Php::Value Producer::getNamesrvAddr(){
 }
 
 
+void Producer::setSessionCredentials(Php::Parameters &param){
+	std::string accessKey = param[0];
+	std::string secretKey = param[1];
+	std::string authChannel = param[2];
+
+	this->producer->setSessionCredentials(accessKey, secretKey, authChannel);
+}
+
+Php::Value Producer::getSessionCredentials(){
+	rocketmq::SessionCredentials sc = this->producer->getSessionCredentials();
+	SessionCredentials *sessionCredentials = new SessionCredentials(&sc);
+	Php::Value pv(Php::Object(SESSION_CREDENTIALS_CLASS_NAME , sessionCredentials));
+	return pv;
+}
+
 void Producer::setNamesrvDomain(Php::Parameters &param){
 	std::string domain = param[0];
 	return this->producer->setNamesrvDomain(domain);
@@ -83,6 +99,13 @@ void registerProducer(Php::Namespace &rocketMQNamespace){
 	producerClass.method<&Producer::getGroupName>("getGroupName");
 	producerClass.method<&Producer::setGroupName>("setGroupName", {
 			Php::ByVal("groupName", Php::Type::String),
+			});
+
+	producerClass.method<&Producer::getSessionCredentials>("getSessionCredentials");
+	producerClass.method<&Producer::setSessionCredentials>("setSessionCredentials", {
+			Php::ByVal("accessKey", Php::Type::String),
+			Php::ByVal("secretKey", Php::Type::String),
+			Php::ByVal("authChannel", Php::Type::String),
 			});
 
 	producerClass.method<&Producer::start>("start");

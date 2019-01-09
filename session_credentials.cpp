@@ -5,7 +5,13 @@ void SessionCredentials::__construct(Php::Parameters &params){
 	std::string secretKey = params[1];
 	std::string authChannel = params[2];
 
-	this->sc = new rocketmq::SessionCredentials(accessKey, secretKey, authChannel);
+	if (sc != nullptr){
+		this->sc = new rocketmq::SessionCredentials(accessKey, secretKey, authChannel);
+	}else{
+		this->sc->setAccessKey(accessKey);
+		this->sc->setSecretKey(secretKey);
+		this->sc->setAuthChannel(authChannel);
+	}
 }
 void SessionCredentials::__destruct(){
 	delete(this->sc);

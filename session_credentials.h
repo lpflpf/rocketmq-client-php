@@ -3,9 +3,15 @@
 #include "common.h"
 #include <rocketmq/SessionCredentials.h>
 
+#define SESSION_CREDENTIALS_CLASS_NAME NAMESPACE_NAME"\\SessionCredentials"
+
 class SessionCredentials : public Php::Base {
 	rocketmq::SessionCredentials* sc;
+
 	public:
+	SessionCredentials(rocketmq::SessionCredentials* sc){
+		this->sc = sc;
+	}
 	void __construct(Php::Parameters &params);
 	void __destruct();
 
