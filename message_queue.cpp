@@ -31,7 +31,9 @@ void registerMessageQueue(Php::Namespace &rocketMQNamespace){
 	Php::Class<MessageQueue> messageQueueClass("MessageQueue");
 
 	messageQueueClass.method<&MessageQueue::getMessageQueueOffset>("getMessageQueueOffset");
-	messageQueueClass.method<&MessageQueue::setMessageQueueOffset>("setMessageQueueOffset");
+	messageQueueClass.method<&MessageQueue::setMessageQueueOffset>("setMessageQueueOffset", {
+			Php::ByVal("offset", Php::Type::Numeric);
+			});
 	messageQueueClass.method<&MessageQueue::pull>("pull", { 
 			Php::ByVal("tag", Php::Type::String), 
 			Php::ByVal("size", Php::Type::Numeric, false),

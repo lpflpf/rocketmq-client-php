@@ -63,3 +63,82 @@ A Php Client for Apache RocketMQ.
    - getNextBeginOffset
    - getMinOffset
    - getMaxOffset 
+
+### ConsumeStatus
+   - CONSUME_SUCCESS
+   - RECONSUME_LATER
+
+### ConsumeType
+   - CONSUME_ACTIVELY
+   - CONSUME_PASSIVELY
+
+### ConsumeFromWhere
+   - CONSUME_FROM_LAST_OFFSET
+   - CONSUME_FROM_LAST_OFFSET_AND_FROM_MIN_WHEN_BOOT_FIRST  (@Deprecated)
+   - CONSUME_FROM_MIN_OFFSET (@Deprecated)
+   - CONSUME_FROM_MAX_OFFSET (@Deprecated)
+   - CONSUME_FROM_FIRST_OFFSET
+   - CONSUME_FROM_TIMESTAMP
+
+### MessageModel
+   - BROADCASTING
+   - CLUSTERING
+
+### Message
+   - toString()
+   - getQueueId()
+   - getBornTimestamp()
+   - getBornHost()
+   - getBornHostString()
+   - getBornHostNameString()
+   - getStoreTimestamp()
+   - getStoreHost()
+   - getStoreHostString()
+   - getMsgId()
+   - getOffsetMsgId()
+   - getBodyCRC()
+   - getQueueOffset()
+   - getStoreSize()
+   - getReconsumeTimes()
+   - getPreparedTransactionOffset()
+   - getProperty($name)
+   - getTopic()
+   - getTags()
+   - getKeys()
+   - getDelayTimeLevel()
+   - getFlag()
+   - getSysFlag()
+   - getBody()
+
+### MessageQueue
+   - getMessageQueueOffset()
+   - setMessageQueueOffset($offset)
+   - pull($tag, $size = 32)
+
+### MessageListenerType
+   - messageListenerDefaultly
+   - messageListenerOrderly
+   - messageListenerConcurrently
+
+### PullStatus
+   - FOUND
+   - NO_NEW_MSG
+   - NO_MATCH_MSG
+   - OFFSET_ILLEGAL
+   - BROKER_TIMEOUT
+
+### SessionCredentials
+   - __construct($accessKey, $secretKey, $authChannel)
+   - __destruct()
+   - getAccessKey()
+   - setAccessKey($accessKey)
+   - getSecretKey()
+   - setSecretKey($secretKey)
+   - getSignature()
+   - setSignature($signature)
+   - getSignatureMethod()
+   - setSignatureMethod($signatureMethod)
+   - getAuthChannel()
+   - setAuthChannel($authChannel)
+   - isvalid()
+

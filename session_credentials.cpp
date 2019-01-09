@@ -94,7 +94,7 @@ void registerSessionCredentials(Php::Namespace &rocketMQNamespace){
 
 	scClass.method<&SessionCredentials::getAuthChannel>("getAuthChannel");
 	scClass.method<&SessionCredentials::setAuthChannel>("setAuthChannel", {
-			Php::ByVal("authCannel", Php::Type::String),
+			Php::ByVal("authChannel", Php::Type::String),
 			});
 
 	scClass.method<&SessionCredentials::isValid>("isValid");
