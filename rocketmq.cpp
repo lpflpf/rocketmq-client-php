@@ -9,6 +9,7 @@
 #include "consume_type.h"
 #include "consume_status.h"
 #include "msg_listener.h"
+#include "session_credentials.h"
 
 // symbols are exported according to the "C" language
 extern "C"
@@ -48,6 +49,9 @@ extern "C"
 
 		// class MessageListenerType
 		registerMessageListenerType(rocketMQNamespace);
+
+		// class SessionCredentials
+		registerSessionCredentials(rocketMQNamespace);
 
 		// create extension
 		static Php::Extension extension("rocketmq", "1.0");
