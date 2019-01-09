@@ -3,17 +3,20 @@ layout: default
 ---
 
 ## RocketMQ::Producer
-   - __construct($groupName)
-   - getInstanceName()
-   - setInstanceName($instanceName)
-   - setNamesrvDomain($nameserver)
-   - getSessionCredentials()
-   - setSessionCredentials($accessKey, $secretKey, $authChannel)
-   - getGroupName()
-   - setGroupName($groupName)
-   - setNamesrvAddr($nameaddr)
-   - getNamesrvAddr()
-   - start()
-   - push($topic, $tag, $body)
-
+```
+class Producer {
+    function __construct($groupName)
+    function getInstanceName()
+    function setInstanceName($instanceName)
+    function setNamesrvDomain($nameserver)
+    function getSessionCredentials()
+    function setSessionCredentials($accessKey, $secretKey, $authChannel)
+    function getGroupName()
+    function setGroupName($groupName)
+    function setNamesrvAddr($nameaddr)
+    function getNamesrvAddr()
+    function start()
+    function push($topic, $tag, $body)
+}
+```
 
