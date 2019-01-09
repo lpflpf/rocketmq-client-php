@@ -25,6 +25,12 @@ class PushConsumer : public Php::Base{
 		virtual ~PushConsumer(){}
 		virtual void __construct(){}
 
+ 		void doRebalance();
+
+ 		void persistConsumerOffset();
+
+ 		void persistConsumerOffsetByResetOffset();
+
 		void setNamesrvDomain(Php::Parameters &param);
 
 		void setInstanceName(Php::Parameters &param);
@@ -40,6 +46,12 @@ class PushConsumer : public Php::Base{
 		void subscribe(Php::Parameters &param);
 		
 		void setCallback(Php::Parameters &param);
+
+		Php::Value getConsumeType();
+
+		Php::Value getConsumeFromWhere();
+
+  		void setConsumeFromWhere(Php::Parameters &param);
 
 		void start();
 

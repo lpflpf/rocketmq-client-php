@@ -1,6 +1,17 @@
 #include "push_consumer.h"
 #include "msg_listener.h"
 
+void PushConsumer::doRebalance(){
+	this->consumer->doRebalance();
+}
+
+void PushConsumer::persistConsumerOffset(){
+	this->consumer->persistConsumerOffset();
+}
+void PushConsumer::persistConsumerOffsetByResetOffset(){
+	this->consumer->persistConsumerOffsetByResetOffset();
+}
+
 void PushConsumer::setNamesrvDomain(Php::Parameters &param){
 	std::string nameserver =  param[0];
 	this->namesrv_domain = nameserver;
@@ -23,6 +34,19 @@ void PushConsumer::setThreadCount(Php::Parameters &param){
 	this->threadCount = param[0];
 }
 
+Php::Value PushConsumer::getConsumeType(){
+	return (int) this->consumer->getConsumeType();
+}
+
+Php::Value PushConsumer::getConsumeFromWhere(){
+	return (int) this->consumer->getConsumeFromWhere();
+}
+
+void PushConsumer::setConsumeFromWhere(Php::Parameters &param){
+	int consumeFromWhere = (int) param[0];
+	this->consumer->setConsumeFromWhere(rocketmq::ConsumeFromWhere(consumeFromWhere));
+}
+
 void PushConsumer::setListenerType(Php::Parameters &param){
 	this->msgListenerType = param[0];
 }
@@ -38,6 +62,7 @@ void PushConsumer::setCallback(Php::Parameters &param){
 		throw Php::Exception("Not a callable type.");
 	this->callback = param[0];
 }
+
 
 void PushConsumer::start(){
 	this->consumer = new rocketmq::DefaultMQPushConsumer(this->groupName);
@@ -85,6 +110,9 @@ void PushConsumer::shutdown(){
 
 void registerPushConsumer(Php::Namespace &rocketMQNamespace){
 		Php::Class<PushConsumer> pushConsumer("PushConsumer");
+		pushConsumer.method<&PushConsumer::doRebalance>("doRebalance");
+		pushConsumer.method<&PushConsumer::persistConsumerOffset>("persistConsumerOffset");
+		pushConsumer.method<&PushConsumer::persistConsumerOffsetByResetOffset>("persistConsumerOffsetByResetOffset");
 		pushConsumer.method<&PushConsumer::__construct>("__construct");
 		pushConsumer.method<&PushConsumer::setNamesrvDomain>("setNamesrvDomain", { Php::ByVal("nameserver", Php::Type::String), });
 		pushConsumer.method<&PushConsumer::setInstanceName>("setInstanceName", { Php::ByVal("groupName", Php::Type::String), });
@@ -92,6 +120,11 @@ void registerPushConsumer(Php::Namespace &rocketMQNamespace){
 		pushConsumer.method<&PushConsumer::setConnectTimeout>("setConnectTimeout", {Php::ByVal("connectTimeout", Php::Type::Numeric),});
 		pushConsumer.method<&PushConsumer::setThreadCount>("setThreadCount", {Php::ByVal("threadCount", Php::Type::Numeric),});
 		pushConsumer.method<&PushConsumer::setListenerType>("setListenerType", {Php::ByVal("listenerType", Php::Type::Numeric), });
+		pushConsumer.method<&PushConsumer::getConsumeType>("getConsumeType");
+		pushConsumer.method<&PushConsumer::getConsumeFromWhere>("getConsumeFromWhere");
+		pushConsumer.method<&PushConsumer::setConsumeFromWhere>("setConsumeFromWhere", {
+				Php::ByVal("setConsumeFromWhere", Php::Type::Numeric),
+				});
 		pushConsumer.method<&PushConsumer::subscribe>("subscribe", { Php::ByVal("topic", Php::Type::String), Php::ByVal("tag", Php::Type::String), });
 		pushConsumer.method<&PushConsumer::start>("start");
 		pushConsumer.method<&PushConsumer::shutdown>("shutdown");
