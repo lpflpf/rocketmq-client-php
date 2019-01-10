@@ -23,7 +23,7 @@ class PushConsumer : public Php::Base{
 	public:
 		PushConsumer(){}
 		virtual ~PushConsumer(){}
-		virtual void __construct(){}
+		virtual void __construct(Php::Parameters &params);
 
  		void doRebalance();
 

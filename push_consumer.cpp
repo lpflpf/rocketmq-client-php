@@ -19,19 +19,19 @@ void PushConsumer::setNamesrvDomain(Php::Parameters &param){
 
 void PushConsumer::setInstanceName(Php::Parameters &param){
 	std::string groupName= param[0];
-	this->groupName = groupName;
+	this->consumer->setGroupName(this->groupName);
 }  
 
 void PushConsumer::setTryLockTimeout(Php::Parameters &param){
-	this->tryLockTimeout = param[0];
+	this->consumer->setTcpTransportTryLockTimeout((int64_t)param[0]);
 }
 
 void PushConsumer::setConnectTimeout(Php::Parameters &param){
-	this->connectTimeout = param[0];
+	this->consumer->setTcpTransportConnectTimeout((int64_t)param[0]);
 }
 
 void PushConsumer::setThreadCount(Php::Parameters &param){
-	this->threadCount = param[0];
+	this->consumer->setConsumeThreadCount((int64_t)param[0]);
 }
 
 Php::Value PushConsumer::getConsumeType(){
@@ -54,8 +54,7 @@ void PushConsumer::setListenerType(Php::Parameters &param){
 void PushConsumer::subscribe(Php::Parameters &param){
 	std::string topic = param[0];
 	std::string tag = param[1];
-	this->tag = tag;
-	this->topic = topic;
+	this->consumer->subscribe(topic, tag);
 }
 void PushConsumer::setCallback(Php::Parameters &param){
 	if (!param[0].isCallable())
@@ -65,15 +64,6 @@ void PushConsumer::setCallback(Php::Parameters &param){
 
 
 void PushConsumer::start(){
-	this->consumer = new rocketmq::DefaultMQPushConsumer(this->groupName);
-	this->consumer->setGroupName(this->groupName);
-	this->consumer->setInstanceName(this->groupName);
-	this->consumer->setNamesrvAddr(this->namesrv_domain);
-	this->consumer->subscribe(this->topic, this->tag);
-	this->consumer->setConsumeThreadCount(this->threadCount);
-	this->consumer->setTcpTransportTryLockTimeout(this->tryLockTimeout);
-	this->consumer->setTcpTransportConnectTimeout(this->connectTimeout);
-
 	MsgListenerOrderly* msgListenerOrderly;
 	MsgListenerConcurrently* msgListenerConcurrently;
 	MsgListener* msgListener;
@@ -95,8 +85,6 @@ void PushConsumer::start(){
 			break;
 	}
 
-	this->consumer->setConsumeFromWhere(rocketmq::CONSUME_FROM_FIRST_OFFSET);
-	std::cout << this->groupName << this->namesrv_domain << std::endl;
 	try {
 		this->consumer->start();
 	} catch (rocketmq::MQClientException &e) {
@@ -108,12 +96,19 @@ void PushConsumer::shutdown(){
 	this->consumer->shutdown();
 }
 
+void PushConsumer::__construct(Php::Parameters &params){
+	std::string groupName = params[0];
+	this->consumer = new rocketmq::DefaultMQPushConsumer(this->groupName);
+}
+
 void registerPushConsumer(Php::Namespace &rocketMQNamespace){
 		Php::Class<PushConsumer> pushConsumer("PushConsumer");
 		pushConsumer.method<&PushConsumer::doRebalance>("doRebalance");
 		pushConsumer.method<&PushConsumer::persistConsumerOffset>("persistConsumerOffset");
 		pushConsumer.method<&PushConsumer::persistConsumerOffsetByResetOffset>("persistConsumerOffsetByResetOffset");
-		pushConsumer.method<&PushConsumer::__construct>("__construct");
+		pushConsumer.method<&PushConsumer::__construct>("__construct", {
+				Php::ByVal("groupName", Php::Type::String),
+				});
 		pushConsumer.method<&PushConsumer::setNamesrvDomain>("setNamesrvDomain", { Php::ByVal("nameserver", Php::Type::String), });
 		pushConsumer.method<&PushConsumer::setInstanceName>("setInstanceName", { Php::ByVal("groupName", Php::Type::String), });
 		pushConsumer.method<&PushConsumer::setTryLockTimeout>("setTryLockTimeout", {Php::ByVal("tryLockTimeout", Php::Type::Numeric),});

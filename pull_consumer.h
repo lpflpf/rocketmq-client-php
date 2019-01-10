@@ -10,15 +10,13 @@
 class PullConsumer:public Php::Base
 {
 	private:
-		std::string groupName;
-		std::string namesrv_domain;
-		std::string topic;
+		std::string topicName;
 		rocketmq::DefaultMQPullConsumer *consumer;
 		std::vector<rocketmq::MQMessageQueue> mqs;
 	public:
 		PullConsumer(){}
-		virtual ~PullConsumer(){}
-		virtual void __construct(){}
+		virtual ~PullConsumer(){delete(this->consumer);}
+		virtual void __construct(Php::Parameters &params);
 
 		void start();
 
@@ -26,9 +24,13 @@ class PullConsumer:public Php::Base
 
 		void setNamesrvDomain(Php::Parameters &param);
 
+		void setNamesrvAddr(Php::Parameters &param);
+
 		void setInstanceName(Php::Parameters &param);
 
 		void setTopic(Php::Parameters &param);
+
+		void setGroup(Php::Parameters &param);
 
 };
 

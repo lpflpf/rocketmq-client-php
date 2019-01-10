@@ -1,18 +1,23 @@
 #include "pull_consumer.h"
 
+void PullConsumer::__construct(Php::Parameters &params){
+	std::string groupName = params[0];
+	this->consumer = new rocketmq::DefaultMQPullConsumer(groupName);
+}
+
+void PullConsumer::setGroup(Php::Parameters &params){
+	std::string groupName = params[0];
+	this->consumer->setGroupName(groupName);
+}
+
 void PullConsumer::start(){
-	this->consumer = new rocketmq::DefaultMQPullConsumer(this->groupName);
-	this->consumer->setNamesrvAddr(this->namesrv_domain);
-	this->consumer->setGroupName(this->groupName);
-	this->consumer->setInstanceName(this->groupName);
 	this->consumer->start();
 }
 
 Php::Value PullConsumer::getQueues(){
-	this->consumer->fetchSubscribeMessageQueues(this->topic, this->mqs);
 	Php::Value result;
 	int idx = 0;
-
+	this->consumer->fetchSubscribeMessageQueues(this->topicName, this->mqs);
 	std::vector<rocketmq::MQMessageQueue>::iterator iter = mqs.begin();
 	for (; iter != mqs.end(); ++iter) {
 		rocketmq::MQMessageQueue mq = (*iter);
@@ -23,27 +28,34 @@ Php::Value PullConsumer::getQueues(){
 
 void PullConsumer::setNamesrvDomain(Php::Parameters &param){
 	std::string namesrv_domain = param[0];
-	this->namesrv_domain = namesrv_domain;
+	this->consumer->setNamesrvDomain(namesrv_domain);
+}
+
+void PullConsumer::setNamesrvAddr(Php::Parameters &param){
+	std::string namesrv_addr = param[0];
+	this->consumer->setNamesrvDomain(namesrv_addr);
 }
 
 void PullConsumer::setInstanceName(Php::Parameters &param){
-	std::string groupName = param[0];
-	this->groupName = groupName;
+	std::string instanceName = param[0];
+	this->consumer->setInstanceName(instanceName);
 }
 
 void PullConsumer::setTopic(Php::Parameters &param){
 	std::string topic = param[0];
-	this->topic = topic;
+	this->topicName= topic;
 }
 
 
 void registerPullConsumer(Php::Namespace &rocketMQNamespace){
 		Php::Class<PullConsumer> pullConsumer("PullConsumer");
-		pullConsumer.method<&PullConsumer::__construct>("__construct");
+		pullConsumer.method<&PullConsumer::__construct>("__construct", { Php::ByVal("groupName", Php::Type::String), });
 		pullConsumer.method<&PullConsumer::setInstanceName>("setInstanceName", { Php::ByVal("groupName", Php::Type::String), });
 		pullConsumer.method<&PullConsumer::setNamesrvDomain>("setNamesrvDomain", { Php::ByVal("nameserver", Php::Type::String), });
 		pullConsumer.method<&PullConsumer::setTopic>("setTopic", { Php::ByVal("topic", Php::Type::String), });
 		pullConsumer.method<&PullConsumer::start>("start");
 		pullConsumer.method<&PullConsumer::getQueues>("getQueues");
+		pullConsumer.method<&PullConsumer::setNamesrvAddr>("setNamesrvAddr", { Php::ByVal("namesrvAddr", Php::Type::String), });
+		pullConsumer.method<&PullConsumer::setGroup>("setGroup", { Php::ByVal("group", Php::Type::String), });
 		rocketMQNamespace.add(pullConsumer);
 }
