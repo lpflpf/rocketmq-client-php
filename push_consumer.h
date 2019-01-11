@@ -19,6 +19,7 @@ class PushConsumer : public Php::Base{
 		int threadCount = 1;
 		std::string tag = "*";
 		int msgListenerType;
+		int maxRequestTime = 3600;
 
 	public:
 		PushConsumer(){}
@@ -32,6 +33,8 @@ class PushConsumer : public Php::Base{
  		void persistConsumerOffsetByResetOffset();
 
 		void setNamesrvDomain(Php::Parameters &param);
+
+		void setNamesrvAddr(Php::Parameters &param);
 
 		void setInstanceName(Php::Parameters &param);
 
@@ -52,6 +55,8 @@ class PushConsumer : public Php::Base{
 		Php::Value getConsumeFromWhere();
 
   		void setConsumeFromWhere(Php::Parameters &param);
+
+		void setMaxRequestTime(Php::Parameters &param);
 
 		void start();
 

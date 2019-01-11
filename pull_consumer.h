@@ -14,8 +14,14 @@ class PullConsumer:public Php::Base
 		rocketmq::DefaultMQPullConsumer *consumer;
 		std::vector<rocketmq::MQMessageQueue> mqs;
 	public:
-		PullConsumer(){}
-		virtual ~PullConsumer(){delete(this->consumer);}
+		PullConsumer(){
+			this->consumer = nullptr;
+		}
+		virtual ~PullConsumer(){
+			if (nullptr != this->consumer){
+				delete(this->consumer);
+			}
+		}
 		virtual void __construct(Php::Parameters &params);
 
 		void start();

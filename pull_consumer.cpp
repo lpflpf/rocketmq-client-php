@@ -15,9 +15,10 @@ void PullConsumer::start(){
 }
 
 Php::Value PullConsumer::getQueues(){
-	Php::Value result;
+	Php::Array result;
 	int idx = 0;
 	this->consumer->fetchSubscribeMessageQueues(this->topicName, this->mqs);
+	std::cout << this->mqs.size() << std::endl;
 	std::vector<rocketmq::MQMessageQueue>::iterator iter = mqs.begin();
 	for (; iter != mqs.end(); ++iter) {
 		rocketmq::MQMessageQueue mq = (*iter);
@@ -33,7 +34,7 @@ void PullConsumer::setNamesrvDomain(Php::Parameters &param){
 
 void PullConsumer::setNamesrvAddr(Php::Parameters &param){
 	std::string namesrv_addr = param[0];
-	this->consumer->setNamesrvDomain(namesrv_addr);
+	this->consumer->setNamesrvAddr(namesrv_addr);
 }
 
 void PullConsumer::setInstanceName(Php::Parameters &param){

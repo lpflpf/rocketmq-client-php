@@ -4,21 +4,15 @@ namespace RocketMQ;
 
 include("message.php");
 
-$consumer = new PullConsumer();
+$consumer = new PullConsumer("pullTestGroup");
+$consumer->setGroup("pullTestGroup");
 $consumer->setInstanceName("testGroup");
 $consumer->setTopic("TopicTest");
-$consumer->setNamesrvDomain("127.0.0.1:9876");
+$consumer->setNamesrvAddr("127.0.0.1:9876");
 $consumer->start();
 $queues = $consumer->getQueues();
 
-echo "FOUND:          " . PullStatus::FOUND . "\n";
-echo "NO_MATCHED_MSG: " . PullStatus::NO_MATCHED_MSG. "\n";
-echo "OFFSET_ILLEGAL: " . PullStatus::OFFSET_ILLEGAL. "\n";
-echo "BROKER_TIMEOUT: " . PullStatus::BROKER_TIMEOUT . "\n";
-echo "NO_NEW_MSG:     " . PullStatus::NO_NEW_MSG . "\n";
-
 foreach($queues as $queue){
-
 	$newMsg = true;
 	while($newMsg){
 		$pullResult = $queue->pull("*", 8);
