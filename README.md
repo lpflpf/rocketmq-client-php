@@ -45,14 +45,13 @@ for ($i = 0;$i < 10000; $i ++){
 
 ### PullConsumer Example
 
+It is a good idea to save offset in local.
+
 ```php
 namespace RocketMQ;
 
-include("message.php");
-
 $consumer = new PullConsumer("pullTestGroup");
-$consumer->setGroup("pullTestGroup");
-$consumer->setInstanceName("testGroup");
+$consumer->setInstanceName("testInstanceName");
 $consumer->setTopic("TopicTest");
 $consumer->setNamesrvAddr("127.0.0.1:9876");
 $consumer->start();
@@ -74,14 +73,17 @@ foreach($queues as $queue){
 			echo "\n";
 			for($i = 0; $i < $pullResult->getCount(); $i ++){
 				$msg = $pullResult->getMessage($i);
-				echo_msg($msg);
+                echo $msg->getBody();
 			}
 			break;
 		case PullStatus::NO_MATCHED_MSG:
+            break;
 		case PullStatus::OFFSET_ILLEGAL:
 			$newMsg = false;
+            break;
 		case PullStatus::BROKER_TIMEOUT:
 			$newMsg = false;
+            break;
 		case PullStatus::NO_NEW_MSG:
 			$newMsg = false;
 			break;
@@ -94,19 +96,17 @@ foreach($queues as $queue){
 }
 ```
 
-
-###PushConsumer Example
+### PushConsumer Example
 
 ```php
-
 namespace RocketMQ;
 
-include("message.php");
-
 $consumer = new PushConsumer("testGroup");
-$consumer->setInstanceName("testGroup");
+$consumer->setInstanceName("testInstanceName");
 $consumer->setNamesrvAddr("127.0.0.1:9876");
-$consumer->setThreadCount(10);
+
+// for php, maybe set 1 is a good idea.
+$consumer->setThreadCount(1);
 $consumer->setListenerType(MessageListenerType::LISTENER_ORDERLY);
 $result = array();
 $count = 0;
