@@ -43,4 +43,82 @@ for ($i = 0;$i < 10000; $i ++){
 }
 ```
 
+### PullConsumer Example
+
+```php
+namespace RocketMQ;
+
+include("message.php");
+
+$consumer = new PullConsumer("pullTestGroup");
+$consumer->setGroup("pullTestGroup");
+$consumer->setInstanceName("testGroup");
+$consumer->setTopic("TopicTest");
+$consumer->setNamesrvAddr("127.0.0.1:9876");
+$consumer->start();
+$queues = $consumer->getQueues();
+
+foreach($queues as $queue){
+	$newMsg = true;
+	while($newMsg){
+		$pullResult = $queue->pull("*", 8);
+	
+		switch ($pullResult->getPullStatus()){
+		case PullStatus::FOUND:
+			echo "pullStatus: " . $pullResult->getPullStatus() . "\n";
+			echo "count: " . $pullResult->getCount() . "\n";
+			echo "nextBeginOffset: " . $pullResult->getNextBeginOffset() . "\n";
+			echo "minOffset: " . $pullResult->getMinOffset() . "\n";
+			echo "maxOffset: " . $pullResult->getMaxOffset() . "\n";
+			echo "pullStatus: " . $pullResult->getPullStatus() . "\n";
+			echo "\n";
+			for($i = 0; $i < $pullResult->getCount(); $i ++){
+				$msg = $pullResult->getMessage($i);
+				echo_msg($msg);
+			}
+			break;
+		case PullStatus::NO_MATCHED_MSG:
+		case PullStatus::OFFSET_ILLEGAL:
+			$newMsg = false;
+		case PullStatus::BROKER_TIMEOUT:
+			$newMsg = false;
+		case PullStatus::NO_NEW_MSG:
+			$newMsg = false;
+			break;
+		default:
+		}
+		$position = $queue->getMessageQueueOffset();
+		echo "position: " . $position . "\tnextBeginOffset:" . $pullResult->getNextBeginOffset() . "\tminOffset" . $pullResult->getMinOffset() . "\tmaxOffset:" . $pullResult->getMaxOffset() . "\n";
+		$queue->setMessageQueueOffset($position + $pullResult->getCount());
+	}
+}
+```
+
+
+###PushConsumer Example
+
+```php
+
+namespace RocketMQ;
+
+include("message.php");
+
+$consumer = new PushConsumer("testGroup");
+$consumer->setInstanceName("testGroup");
+$consumer->setNamesrvAddr("127.0.0.1:9876");
+$consumer->setThreadCount(10);
+$consumer->setListenerType(MessageListenerType::LISTENER_ORDERLY);
+$result = array();
+$count = 0;
+$consumer->setCallback(function ($msg) use (&$count){
+	// if thread > 1 & use echo method will core dump.
+	file_put_contents("1", $msg->getMsgId() .  "\t" . $count .  "\n", FILE_APPEND);
+	$count ++;
+});
+$consumer->subscribe("TopicTest", "*");
+$consumer->start();
+$consumer->shutdown();
+
+```
+
 ## [Usage](https://github.com/lpflpf/rocketmq-client-php/wiki/Usage)
