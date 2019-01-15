@@ -20,6 +20,12 @@ A Php Client for Apache RocketMQ.
 4. update php.ini file, add line `extension=rocketmq.so`;
 5. try to run example in example directory.
 
+## TODO
+
+1. manual commit an offset.
+2. push consumer can set a queue to consumer.
+3. producer can get some extra information for sending message.
+
 ## Example 
 
 ### Producer Example
