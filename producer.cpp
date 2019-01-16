@@ -92,6 +92,16 @@ void Producer::setNamesrvDomain(Php::Parameters &param){
 	return this->producer->setNamesrvDomain(domain);
 }
 
+// int getRetryTimes() const;
+Php::Value Producer::getRetryTimes(){
+	return this->producer->getRetryTimes();
+}
+
+// void setRetryTimes(int times);
+void Producer::setRetryTimes(Php::Parameters &param){
+	this->producer->setRetryTimes(param[0]);
+}
+
 void registerProducer(Php::Namespace &rocketMQNamespace){
 	Php::Class<Producer> producerClass("Producer");
 	producerClass.method<&Producer::getMQClientId>("getMQClientId");
@@ -134,6 +144,9 @@ void registerProducer(Php::Namespace &rocketMQNamespace){
 			Php::ByVal("tag", Php::Type::String),
 			Php::ByVal("body", Php::Type::String),
 			});
+
+	producerClass.method<&Producer::setRetryTimes>("setRetryTimes", { Php::ByVal("retryTimes", Php::Type::Numeric), });
+	producerClass.method<&Producer::getRetryTimes>("getRetryTimes");
 
 	rocketMQNamespace.add(producerClass);
 }

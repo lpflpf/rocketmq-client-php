@@ -40,6 +40,10 @@ class Producer : public Php::Base
   		void setSessionCredentials(Php::Parameters &param);
 		Php::Value getSessionCredentials();
 
+
+		Php::Value getRetryTimes();
+  		void setRetryTimes(Php::Parameters &param);
+
 		virtual void __destruct(){
 			if (this->producer != nullptr){
 				producer->shutdown();
