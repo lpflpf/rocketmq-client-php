@@ -22,6 +22,8 @@ class Producer : public Php::Base
 		Php::Value getNamesrvAddr();
 		void setNamesrvDomain(Php::Parameters &param);
 
+//		Php::Value getTopicMessageQueueInfo(Php::Parameters &param);
+
 		Php::Value getMQClientId();
 
 		void setGroupName(Php::Parameters &param);

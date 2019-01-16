@@ -22,7 +22,7 @@ Php::Value PullConsumer::getQueues(){
 	std::vector<rocketmq::MQMessageQueue>::iterator iter = mqs.begin();
 	for (; iter != mqs.end(); ++iter) {
 		rocketmq::MQMessageQueue mq = (*iter);
-		result[idx++] = Php::Object(MESSAGE_QUEUE_CLASS_NAME , new MessageQueue(mq, this->consumer)); 
+		result[idx++] = Php::Object(MESSAGE_QUEUE_CLASS_NAME , new MessageQueue(mq)); 
 	}
 	return result;
 }
@@ -47,6 +47,18 @@ void PullConsumer::setTopic(Php::Parameters &param){
 	this->topicName= topic;
 }
 
+// pull( MessageQueue mq, string subExpression, int offset, int maxNums)
+Php::Value PullConsumer::pull(Php::Parameters &param){
+	Php::Value mq = param[0];
+	std::string subExpression = param[1];
+	int64_t offset = param[2];
+	int64_t maxNums = param[3];
+	MessageQueue* messageQueue = (MessageQueue*)mq.implementation();
+	rocketmq::PullResult result = this->consumer->pull(messageQueue->getInstance(), subExpression, offset, maxNums);
+	PullResult *pullResult = new PullResult(result);
+	Php::Value pv(Php::Object(PULL_RESULT_CLASS_NAME, pullResult));
+	return pv;
+}
 
 void registerPullConsumer(Php::Namespace &rocketMQNamespace){
 		Php::Class<PullConsumer> pullConsumer("PullConsumer");
@@ -58,5 +70,11 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
 		pullConsumer.method<&PullConsumer::getQueues>("getQueues");
 		pullConsumer.method<&PullConsumer::setNamesrvAddr>("setNamesrvAddr", { Php::ByVal("namesrvAddr", Php::Type::String), });
 		pullConsumer.method<&PullConsumer::setGroup>("setGroup", { Php::ByVal("group", Php::Type::String), });
+		pullConsumer.method<&PullConsumer::pull>("pull", {
+            	Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME),
+				Php::ByVal("subExpression", Php::Type::String),
+				Php::ByVal("offset", Php::Type::Numeric),
+				Php::ByVal("maxNums", Php::Type::Numeric),
+				});
 		rocketMQNamespace.add(pullConsumer);
 }

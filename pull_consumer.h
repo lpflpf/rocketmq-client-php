@@ -37,7 +37,9 @@ class PullConsumer:public Php::Base
 		void setTopic(Php::Parameters &param);
 
 		void setGroup(Php::Parameters &param);
-
+		Php::Value pull(Php::Parameters &param);
+		//Php::Value pull(const MQMessageQueue& mq, const std::string& subExpression, int64 offset, int maxNums);
+ 
 };
 
 void registerPullConsumer(Php::Namespace &rocketMQNamespace);

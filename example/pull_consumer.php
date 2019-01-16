@@ -14,8 +14,9 @@ $queues = $consumer->getQueues();
 
 foreach($queues as $queue){
 	$newMsg = true;
+	$offset = 0;
 	while($newMsg){
-		$pullResult = $queue->pull("*", 8);
+		$pullResult = $consumer->pull($queue, "*", $offset, 8);
 	
 		switch ($pullResult->getPullStatus()){
 		case PullStatus::FOUND:
@@ -41,8 +42,8 @@ foreach($queues as $queue){
 			break;
 		default:
 		}
-		$position = $queue->getMessageQueueOffset();
-		echo "position: " . $position . "\tnextBeginOffset:" . $pullResult->getNextBeginOffset() . "\tminOffset" . $pullResult->getMinOffset() . "\tmaxOffset:" . $pullResult->getMaxOffset() . "\n";
-		$queue->setMessageQueueOffset($position + $pullResult->getCount());
+//		echo "position: " . $position . "\tnextBeginOffset:" . $pullResult->getNextBeginOffset() . "\tminOffset" . $pullResult->getMinOffset() . "\tmaxOffset:" . $pullResult->getMaxOffset() . "\n";
+		$offset += $pullResult->getCount();
+//		$queue->setMessageQueueOffset($position + $pullResult->getCount());
 	}
 }

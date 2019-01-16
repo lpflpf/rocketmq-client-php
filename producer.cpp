@@ -1,4 +1,5 @@
 #include "producer.h"
+#include "message_queue.h"
 #include "session_credentials.h"
 
 void Producer::__construct(Php::Parameters &param){
@@ -55,6 +56,21 @@ Php::Value Producer::getNamesrvAddr(){
 	return this->producer->getNamesrvAddr();
 }
 
+//Php::Value Producer::getTopicMessageQueueInfo(Php::Parameters &params){
+//	std::string topic = params[0];
+//	Php::Array result;
+//
+//	std::vector<rocketmq::MQMessageQueue> mqs = this->producer->getTopicMessageQueueInfo(topic);
+//	std::vector<rocketmq::MQMessageQueue>::iterator iter = mqs.begin();
+//	int idx = 0;
+//
+//	for (; iter != mqs.end(); ++iter) {
+//		rocketmq::MQMessageQueue mq = (*iter);
+//		result[idx++] = Php::Object(MESSAGE_QUEUE_CLASS_NAME , new MessageQueue(mq, this->consumer)); 
+//	}
+//
+//	return result;
+//}
 
 void Producer::setSessionCredentials(Php::Parameters &param){
 	std::string accessKey = param[0];
@@ -107,6 +123,10 @@ void registerProducer(Php::Namespace &rocketMQNamespace){
 			Php::ByVal("secretKey", Php::Type::String),
 			Php::ByVal("authChannel", Php::Type::String),
 			});
+
+//	producerClass.method<&Producer::getTopicMessageQueueInfo>("getTopicMessageQueueInfo", {
+//			Php::ByVal("topic", Php::Type::String),
+//			});
 
 	producerClass.method<&Producer::start>("start");
 	producerClass.method<&Producer::push>("push", {
