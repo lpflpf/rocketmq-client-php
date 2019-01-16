@@ -38,6 +38,11 @@ class PullConsumer:public Php::Base
 
 		void setGroup(Php::Parameters &param);
 		Php::Value pull(Php::Parameters &param);
+//  		void persistConsumerOffset();
+//  		void persistConsumerOffsetByResetOffset();
+
+		Php::Value pullBlockIfNotFound(Php::Parameters &param);
+//  		PullResult pullBlockIfNotFound(const MQMessageQueue& mq, const std::string& subExpression, int64 offset, int maxNums);
 		//Php::Value pull(const MQMessageQueue& mq, const std::string& subExpression, int64 offset, int maxNums);
  
 };

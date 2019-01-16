@@ -60,6 +60,29 @@ Php::Value PullConsumer::pull(Php::Parameters &param){
 	return pv;
 }
 
+/*
+void PullConsumer::persistConsumerOffset(){
+	this->consumer->persistConsumerOffset();
+}
+
+void PullConsumer::persistConsumerOffsetByResetOffset(){
+	this->consumer->persistConsumerOffsetByResetOffset();
+}
+*/
+
+Php::Value PullConsumer::pullBlockIfNotFound(Php::Parameters &param){
+	Php::Value mq = param[0];
+	std::string subExpression = param[1];
+	int64_t offset = param[2];
+	int64_t maxNums = param[3];
+	MessageQueue* messageQueue = (MessageQueue*)mq.implementation();
+	rocketmq::PullResult result = this->consumer->pullBlockIfNotFound(messageQueue->getInstance(), subExpression, offset, maxNums);
+	PullResult *pullResult = new PullResult(result);
+	Php::Value pv(Php::Object(PULL_RESULT_CLASS_NAME, pullResult));
+	return pv;
+}
+
+
 void registerPullConsumer(Php::Namespace &rocketMQNamespace){
 		Php::Class<PullConsumer> pullConsumer("PullConsumer");
 		pullConsumer.method<&PullConsumer::__construct>("__construct", { Php::ByVal("groupName", Php::Type::String), });
@@ -71,6 +94,12 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
 		pullConsumer.method<&PullConsumer::setNamesrvAddr>("setNamesrvAddr", { Php::ByVal("namesrvAddr", Php::Type::String), });
 		pullConsumer.method<&PullConsumer::setGroup>("setGroup", { Php::ByVal("group", Php::Type::String), });
 		pullConsumer.method<&PullConsumer::pull>("pull", {
+            	Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME),
+				Php::ByVal("subExpression", Php::Type::String),
+				Php::ByVal("offset", Php::Type::Numeric),
+				Php::ByVal("maxNums", Php::Type::Numeric),
+				});
+		pullConsumer.method<&PullConsumer::pullBlockIfNotFound>("pullBlockIfNotFound", {
             	Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME),
 				Php::ByVal("subExpression", Php::Type::String),
 				Php::ByVal("offset", Php::Type::Numeric),
