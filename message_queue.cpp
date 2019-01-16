@@ -35,5 +35,11 @@ void registerMessageQueue(Php::Namespace &rocketMQNamespace){
 	messageQueueClass.method<&MessageQueue::getQueueId>("getQueueId");
 	messageQueueClass.method<&MessageQueue::setQueueId>("setQueueId", { Php::ByVal("queueId", Php::Type::String), });
 
+	messageQueueClass.method<&MessageQueue::__construct>("__construct", {
+			Php::ByVal("topic", Php::Type::String),
+			Php::ByVal("brokerName", Php::Type::String),
+			Php::ByVal("queueId", Php::Type::Numeric),
+			});
+
 	rocketMQNamespace.add(messageQueueClass);
 }
