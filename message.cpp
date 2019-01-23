@@ -19,8 +19,8 @@ void Message::__construct(Php::Parameters &params){
 			std::string body = params[2];
 			this->message = rocketmq::MQMessage(topic, tags, body);
 		}else if (params.size() == 4){
-			std::string keys = params[2];
-			std::string body = params[3];
+			std::string body = params[2];
+			std::string keys = params[3];
 			this->message = rocketmq::MQMessage(topic, tags, keys, body);
 		}/*else if (params.size() == 6){
 			std::string keys = params[2];
@@ -180,8 +180,8 @@ void registerMessage(Php::Namespace &rocketMQNamespace){
 	messageClass.method<&Message::__construct>("__construct", {
 			Php::ByVal("topic", Php::Type::String),
 			Php::ByVal("tags", Php::Type::String),
-//			Php::ByVal("keys", Php::Type::String, false),
-//			Php::ByVal("body", Php::Type::String, false),
+			Php::ByVal("body", Php::Type::String, false),
+			Php::ByVal("keys", Php::Type::String, false),
 			});
 
 	messageClass.method<&Message::setProperty>("setProperty", {
@@ -234,7 +234,7 @@ void registerMessage(Php::Namespace &rocketMQNamespace){
 
 	messageClass.method<&Message::getProperties>("getProperties");
 	messageClass.method<&Message::setProperties>("setProperties", {
-			Php::ByVal("properties"),
+			Php::ByVal("properties", Php::Type::Array),
 			});
 
 	messageClass.method<&Message::toString>("toString");

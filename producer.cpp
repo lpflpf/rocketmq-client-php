@@ -151,11 +151,6 @@ void registerProducer(Php::Namespace &rocketMQNamespace){
 			});
 
 	producerClass.method<&Producer::start>("start");
-//	producerClass.method<&Producer::push>("push", {
-//			Php::ByVal("topic", Php::Type::String),
-//			Php::ByVal("tag", Php::Type::String),
-//			Php::ByVal("body", Php::Type::String),
-//			});
 
 	producerClass.method<&Producer::setRetryTimes>("setRetryTimes", { Php::ByVal("retryTimes", Php::Type::Numeric), });
 	producerClass.method<&Producer::getRetryTimes>("getRetryTimes");
