@@ -34,7 +34,7 @@ class Producer : public Php::Base
 		void start();
 
 
-		void send(Php::Parameters &params);
+		Php::Value send(Php::Parameters &params);
 
 
   		void setSessionCredentials(Php::Parameters &param);

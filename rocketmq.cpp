@@ -11,6 +11,8 @@
 #include "consume_status.h"
 #include "msg_listener.h"
 #include "session_credentials.h"
+#include "send_status.h"
+#include "send_result.h"
 
 // symbols are exported according to the "C" language
 extern "C"
@@ -56,6 +58,12 @@ extern "C"
 
 		// class SessionCredentials
 		registerSessionCredentials(rocketMQNamespace);
+
+		// class SendStatus
+		registerSendStatus(rocketMQNamespace);
+
+		// class SendResult
+		registerSendResult(rocketMQNamespace);
 
 		// create extension
 		static Php::Extension extension("rocketmq", "1.0");

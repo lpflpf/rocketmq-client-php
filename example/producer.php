@@ -9,7 +9,12 @@ $producer->start();
 
 for ($i = 0; $i < 10000; $i ++){
 	$message = new Message("TopicTest", "*", "hello world $i");
-	$producer->send($message);
+	$sendResult = $producer->send($message);
+	echo $sendResult->getMsgId() . "\n";
+	echo $sendResult->getOffsetMsgId() . "\n";
+	echo $sendResult->getSendStatus() . "\n";
+	//echo $sendResult->getMessageQueue();
+	echo $sendResult->getQueueOffset() . "\n";
 }
 //for ($i = 0;$i < 10000; $i ++){
 //	$producer->push("TopicTest", "*", "hello world $i");

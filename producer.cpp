@@ -1,6 +1,7 @@
 #include "producer.h"
 #include "message_queue.h"
 #include "session_credentials.h"
+#include "send_result.h"
 
 void Producer::__construct(Php::Parameters &param){
 	std::string groupName = param[0];
@@ -35,13 +36,15 @@ void Producer::start(){
 	this->producer->start();
 }
 
-void Producer::send(Php::Parameters &params){
+Php::Value Producer::send(Php::Parameters &params){
 	Php::Value pvMessage = params[0];
 //	Php::Value pvMessageQueue = params[1];
 
 	Message *message = (Message *)pvMessage.implementation();
 	//MessageQueue* messageQueue = (MessageQueue*)pvMessageQueue.implementation();
-	this->producer->send(message->getMQMessage());
+	rocketmq::SendResult sr = this->producer->send(message->getMQMessage());
+	Php::Value pv(Php::Object(SEND_RESULT_CLASS_NAME, new SendResult(sr)));
+	return pv;
 }
 
 //void Producer::push(Php::Parameters &params){
