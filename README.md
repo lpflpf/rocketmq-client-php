@@ -5,7 +5,6 @@ A Php Client for Apache RocketMQ.
 # dependence
 * [rocketmq-client-cpp](https://github.com/apache/rocketmq-client-cpp)
 * [PHP-CPP](https://github.com/CopernicaMarketingSoftware/PHP-CPP)
-* linux environment.
 * php7
 
 ## INSTALL
@@ -23,8 +22,6 @@ A Php Client for Apache RocketMQ.
 ## TODO
 
 1. Manual commit an offset.
-2. Push consumer can set a queue to consumer.
-3. Queue can be selected to send message.
 
 ## Example 
 
