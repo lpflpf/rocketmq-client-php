@@ -22,9 +22,9 @@ A Php Client for Apache RocketMQ.
 
 ## TODO
 
-1. manual commit an offset.
-2. push consumer can set a queue to consumer.
-3. producer can get some extra information for sending message.
+1. Manual commit an offset.
+2. Push consumer can set a queue to consumer.
+3. Queue can be selected to send message.
 
 ## Example 
 
