@@ -12,7 +12,8 @@ $consumer->setNamesrvAddr("127.0.0.1:9876");
 $consumer->start();
 $queues = $consumer->getQueues();
 
-foreach($queues as $queue){
+//foreach($queues as $queue){
+$queue = $queues[3];
 	$newMsg = true;
 	$offset = 0;
 	while($newMsg){
@@ -46,4 +47,4 @@ foreach($queues as $queue){
 		$offset += $pullResult->getCount();
 //		$queue->setMessageQueueOffset($position + $pullResult->getCount());
 	}
-}
+//}

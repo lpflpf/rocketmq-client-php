@@ -38,11 +38,16 @@ void Producer::start(){
 
 Php::Value Producer::send(Php::Parameters &params){
 	Php::Value pvMessage = params[0];
-//	Php::Value pvMessageQueue = params[1];
-
 	Message *message = (Message *)pvMessage.implementation();
-	//MessageQueue* messageQueue = (MessageQueue*)pvMessageQueue.implementation();
-	rocketmq::SendResult sr = this->producer->send(message->getMQMessage());
+	if (params.size() == 1){
+		rocketmq::SendResult sr = this->producer->send(message->getMQMessage());
+		Php::Value pv(Php::Object(SEND_RESULT_CLASS_NAME, new SendResult(sr)));
+		return pv;
+	}
+
+	Php::Value pvMessageQueue = params[1];
+	MessageQueue* messageQueue = (MessageQueue*)pvMessageQueue.implementation();
+	rocketmq::SendResult sr = this->producer->send(message->getMQMessage(), messageQueue->getInstance());
 	Php::Value pv(Php::Object(SEND_RESULT_CLASS_NAME, new SendResult(sr)));
 	return pv;
 }
