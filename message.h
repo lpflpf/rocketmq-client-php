@@ -1,104 +1,85 @@
-
 #ifndef ROCKETMQ_CLIENT_PHP_MESSAGE_H
 #define ROCKETMQ_CLIENT_PHP_MESSAGE_H
 #include "common.h"
 #include <phpcpp.h>
 #include <iostream>
-#include <rocketmq/MQMessageExt.h>
+#include <rocketmq/MQMessage.h>
 
-#define MESSAGE_CLASS_NAME   NAMESPACE_NAME"\\MESSAGE"
+#define MESSAGE_CLASS_NAME   NAMESPACE_NAME"\\Message"
 
 class Message: public Php::Base {
 	private:
-		rocketmq::MQMessageExt message;
+		rocketmq::MQMessage message;
 	public:
-		virtual void __construct(){}
-		virtual void __destruct(){}
-		virtual ~Message(){}
-		Message(rocketmq::MQMessageExt message){
-			this->message = message;
-		}
+		Message(){}
+		Message(rocketmq::MQMessage &message);
 
-		Php::Value getQueueId(){
-			return this->message.getQueueId();
-		};
-		Php::Value getBornTimestamp(){
-			return (int64_t)this->message.getBornTimestamp();
-		}
-		Php::Value getBornHost(){
-			return this->message.getBornHost().sa_data;
-		}
-		Php::Value getBornHostString(){
-			return this->message.getBornHostString();
-		}
-		Php::Value getBornHostNameString(){
-			return this->message.getBornHostNameString();
-		}
-		Php::Value getStoreTimestamp(){
-			return (int64_t)this->message.getStoreTimestamp();
-		}
-		Php::Value getStoreHost(){
-			return this->message.getStoreHost().sa_data;
-		}
-		Php::Value getStoreHostString(){
-			return this->message.getStoreHostString();
-		}
-		Php::Value getMsgId(){
-			return this->message.getMsgId();
-		}
-		Php::Value getOffsetMsgId(){
-			return this->message.getOffsetMsgId();
-		}
-		Php::Value getBodyCRC(){
-			return this->message.getBodyCRC();
-		}
-		Php::Value getQueueOffset(){
-			return (int64_t)this->message.getQueueOffset();
-		}
-		Php::Value getCommitLogOffset(){
-			return (int64_t)this->message.getCommitLogOffset();
-		}
-		Php::Value getStoreSize(){
-			return this->message.getStoreSize();
-		}
-		Php::Value getReconsumeTimes(){
-			return this->message.getReconsumeTimes();
-		}
-		Php::Value getPreparedTransactionOffset(){
-			return (int64_t)this->message.getPreparedTransactionOffset();
-		}
+		// MQMessage constructor.
+		virtual void __construct(Php::Parameters &params);
 
-		Php::Value getProperty(Php::Parameters &param){
-			Php::Value tmp = param[0];
-			std::string name = tmp;
-			return this->message.getProperty(name);
-		}
-		Php::Value getTopic(){
-			return this->message.getTopic();
-		}
-		Php::Value getTags(){
-			return this->message.getTags();
-		}
-		Php::Value getKeys(){
-			return this->message.getKeys();
-		}
-		Php::Value getDelayTimeLevel(){
-			return this->message.getDelayTimeLevel();
-		}
-		Php::Value getFlag(){
-			return this->message.getFlag();
-		}
-		Php::Value getSysFlag(){
-			return this->message.getSysFlag();
-		}
-		Php::Value getBody(){
-			return this->message.getBody();
-		}
+		rocketmq::MQMessage& getMQMessage();
 
+		//void setProperty(const std::string& name, const std::string& value) ;
+		void setProperty(Php::Parameters &params);
+
+		//const std::string & getProperty(const std::string& name) const;
+		Php::Value getProperty(Php::Parameters &params);
+
+		// const std::string &getTopic() const;
+		Php::Value getTopic();
+		// void setTopic(const std::string& topic);
+		void setTopic(Php::Parameters &params);
+
+		//const std::string &getTags() const;
+		Php::Value getTags();
+		//void setTags(const std::string& tags);
+		void setTags(Php::Parameters &params);
+
+		//const std::string &getKeys() const;
+		Php::Value getKeys();
+		// void setKeys(const std::string& keys);
+		void setKeys(Php::Parameters &params);
+
+		// TODO
+		//void setKeys(const std::vector<std::string>& keys);
+
+		//int getDelayTimeLevel() const;
+		Php::Value getDelayTimeLevel();
+
+		//void setDelayTimeLevel(int level);
+		void setDelayTimeLevel(Php::Parameters &params);
+		//bool isWaitStoreMsgOK();
+		Php::Value isWaitStoreMsgOK();
+
+		// void setWaitStoreMsgOK(bool waitStoreMsgOK);
+		void setWaitStoreMsgOK(Php::Parameters &params);
+
+		//int getFlag() const;
+		Php::Value getFlag();
+		//void setFlag(int flag);
+		void setFlag(Php::Parameters &params);
+
+		//int getSysFlag() const;
+		Php::Value getSysFlag();
+		//void setSysFlag(int sysFlag);
+		void setSysFlag(Php::Parameters &params);
+
+		//const std::string &getBody() const;
+		Php::Value getBody();
+		//void setBody(const char* body, int len);
+		//void setBody(const std::string& body);
+		void setBody(Php::Parameters &params);
+
+		// std::map<std::string, std::string> getProperties() const;
+		Php::Value getProperties();
+
+		//void setProperties(std::map<std::string, std::string>& properties);
+		void setProperties(Php::Parameters &params);
+
+		// const std::string toString() const
 		Php::Value toString();
-
 };
-
 void registerMessage(Php::Namespace &rocketMQNamespace);
 
 #endif
+

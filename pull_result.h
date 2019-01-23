@@ -3,7 +3,7 @@
 
 #include <rocketmq/PullResult.h>
 #include <phpcpp.h>
-#include "message.h"
+#include "message_ext.h"
 #define PULL_RESULT_CLASS_NAME   NAMESPACE_NAME"\\PullResult"
 
 class PullResult: public Php::Base
@@ -23,7 +23,7 @@ class PullResult: public Php::Base
 			int idx = idx_val;
 
 			if (idx < (int)this->result.msgFoundList.size()){
-				Php::Value msg(Php::Object(MESSAGE_CLASS_NAME, new Message(this->result.msgFoundList[idx])));
+				Php::Value msg(Php::Object(MESSAGE_EXT_CLASS_NAME, new MessageExt(this->result.msgFoundList[idx])));
 				return msg;
 			}
 			return nullptr;

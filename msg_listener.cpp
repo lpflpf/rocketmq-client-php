@@ -1,5 +1,5 @@
 #include "msg_listener.h"
-#include "message.h"
+#include "message_ext.h"
 
 void registerMessageListenerType(Php::Namespace &rocketMQNamespace){
 	Php::Class<MessageListenerType> messageListenerTypeClass("MessageListenerType");
@@ -12,8 +12,8 @@ void registerMessageListenerType(Php::Namespace &rocketMQNamespace){
 
 rocketmq::ConsumeStatus commonConsumeMessage(const std::vector<rocketmq::MQMessageExt> &msgs, Php::Value callback){
 	for (size_t i = 0; i < msgs.size(); ++i) {
-		Php::Value msg(Php::Object(MESSAGE_CLASS_NAME, new Message(msgs[i])));
-		int ret = callback(msg);
+		Php::Value msgExt(Php::Object(MESSAGE_EXT_CLASS_NAME, new MessageExt(msgs[i])));
+		int ret = callback(msgExt);
 		if (rocketmq::CONSUME_SUCCESS != ret){
 			return rocketmq::RECONSUME_LATER;
 		}

@@ -3,6 +3,7 @@
 #include "push_consumer.h"
 #include "pull_consumer.h"
 #include "message.h"
+#include "message_ext.h"
 #include "pull_status.h"
 #include "pull_result.h"
 #include "message_queue.h"
@@ -43,6 +44,9 @@ extern "C"
 
 		// class Message 
 		registerMessage(rocketMQNamespace);
+
+		// class MessageExt
+		registerMessageExt(rocketMQNamespace);
 
 		// class ConsumeStatus
 		registerConsumeStatus(rocketMQNamespace);

@@ -35,18 +35,27 @@ void Producer::start(){
 	this->producer->start();
 }
 
-void Producer::push(Php::Parameters &params){
-	std::string topic = params[0];
-	std::string tag = params[1];
-	std::string body = params[2];
+void Producer::send(Php::Parameters &params){
+	Php::Value pvMessage = params[0];
+//	Php::Value pvMessageQueue = params[1];
 
-	rocketmq::MQMessage msg(topic, tag, body);
-	try {
-		this->producer->send(msg);
-	}catch (rocketmq::MQException& e){
-		std::cout <<e << std::endl;
-	}
+	Message *message = (Message *)pvMessage.implementation();
+	//MessageQueue* messageQueue = (MessageQueue*)pvMessageQueue.implementation();
+	this->producer->send(message->getMQMessage());
 }
+
+//void Producer::push(Php::Parameters &params){
+//	std::string topic = params[0];
+//	std::string tag = params[1];
+//	std::string body = params[2];
+//
+//	rocketmq::MQMessage msg(topic, tag, body);
+//	try {
+//		this->producer->send(msg);
+//	}catch (rocketmq::MQException& e){
+//		std::cout <<e << std::endl;
+//	}
+//}
 
 Php::Value Producer::getMQClientId(){
 	return this->producer->getMQClientId();
@@ -56,21 +65,21 @@ Php::Value Producer::getNamesrvAddr(){
 	return this->producer->getNamesrvAddr();
 }
 
-//Php::Value Producer::getTopicMessageQueueInfo(Php::Parameters &params){
-//	std::string topic = params[0];
-//	Php::Array result;
-//
-//	std::vector<rocketmq::MQMessageQueue> mqs = this->producer->getTopicMessageQueueInfo(topic);
-//	std::vector<rocketmq::MQMessageQueue>::iterator iter = mqs.begin();
-//	int idx = 0;
-//
-//	for (; iter != mqs.end(); ++iter) {
-//		rocketmq::MQMessageQueue mq = (*iter);
-//		result[idx++] = Php::Object(MESSAGE_QUEUE_CLASS_NAME , new MessageQueue(mq, this->consumer)); 
-//	}
-//
-//	return result;
-//}
+Php::Value Producer::getTopicMessageQueueInfo(Php::Parameters &params){
+	std::string topic = params[0];
+	Php::Array result;
+
+	std::vector<rocketmq::MQMessageQueue> mqs = this->producer->getTopicMessageQueueInfo(topic);
+	std::vector<rocketmq::MQMessageQueue>::iterator iter = mqs.begin();
+	int idx = 0;
+
+	for (; iter != mqs.end(); ++iter) {
+		rocketmq::MQMessageQueue mq = (*iter);
+		result[idx++] = Php::Object(MESSAGE_QUEUE_CLASS_NAME , new MessageQueue(mq)); 
+	}
+
+	return result;
+}
 
 void Producer::setSessionCredentials(Php::Parameters &param){
 	std::string accessKey = param[0];
@@ -127,6 +136,9 @@ void registerProducer(Php::Namespace &rocketMQNamespace){
 			Php::ByVal("groupName", Php::Type::String),
 			});
 
+	producerClass.method<&Producer::send>("send", {
+			Php::ByVal("message", MESSAGE_CLASS_NAME),
+			});
 	producerClass.method<&Producer::getSessionCredentials>("getSessionCredentials");
 	producerClass.method<&Producer::setSessionCredentials>("setSessionCredentials", {
 			Php::ByVal("accessKey", Php::Type::String),
@@ -134,16 +146,16 @@ void registerProducer(Php::Namespace &rocketMQNamespace){
 			Php::ByVal("authChannel", Php::Type::String),
 			});
 
-//	producerClass.method<&Producer::getTopicMessageQueueInfo>("getTopicMessageQueueInfo", {
-//			Php::ByVal("topic", Php::Type::String),
-//			});
+	producerClass.method<&Producer::getTopicMessageQueueInfo>("getTopicMessageQueueInfo", {
+			Php::ByVal("topic", Php::Type::String),
+			});
 
 	producerClass.method<&Producer::start>("start");
-	producerClass.method<&Producer::push>("push", {
-			Php::ByVal("topic", Php::Type::String),
-			Php::ByVal("tag", Php::Type::String),
-			Php::ByVal("body", Php::Type::String),
-			});
+//	producerClass.method<&Producer::push>("push", {
+//			Php::ByVal("topic", Php::Type::String),
+//			Php::ByVal("tag", Php::Type::String),
+//			Php::ByVal("body", Php::Type::String),
+//			});
 
 	producerClass.method<&Producer::setRetryTimes>("setRetryTimes", { Php::ByVal("retryTimes", Php::Type::Numeric), });
 	producerClass.method<&Producer::getRetryTimes>("getRetryTimes");

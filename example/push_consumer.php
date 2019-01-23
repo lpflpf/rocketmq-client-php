@@ -13,7 +13,8 @@ $result = array();
 $count = 0;
 $consumer->setCallback(function ($msg) use (&$count){
 	// if thread > 1 & use echo method will core dump.
-	file_put_contents("1", $msg->getMsgId() .  "\t" . $count .  "\n", FILE_APPEND);
+	//file_put_contents("1", $msg->getMsgId() .  "\t" . $count .  "\n", FILE_APPEND);
+	echo_msg($msg);
 	$count ++;
 });
 $consumer->subscribe("TopicTest", "*");
