@@ -1,103 +1,103 @@
 #include "session_credentials.h"
 
 void SessionCredentials::__construct(Php::Parameters &params){
-	std::string accessKey = params[0];
-	std::string secretKey = params[1];
-	std::string authChannel = params[2];
+    std::string accessKey = params[0];
+    std::string secretKey = params[1];
+    std::string authChannel = params[2];
 
-	if (sc != nullptr){
-		this->sc = new rocketmq::SessionCredentials(accessKey, secretKey, authChannel);
-	}else{
-		this->sc->setAccessKey(accessKey);
-		this->sc->setSecretKey(secretKey);
-		this->sc->setAuthChannel(authChannel);
-	}
+    if (sc != nullptr){
+        this->sc = new rocketmq::SessionCredentials(accessKey, secretKey, authChannel);
+    }else{
+        this->sc->setAccessKey(accessKey);
+        this->sc->setSecretKey(secretKey);
+        this->sc->setAuthChannel(authChannel);
+    }
 }
 void SessionCredentials::__destruct(){
-	delete(this->sc);
+    delete(this->sc);
 }
 
 Php::Value SessionCredentials::getAccessKey(){
-	return this->sc->getAccessKey();
+    return this->sc->getAccessKey();
 }
 void SessionCredentials::setAccessKey(Php::Parameters &params){
-	std::string accessKey = params[0];
+    std::string accessKey = params[0];
 
-	return this->sc->setAccessKey(accessKey);
+    return this->sc->setAccessKey(accessKey);
 }
 
 Php::Value SessionCredentials::getSecretKey(){
-	return this->sc->getAccessKey();
+    return this->sc->getAccessKey();
 }
 void SessionCredentials::setSecretKey(Php::Parameters &params){
-	std::string secretKey = params[0];
-	this->sc->setSecretKey(secretKey);
+    std::string secretKey = params[0];
+    this->sc->setSecretKey(secretKey);
 }
 
 Php::Value SessionCredentials::getSignature(){
-	return this->sc->getSignature();
+    return this->sc->getSignature();
 }
 void SessionCredentials::setSignature(Php::Parameters &params){
-	std::string signature = params[0];
-	this->sc->setSignature(signature);
+    std::string signature = params[0];
+    this->sc->setSignature(signature);
 }
 
 Php::Value SessionCredentials::getSignatureMethod(){
-	return this->sc->getSignatureMethod();
+    return this->sc->getSignatureMethod();
 }
 void SessionCredentials::setSignatureMethod(Php::Parameters &params){
-	std::string signatureMethod = params[0];
-	this->sc->setSignatureMethod(signatureMethod);
+    std::string signatureMethod = params[0];
+    this->sc->setSignatureMethod(signatureMethod);
 }
 
 Php::Value SessionCredentials::getAuthChannel(){
-	return this->sc->getAuthChannel();
+    return this->sc->getAuthChannel();
 }
 void SessionCredentials::setAuthChannel(Php::Parameters &params){
-	std::string authChannel = params[0];
-	this->sc->setAuthChannel(authChannel);
+    std::string authChannel = params[0];
+    this->sc->setAuthChannel(authChannel);
 }
 
 Php::Value SessionCredentials::isValid(){
-	return this->sc->isValid();
+    return this->sc->isValid();
 }
 
 void registerSessionCredentials(Php::Namespace &rocketMQNamespace){
-	Php::Class<SessionCredentials> scClass("SessionCredentials");
+    Php::Class<SessionCredentials> scClass("SessionCredentials");
 
-	scClass.method<&SessionCredentials::__construct>("__construct", {
-			Php::ByVal("accessKey", Php::Type::String, false),
-			Php::ByVal("secretKey", Php::Type::String, false),
-			Php::ByVal("authChannel", Php::Type::String, false),
-			});
-	scClass.method<&SessionCredentials::__destruct>("__destruct");
+    scClass.method<&SessionCredentials::__construct>("__construct", {
+            Php::ByVal("accessKey", Php::Type::String, false),
+            Php::ByVal("secretKey", Php::Type::String, false),
+            Php::ByVal("authChannel", Php::Type::String, false),
+            });
+    scClass.method<&SessionCredentials::__destruct>("__destruct");
 
-	scClass.method<&SessionCredentials::getAccessKey>("getAccessKey");
-	scClass.method<&SessionCredentials::setAccessKey>("setAccessKey",{
-			Php::ByVal("accessKey", Php::Type::String),
-			});
+    scClass.method<&SessionCredentials::getAccessKey>("getAccessKey");
+    scClass.method<&SessionCredentials::setAccessKey>("setAccessKey",{
+            Php::ByVal("accessKey", Php::Type::String),
+            });
 
-	scClass.method<&SessionCredentials::getSecretKey>("getSecretKey");
-	scClass.method<&SessionCredentials::setSecretKey>("setSecretKey", {
-			Php::ByVal("secretKey", Php::Type::String),
-			});
-	
-	scClass.method<&SessionCredentials::getSignature>("getSignature");
-	scClass.method<&SessionCredentials::setSignature>("setSignature", {
-			Php::ByVal("signature", Php::Type::String),
-			});
+    scClass.method<&SessionCredentials::getSecretKey>("getSecretKey");
+    scClass.method<&SessionCredentials::setSecretKey>("setSecretKey", {
+            Php::ByVal("secretKey", Php::Type::String),
+            });
 
-	scClass.method<&SessionCredentials::getSignatureMethod>("getSignatureMethod");
-	scClass.method<&SessionCredentials::setSignatureMethod>("setSignatureMethod",{
-			Php::ByVal("signatureMethod", Php::Type::String),
-			});
+    scClass.method<&SessionCredentials::getSignature>("getSignature");
+    scClass.method<&SessionCredentials::setSignature>("setSignature", {
+            Php::ByVal("signature", Php::Type::String),
+            });
 
-	scClass.method<&SessionCredentials::getAuthChannel>("getAuthChannel");
-	scClass.method<&SessionCredentials::setAuthChannel>("setAuthChannel", {
-			Php::ByVal("authChannel", Php::Type::String),
-			});
+    scClass.method<&SessionCredentials::getSignatureMethod>("getSignatureMethod");
+    scClass.method<&SessionCredentials::setSignatureMethod>("setSignatureMethod",{
+            Php::ByVal("signatureMethod", Php::Type::String),
+            });
 
-	scClass.method<&SessionCredentials::isValid>("isValid");
+    scClass.method<&SessionCredentials::getAuthChannel>("getAuthChannel");
+    scClass.method<&SessionCredentials::setAuthChannel>("setAuthChannel", {
+            Php::ByVal("authChannel", Php::Type::String),
+            });
 
-	rocketMQNamespace.add(scClass);
+    scClass.method<&SessionCredentials::isValid>("isValid");
+
+    rocketMQNamespace.add(scClass);
 }

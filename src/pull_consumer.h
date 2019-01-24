@@ -9,42 +9,36 @@
 
 class PullConsumer:public Php::Base
 {
-	private:
-		std::string topicName;
-		rocketmq::DefaultMQPullConsumer *consumer;
-		std::vector<rocketmq::MQMessageQueue> mqs;
-	public:
-		PullConsumer(){
-			this->consumer = nullptr;
-		}
-		virtual ~PullConsumer(){
-			if (nullptr != this->consumer){
-				delete(this->consumer);
-			}
-		}
-		virtual void __construct(Php::Parameters &params);
+    private:
+        std::string topicName;
+        rocketmq::DefaultMQPullConsumer *consumer;
+        std::vector<rocketmq::MQMessageQueue> mqs;
+    public:
+        PullConsumer(){
+            this->consumer = nullptr;
+        }
+        virtual ~PullConsumer(){
+            if (nullptr != this->consumer){
+                delete(this->consumer);
+            }
+        }
+        virtual void __construct(Php::Parameters &params);
 
-		void start();
+        void start();
 
-		Php::Value getQueues();
+        Php::Value getQueues();
 
-		void setNamesrvDomain(Php::Parameters &param);
+        void setNamesrvDomain(Php::Parameters &param);
 
-		void setNamesrvAddr(Php::Parameters &param);
+        void setNamesrvAddr(Php::Parameters &param);
 
-		void setInstanceName(Php::Parameters &param);
+        void setInstanceName(Php::Parameters &param);
 
-		void setTopic(Php::Parameters &param);
+        void setTopic(Php::Parameters &param);
 
-		void setGroup(Php::Parameters &param);
-		Php::Value pull(Php::Parameters &param);
-//  		void persistConsumerOffset();
-//  		void persistConsumerOffsetByResetOffset();
-
-		Php::Value pullBlockIfNotFound(Php::Parameters &param);
-//  		PullResult pullBlockIfNotFound(const MQMessageQueue& mq, const std::string& subExpression, int64 offset, int maxNums);
-		//Php::Value pull(const MQMessageQueue& mq, const std::string& subExpression, int64 offset, int maxNums);
- 
+        void setGroup(Php::Parameters &param);
+        Php::Value pull(Php::Parameters &param);
+        Php::Value pullBlockIfNotFound(Php::Parameters &param);
 };
 
 void registerPullConsumer(Php::Namespace &rocketMQNamespace);

@@ -8,61 +8,61 @@
 
 
 class PushConsumer : public Php::Base{
-	private:
-		std::string groupName;
-		std::string namesrv_domain;
-		std::string topic;
-		rocketmq::DefaultMQPushConsumer *consumer;
-		Php::Value    callback;
-		int tryLockTimeout = 1000;
-		int connectTimeout = 400;
-		int threadCount = 1;
-		std::string tag = "*";
-		int msgListenerType;
-		int maxRequestTime = 3600;
+    private:
+        std::string groupName;
+        std::string namesrv_domain;
+        std::string topic;
+        rocketmq::DefaultMQPushConsumer *consumer;
+        Php::Value    callback;
+        int tryLockTimeout = 1000;
+        int connectTimeout = 400;
+        int threadCount = 1;
+        std::string tag = "*";
+        int msgListenerType;
+        int maxRequestTime = 3600;
 
-	public:
-		PushConsumer(){}
-		virtual ~PushConsumer(){}
-		virtual void __construct(Php::Parameters &params);
+    public:
+        PushConsumer(){}
+        virtual ~PushConsumer(){}
+        virtual void __construct(Php::Parameters &params);
 
- 		void doRebalance();
+        void doRebalance();
 
- 		void persistConsumerOffset();
+        void persistConsumerOffset();
 
- 		void persistConsumerOffsetByResetOffset();
+        void persistConsumerOffsetByResetOffset();
 
-		void setNamesrvDomain(Php::Parameters &param);
+        void setNamesrvDomain(Php::Parameters &param);
 
-		void setNamesrvAddr(Php::Parameters &param);
+        void setNamesrvAddr(Php::Parameters &param);
 
-		void setInstanceName(Php::Parameters &param);
+        void setInstanceName(Php::Parameters &param);
 
-		void setTryLockTimeout(Php::Parameters &param);
+        void setTryLockTimeout(Php::Parameters &param);
 
-		void setConnectTimeout(Php::Parameters &param);
+        void setConnectTimeout(Php::Parameters &param);
 
-		void setListenerType(Php::Parameters &param);
+        void setListenerType(Php::Parameters &param);
 
-		void setThreadCount(Php::Parameters &param);
+        void setThreadCount(Php::Parameters &param);
 
-		void subscribe(Php::Parameters &param);
-		
-		void setCallback(Php::Parameters &param);
+        void subscribe(Php::Parameters &param);
 
-		Php::Value getConsumeType();
+        void setCallback(Php::Parameters &param);
 
-		Php::Value getConsumeFromWhere();
+        Php::Value getConsumeType();
 
-  		void setConsumeFromWhere(Php::Parameters &param);
+        Php::Value getConsumeFromWhere();
 
-		void setMaxRequestTime(Php::Parameters &param);
+        void setConsumeFromWhere(Php::Parameters &param);
 
-		void start();
+        void setMaxRequestTime(Php::Parameters &param);
 
-		void shutdown();
+        void start();
 
-		virtual void __destruct() { }
+        void shutdown();
+
+        virtual void __destruct() { }
 
 };
 

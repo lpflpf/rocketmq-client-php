@@ -1,27 +1,34 @@
 <?php
 
 function echo_msg($msg_ext){
-	$msg = $msg_ext->getMessage();
-	printf("|%-30s|%-40s|\n", "msgId", $msg_ext->getMsgId());
-	printf("|%-30s|%-40s|\n", "topic", $msg->getTopic());
-	printf("|%-30s|%-40s|\n", "tags", $msg->getTags());
-	printf("|%-30s|%-40s|\n", "storeHostString", $msg_ext->getStoreHostString());
-	printf("|%-30s|%-40s|\n", "bornTimestamp", $msg_ext->getBornTimestamp());
-	printf("|%-30s|%-40s|\n", "queueId", $msg_ext->getQueue());
-	printf("|%-30s|%-40s|\n", "getBornTimestamp", $msg_ext->getBornTimestamp());
-	printf("|%-30s|%-40s|\n", "offsetMsgId", $msg_ext->getOffsetMsgId());
-	printf("|%-30s|%-40s|\n", "bodyCRC", $msg_ext->getBodyCRC());
-	printf("|%-30s|%-40s|\n", "queueOffset", $msg_ext->getQueueOffset());
-	printf("|%-30s|%-40s|\n", "commitLogOffset", $msg_ext->getCommitLogOffset());
-	printf("|%-30s|%-40s|\n", "storeSize", $msg_ext->getStoreSize());
-	printf("|%-30s|%-40s|\n", "reconsumeTimes", $msg_ext->getReconsumeTimes());
-	printf("|%-30s|%-40s|\n", "preparedTransactionOffset", $msg_ext->getPreparedTransactionOffset());
-	printf("|%-30s|%-40s|\n", "keys", $msg->getKeys());
-	printf("|%-30s|%-40s|\n", "delayTimeLevel", $msg->getDelayTimeLevel());
-	printf("|%-30s|%-40s|\n", "isWaitStoreMsgOK", $msg->isWaitStoreMsgOK() ? "true" : "false");
-	printf("|%-30s|%-40s|\n", "flag", $msg->getFlag());
-	printf("|%-30s|%-40s|\n", "sysFlag", $msg->getSysFlag());
-	printf("|%-30s|%-40s|\n", "body", substr($msg->getBody(),0,40));
-	echo "-------------------------------------------------------------------------\n";
+    $msg = $msg_ext->getMessage();
+    $arr = array(
+        "msgId" => $msg_ext->getMsgId(),
+        "topic" => $msg->getTopic(),
+        "tags" => $msg->getTags(),
+        "storeHostString" => $msg_ext->getStoreHostString(),
+        "bornTimestamp" => $msg_ext->getBornTimestamp(),
+        "queueId" => $msg_ext->getQueue(),
+        "getBornTimestamp" => $msg_ext->getBornTimestamp(),
+        "offsetMsgId" => $msg_ext->getOffsetMsgId(),
+        "bodyCRC" => $msg_ext->getBodyCRC(),
+        "queueOffset" => $msg_ext->getQueueOffset(),
+        "commitLogOffset" => $msg_ext->getCommitLogOffset(),
+        "storeSize" => $msg_ext->getStoreSize(),
+        "reconsumeTimes" => $msg_ext->getReconsumeTimes(),
+        "preparedTransactionOffset" => $msg_ext->getPreparedTransactionOffset(),
+        "keys" => $msg->getKeys(),
+        "delayTimeLevel" => $msg->getDelayTimeLevel(),
+        "isWaitStoreMsgOK" => $msg->isWaitStoreMsgOK() ? "true" : "false",
+        "flag" => $msg->getFlag(),
+        "sysFlag" => $msg->getSysFlag(),
+        "body" => substr($msg->getBody(),0,40),
+
+    );
+    
+    foreach($arr as $key => $val){
+        printf("|%-30s|%-40s|\n", $key, $val);
+    }
+    echo "-------------------------------------------------------------------------\n";
 }
 

@@ -6,31 +6,31 @@
 #define SESSION_CREDENTIALS_CLASS_NAME NAMESPACE_NAME"\\SessionCredentials"
 
 class SessionCredentials : public Php::Base {
-	rocketmq::SessionCredentials* sc;
+    rocketmq::SessionCredentials* sc;
 
-	public:
-	SessionCredentials(rocketmq::SessionCredentials* sc){
-		this->sc = sc;
-	}
-	void __construct(Php::Parameters &params);
-	void __destruct();
+    public:
+    SessionCredentials(rocketmq::SessionCredentials* sc){
+        this->sc = sc;
+    }
+    void __construct(Php::Parameters &params);
+    void __destruct();
 
-	Php::Value getAccessKey();
-	void setAccessKey(Php::Parameters &params);
+    Php::Value getAccessKey();
+    void setAccessKey(Php::Parameters &params);
 
-	Php::Value getSecretKey();
-	void setSecretKey(Php::Parameters &params);
+    Php::Value getSecretKey();
+    void setSecretKey(Php::Parameters &params);
 
-	Php::Value getSignature();
-	void setSignature(Php::Parameters &params);
+    Php::Value getSignature();
+    void setSignature(Php::Parameters &params);
 
-	Php::Value getSignatureMethod();
-	void setSignatureMethod(Php::Parameters &params);
+    Php::Value getSignatureMethod();
+    void setSignatureMethod(Php::Parameters &params);
 
-	Php::Value getAuthChannel();
-	void setAuthChannel(Php::Parameters &params);
+    Php::Value getAuthChannel();
+    void setAuthChannel(Php::Parameters &params);
 
-	Php::Value isValid();
+    Php::Value isValid();
 };
 
 void registerSessionCredentials(Php::Namespace &rocketMQNamespace);

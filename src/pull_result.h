@@ -8,34 +8,34 @@
 
 class PullResult: public Php::Base
 {
-	private:
-		rocketmq::PullResult result;
-		int64_t position = 0;
-	public :
-		~PullResult(){ }
-	   	PullResult(rocketmq::PullResult result);
-		Php::Value getCount(){
-			return (int64_t)this->result.msgFoundList.size();
-		}
+    private:
+        rocketmq::PullResult result;
+        int64_t position = 0;
+    public :
+        ~PullResult(){ }
+        PullResult(rocketmq::PullResult result);
+        Php::Value getCount(){
+            return (int64_t)this->result.msgFoundList.size();
+        }
 
-		Php::Value getMessage(Php::Parameters &param){
-			Php::Value idx_val = param[0];
-			int idx = idx_val;
+        Php::Value getMessage(Php::Parameters &param){
+            Php::Value idx_val = param[0];
+            int idx = idx_val;
 
-			if (idx < (int)this->result.msgFoundList.size()){
-				Php::Value msg(Php::Object(MESSAGE_EXT_CLASS_NAME, new MessageExt(this->result.msgFoundList[idx])));
-				return msg;
-			}
-			return nullptr;
-		}
+            if (idx < (int)this->result.msgFoundList.size()){
+                Php::Value msg(Php::Object(MESSAGE_EXT_CLASS_NAME, new MessageExt(this->result.msgFoundList[idx])));
+                return msg;
+            }
+            return nullptr;
+        }
 
-		Php::Value getNextBeginOffset();
+        Php::Value getNextBeginOffset();
 
-		Php::Value getMinOffset();
+        Php::Value getMinOffset();
 
-		Php::Value getMaxOffset();
+        Php::Value getMaxOffset();
 
-		Php::Value getPullStatus();
+        Php::Value getPullStatus();
 };
 
 void registerPullResult(Php::Namespace &rocketMQNamespace);
