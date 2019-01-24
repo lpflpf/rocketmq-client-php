@@ -1,5 +1,5 @@
-#ifndef ROCKETMQ_CLIENT_PHP_PRODUCER_H
-#define ROCKETMQ_CLIENT_PHP_PRODUCER_H
+#ifndef ROCKETMQ_CLIENT_PHP_PRODUCER_H_
+#define ROCKETMQ_CLIENT_PHP_PRODUCER_H_
 #include "common.h"
 #include <rocketmq/DefaultMQProducer.h>
 

@@ -1,8 +1,7 @@
+#ifndef ROCKETMQ_CLIENT_PHP_PUSH_CONSUMER_H_
+#define ROCKETMQ_CLIENT_PHP_PUSH_CONSUMER_H_
+
 #include "common.h"
-
-#ifndef ROCKETMQ_CLIENT_PHP_PUSH_CONSUMER_H
-#define ROCKETMQ_CLIENT_PHP_PUSH_CONSUMER_H
-
 #include "message.h"
 #include <rocketmq/DefaultMQPushConsumer.h>
 

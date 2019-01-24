@@ -1,5 +1,5 @@
-#ifndef ROCKETMQ_CLIENT_PHP_consume_STATUS_H
-#define ROCKETMQ_CLIENT_PHP_consume_STATUS_H
+#ifndef ROCKETMQ_CLIENT_PHP_CONSUME_STATUS_H_
+#define ROCKETMQ_CLIENT_PHP_CONSUME_STATUS_H_
 #include "common.h"
 
 class ConsumeStatus: public Php::Base

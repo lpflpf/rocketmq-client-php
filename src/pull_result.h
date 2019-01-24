@@ -1,5 +1,5 @@
-#ifndef ROCKETMQ_CLIENT_PHP_PULL_RESULT_H
-#define ROCKETMQ_CLIENT_PHP_PULL_RESULT_H
+#ifndef ROCKETMQ_CLIENT_PHP_PULL_RESULT_H_
+#define ROCKETMQ_CLIENT_PHP_PULL_RESULT_H_
 
 #include <rocketmq/PullResult.h>
 #include <phpcpp.h>

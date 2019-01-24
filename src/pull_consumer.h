@@ -1,5 +1,5 @@
-#ifndef ROCKETMQ_CLIENT_PHP_PULL_CONSUMER_H
-#define ROCKETMQ_CLIENT_PHP_PULL_CONSUMER_H
+#ifndef ROCKETMQ_CLIENT_PHP_PULL_CONSUMER_H_
+#define ROCKETMQ_CLIENT_PHP_PULL_CONSUMER_H_
 
 #include "common.h"
 #include <rocketmq/DefaultMQPullConsumer.h>

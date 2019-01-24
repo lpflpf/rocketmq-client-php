@@ -1,5 +1,5 @@
-#ifndef ROCKETMQ_CLIENT_PHP_MESSAGE_QUEUE_H
-#define ROCKETMQ_CLIENT_PHP_MESSAGE_QUEUE_H
+#ifndef ROCKETMQ_CLIENT_PHP_MESSAGE_QUEUE_H_
+#define ROCKETMQ_CLIENT_PHP_MESSAGE_QUEUE_H_
 
 #include <rocketmq/DefaultMQPullConsumer.h>
 #include "common.h"

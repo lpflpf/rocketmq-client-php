@@ -1,5 +1,5 @@
-#ifndef ROCKETMQ_CLIENT_PHP_COMMON_H
-#define ROCKETMQ_CLIENT_PHP_COMMON_H
+#ifndef ROCKETMQ_CLIENT_PHP_COMMON_H_
+#define ROCKETMQ_CLIENT_PHP_COMMON_H_
 #include <string>
 #include <iostream>
 #include <phpcpp.h>

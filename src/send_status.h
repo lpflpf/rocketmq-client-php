@@ -1,8 +1,8 @@
-#ifndef ROCKETMQ_CLIENT_PHP_SEND_STATUS_H
-#define ROCKETMQ_CLIENT_PHP_SEND_STATUS_H
+#ifndef ROCKETMQ_CLIENT_PHP_SEND_STATUS_H_
+#define ROCKETMQ_CLIENT_PHP_SEND_STATUS_H_
 
-#include "common.h"
 #include <rocketmq/SendResult.h>
+#include "common.h"
 
 class SendStatus : public Php::Base
 {

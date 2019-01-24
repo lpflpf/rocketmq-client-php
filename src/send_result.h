@@ -1,5 +1,5 @@
-#ifndef ROCKETMQ_CLIENT_PHP_SEND_RESULT_H
-#define ROCKETMQ_CLIENT_PHP_SEND_RESULT_H
+#ifndef ROCKETMQ_CLIENT_PHP_SEND_RESULT_H_
+#define ROCKETMQ_CLIENT_PHP_SEND_RESULT_H_
 
 #include "common.h"
 #include "message_queue.h"

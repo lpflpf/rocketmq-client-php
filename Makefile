@@ -10,8 +10,8 @@ RESULT          = rocketmq.so
 
 DIR_SRC         = ./src
 
-SOURCES			= $(wildcard ${DIR_SRC}/*.cpp)
-OBJECTS         = $(SOURCES:%.cpp=%.o)
+SOURCES			= $(wildcard ${DIR_SRC}/*.cc)
+OBJECTS         = $(SOURCES:%.cc=%.o)
 
 all:	${OBJECTS} ${RESULT}
 
@@ -20,7 +20,7 @@ ${RESULT}: ${OBJECTS}
 
 
 ${OBJECTS}: 
-		${CPP} ${CPP_FLAGS} -fpic -o $@ ${@:%.o=%.cpp}
+		${CPP} ${CPP_FLAGS} -fpic -o $@ ${@:%.o=%.cc}
 
 install:
 		cp -f ${RESULT} ${LIBRARY_DIR}
