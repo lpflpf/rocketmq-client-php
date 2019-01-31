@@ -36,4 +36,13 @@ class PullConsumer{
 
     public function setSessionCredentials(string $accessKey, string $secretKey, string $authChannel){
     }
+
+
+    void updateConsumeOffset(Rocketmq\\MessageQueue $messageQueue, int $offset);
+
+    public function removeConsumeOffset(Rocketmq\\MessageQueue $messageQueue){
+    }
+
+    public function fetchConsumeOffset(Rocketmq\\MessageQueue $messageQueue, string $fromStore){
+    }
 }
