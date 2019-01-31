@@ -99,6 +99,28 @@ Php::Value PullConsumer::getSessionCredentials(){
 }
 
 
+void PullConsumer::updateConsumeOffset(Php::Parameters &params){
+    Php::Value mq = params[0];
+    int64_t offset = params[1];
+
+    MessageQueue* messageQueue = (MessageQueue*)mq.implementation();
+    this->consumer->updateConsumeOffset(messageQueue->getInstance(), offset);
+}
+
+void PullConsumer::removeConsumeOffset(Php::Parameters &params){
+    Php::Value mq = params[0];
+    MessageQueue* messageQueue = (MessageQueue*)mq.implementation();
+    this->consumer->removeConsumeOffset(messageQueue->getInstance());
+}
+
+Php::Value PullConsumer::fetchConsumeOffset(Php::Parameters &params){
+    Php::Value mq = params[0];
+    bool fromStore = params[1];
+    MessageQueue* messageQueue = (MessageQueue*)mq.implementation();
+    return (int64_t)this->consumer->fetchConsumeOffset(messageQueue->getInstance(), fromStore);
+}
+
+
 void registerPullConsumer(Php::Namespace &rocketMQNamespace){
     Php::Class<PullConsumer> pullConsumer("PullConsumer");
     pullConsumer.method<&PullConsumer::__construct>("__construct", { Php::ByVal("groupName", Php::Type::String), });
@@ -127,5 +149,16 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
             Php::ByVal("authChannel", Php::Type::String),
             });
     pullConsumer.method<&PullConsumer::getSessionCredentials>("getSessionCredentials");
+    pullConsumer.method<&PullConsumer::updateConsumeOffset>("updateConsumeOffset", {
+            Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME),
+            Php::ByVal("offset", Php::Type::Numeric),
+            });
+    pullConsumer.method<&PullConsumer::removeConsumeOffset>("removeConsumeOffset", {
+            Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME),
+            });
+    pullConsumer.method<&PullConsumer::fetchConsumeOffset>("fetchConsumeOffset", {
+            Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME),
+            Php::ByVal("fromStore", Php::Type::Bool),
+            });
     rocketMQNamespace.add(pullConsumer);
 }

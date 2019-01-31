@@ -44,6 +44,9 @@ class PullConsumer:public Php::Base
         void setSessionCredentials(Php::Parameters &param);
         Php::Value getSessionCredentials();
 
+        void updateConsumeOffset(Php::Parameters &params);
+        void removeConsumeOffset(Php::Parameters &params);
+        Php::Value fetchConsumeOffset(Php::Parameters &params);
 };
 
 void registerPullConsumer(Php::Namespace &rocketMQNamespace);
