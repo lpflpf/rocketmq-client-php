@@ -1,5 +1,6 @@
 #include "push_consumer.h"
 #include "msg_listener.h"
+#include "session_credentials.h"
 
 void PushConsumer::doRebalance(){
     this->consumer->doRebalance();
@@ -110,6 +111,23 @@ void PushConsumer::__construct(Php::Parameters &params){
     this->consumer = new rocketmq::DefaultMQPushConsumer(groupName);
 }
 
+void PushConsumer::setSessionCredentials(Php::Parameters &param){
+    std::string accessKey = param[0];
+    std::string secretKey = param[1];
+    std::string authChannel = param[2];
+
+    this->consumer->setSessionCredentials(accessKey, secretKey, authChannel);
+}
+
+Php::Value PushConsumer::getSessionCredentials(){
+    rocketmq::SessionCredentials sc = this->consumer->getSessionCredentials();
+    SessionCredentials *sessionCredentials = new SessionCredentials(&sc);
+    Php::Value pv(Php::Object(SESSION_CREDENTIALS_CLASS_NAME , sessionCredentials));
+    return pv;
+}
+
+
+
 void registerPushConsumer(Php::Namespace &rocketMQNamespace){
     Php::Class<PushConsumer> pushConsumer("PushConsumer");
     pushConsumer.method<&PushConsumer::doRebalance>("doRebalance");
@@ -134,6 +152,15 @@ void registerPushConsumer(Php::Namespace &rocketMQNamespace){
     pushConsumer.method<&PushConsumer::shutdown>("shutdown");
     pushConsumer.method<&PushConsumer::setMaxRequestTime>("setMaxRequestTime", { Php::ByVal("maxRequestTime", Php::Type::Numeric), });
     pushConsumer.method<&PushConsumer::setCallback>("setCallback", { Php::ByVal("callback", Php::Type::Callable), });
+
+    pushConsumer.method<&PushConsumer::setSessionCredentials>("setSessionCredentials", {
+            Php::ByVal("accessKey", Php::Type::String),
+            Php::ByVal("secretKey", Php::Type::String),
+            Php::ByVal("authChannel", Php::Type::String),
+            });
+    pushConsumer.method<&PushConsumer::getSessionCredentials>("getSessionCredentials");
+
+
     rocketMQNamespace.add(pushConsumer);
 }
 

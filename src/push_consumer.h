@@ -63,6 +63,8 @@ class PushConsumer : public Php::Base{
 
         virtual void __destruct() { }
 
+        void setSessionCredentials(Php::Parameters &param);
+        Php::Value getSessionCredentials();
 };
 
 void registerPushConsumer(Php::Namespace &rocketMQNamespace);
