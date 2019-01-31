@@ -21,7 +21,6 @@ void Message::__construct(Php::Parameters &params){
        std::string body = params[4];
        this->message = Message(topic, tags, keys, (int)params[3], body, params[5]);
        }*/
-
 }
 
 

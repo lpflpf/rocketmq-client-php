@@ -47,6 +47,9 @@ class PullConsumer:public Php::Base
         void updateConsumeOffset(Php::Parameters &params);
         void removeConsumeOffset(Php::Parameters &params);
         Php::Value fetchConsumeOffset(Php::Parameters &params);
+
+        Php::Value getMessageModel();
+        void setMessageModel(Php::Parameters &params);
 };
 
 void registerPullConsumer(Php::Namespace &rocketMQNamespace);

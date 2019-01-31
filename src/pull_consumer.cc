@@ -120,6 +120,12 @@ Php::Value PullConsumer::fetchConsumeOffset(Php::Parameters &params){
     return (int64_t)this->consumer->fetchConsumeOffset(messageQueue->getInstance(), fromStore);
 }
 
+Php::Value PullConsumer::getMessageModel(){
+    return this->consumer->getMessageModel();
+}
+void PullConsumer::setMessageModel(Php::Parameters &params){
+    this->consumer->setMessageModel(rocketmq::MessageModel((int)params[0]));
+}
 
 void registerPullConsumer(Php::Namespace &rocketMQNamespace){
     Php::Class<PullConsumer> pullConsumer("PullConsumer");
@@ -159,6 +165,10 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
     pullConsumer.method<&PullConsumer::fetchConsumeOffset>("fetchConsumeOffset", {
             Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME),
             Php::ByVal("fromStore", Php::Type::Bool),
+            });
+    pullConsumer.method<&PullConsumer::getMessageModel>("getMessageModel");
+    pullConsumer.method<&PullConsumer::setMessageModel>("setMessageModel", {
+            Php::ByVal("messageModel", Php::Type::Numeric),
             });
     rocketMQNamespace.add(pullConsumer);
 }
