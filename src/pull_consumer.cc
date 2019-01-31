@@ -1,4 +1,5 @@
 #include "pull_consumer.h"
+#include "session_credentials.h"
 
 void PullConsumer::__construct(Php::Parameters &params){
     std::string groupName = params[0];
@@ -87,10 +88,10 @@ void PullConsumer::setSessionCredentials(Php::Parameters &param){
     std::string secretKey = param[1];
     std::string authChannel = param[2];
 
-    this->consuemr->setSessionCredentials(accessKey, secretKey, authChannel);
+    this->consumer->setSessionCredentials(accessKey, secretKey, authChannel);
 }
 
-void PullConsumer::getSessionCredentials(){
+Php::Value PullConsumer::getSessionCredentials(){
     rocketmq::SessionCredentials sc = this->consumer->getSessionCredentials();
     SessionCredentials *sessionCredentials = new SessionCredentials(&sc);
     Php::Value pv(Php::Object(SESSION_CREDENTIALS_CLASS_NAME , sessionCredentials));
