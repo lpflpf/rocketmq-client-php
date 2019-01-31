@@ -37,8 +37,13 @@ class PullConsumer:public Php::Base
         void setTopic(Php::Parameters &param);
 
         void setGroup(Php::Parameters &param);
+
         Php::Value pull(Php::Parameters &param);
         Php::Value pullBlockIfNotFound(Php::Parameters &param);
+
+        void setSessionCredentials(Php::Parameters &param);
+        Php::Value getSessionCredentials();
+
 };
 
 void registerPullConsumer(Php::Namespace &rocketMQNamespace);

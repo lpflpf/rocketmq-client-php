@@ -13,6 +13,7 @@
 #include "session_credentials.h"
 #include "send_status.h"
 #include "send_result.h"
+//#include "client.h"
 
 // symbols are exported according to the "C" language
 extern "C"
@@ -65,6 +66,7 @@ extern "C"
         // class SendResult
         registerSendResult(rocketMQNamespace);
 
+        //registerClient(rocketMQNamespace);
         // create extension
         static Php::Extension extension("rocketmq", "1.0");
         extension.add(std::move(rocketMQNamespace));

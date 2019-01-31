@@ -82,6 +82,21 @@ Php::Value PullConsumer::pullBlockIfNotFound(Php::Parameters &param){
     return pv;
 }
 
+void PullConsumer::setSessionCredentials(Php::Parameters &param){
+    std::string accessKey = param[0];
+    std::string secretKey = param[1];
+    std::string authChannel = param[2];
+
+    this->consuemr->setSessionCredentials(accessKey, secretKey, authChannel);
+}
+
+void PullConsumer::getSessionCredentials(){
+    rocketmq::SessionCredentials sc = this->consumer->getSessionCredentials();
+    SessionCredentials *sessionCredentials = new SessionCredentials(&sc);
+    Php::Value pv(Php::Object(SESSION_CREDENTIALS_CLASS_NAME , sessionCredentials));
+    return pv;
+}
+
 
 void registerPullConsumer(Php::Namespace &rocketMQNamespace){
     Php::Class<PullConsumer> pullConsumer("PullConsumer");
@@ -105,5 +120,11 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
             Php::ByVal("offset", Php::Type::Numeric),
             Php::ByVal("maxNums", Php::Type::Numeric),
             });
+    pullConsumer.method<&PullConsumer::setSessionCredentials>("setSessionCredentials", {
+            Php::ByVal("accessKey", Php::Type::String),
+            Php::ByVal("secretKey", Php::Type::String),
+            Php::ByVal("authChannel", Php::Type::String),
+            });
+    pullConsumer.method<&PullConsumer::getSessionCredentials>("getSessionCredentials");
     rocketMQNamespace.add(pullConsumer);
 }
