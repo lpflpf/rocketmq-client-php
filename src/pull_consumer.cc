@@ -102,7 +102,7 @@ Php::Value PullConsumer::getSessionCredentials(){
 void registerPullConsumer(Php::Namespace &rocketMQNamespace){
     Php::Class<PullConsumer> pullConsumer("PullConsumer");
     pullConsumer.method<&PullConsumer::__construct>("__construct", { Php::ByVal("groupName", Php::Type::String), });
-    pullConsumer.method<&PullConsumer::setInstanceName>("setInstanceName", { Php::ByVal("groupName", Php::Type::String), });
+    pullConsumer.method<&PullConsumer::setInstanceName>("setInstanceName", { Php::ByVal("instance", Php::Type::String), });
     pullConsumer.method<&PullConsumer::setNamesrvDomain>("setNamesrvDomain", { Php::ByVal("nameserver", Php::Type::String), });
     pullConsumer.method<&PullConsumer::setTopic>("setTopic", { Php::ByVal("topic", Php::Type::String), });
     pullConsumer.method<&PullConsumer::start>("start");
