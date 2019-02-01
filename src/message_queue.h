@@ -16,16 +16,8 @@ class MessageQueue : public Php::Base
         virtual ~MessageQueue(){}
 
     public:
-        MessageQueue(const rocketmq::MQMessageQueue& other){
-            messageQueue = other;
-        }
-        void __construct(Php::Parameters &params){
-            std::string topic = params[0];
-            std::string brokerName = params[1];
-            int queueId = params[2];
-
-            this->messageQueue = rocketmq::MQMessageQueue(topic, brokerName, queueId);
-        }
+        MessageQueue(const rocketmq::MQMessageQueue& other);
+        void __construct(Php::Parameters &params);
 
         Php::Value getTopic();
         void setTopic(Php::Parameters &param);

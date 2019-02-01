@@ -127,6 +127,44 @@ void PullConsumer::setMessageModel(Php::Parameters &params){
     this->consumer->setMessageModel(rocketmq::MessageModel((int)params[0]));
 }
 
+// void setTcpTransportPullThreadNum(int num);
+void PullConsumer::setTcpTransportPullThreadNum(Php::Parameters &param){
+    this->consumer->setTcpTransportPullThreadNum((int64_t)param[0]);
+}
+
+// const int getTcpTransportPullThreadNum() const;
+Php::Value PullConsumer::getTcpTransportPullThreadNum(){
+    return (int64_t)this->consumer->getTcpTransportPullThreadNum();
+}
+
+// void setTcpTransportConnectTimeout(uint64_t timeout);  // ms
+void PullConsumer::setTcpTransportConnectTimeout(Php::Parameters &param){
+    this->consumer->setTcpTransportConnectTimeout((int64_t)param[0]);
+}
+// const uint64_t getTcpTransportConnectTimeout() const;
+Php::Value PullConsumer::getTcpTransportConnectTimeout(){
+    return (int64_t)this->consumer->getTcpTransportConnectTimeout();
+}
+
+// void setTcpTransportTryLockTimeout(uint64_t timeout);  // ms
+void PullConsumer::setTcpTransportTryLockTimeout(Php::Parameters &param){
+    this->consumer->setTcpTransportTryLockTimeout((int64_t)param[0]);
+}
+
+// const uint64_t getTcpTransportConnectTimeout() const;
+Php::Value PullConsumer::getTcpTransportTryLockTimeout(){
+    return (int64_t)this->consumer->getTcpTransportTryLockTimeout();
+}
+
+//void setUnitName(std::string unitName);
+void PullConsumer::setUnitName(Php::Parameters &param){
+    this->consumer->setUnitName(param[0]);
+}
+//const std::string& getUnitName();
+Php::Value PullConsumer::getUnitName(){
+    return this->consumer->getUnitName();
+}
+
 void registerPullConsumer(Php::Namespace &rocketMQNamespace){
     Php::Class<PullConsumer> pullConsumer("PullConsumer");
     pullConsumer.method<&PullConsumer::__construct>("__construct", { Php::ByVal("groupName", Php::Type::String), });
@@ -170,5 +208,16 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
     pullConsumer.method<&PullConsumer::setMessageModel>("setMessageModel", {
             Php::ByVal("messageModel", Php::Type::Numeric),
             });
+
+    pullConsumer.method<&PullConsumer::getTcpTransportTryLockTimeout>("getTcpTransportTryLockTimeout");
+    pullConsumer.method<&PullConsumer::setTcpTransportTryLockTimeout>("setTcpTransportTryLockTimeout",{ Php::ByVal("timeout", Php::Type::Numeric), });
+    pullConsumer.method<&PullConsumer::getTcpTransportConnectTimeout>("getTcpTransportConnectTimeout");
+    pullConsumer.method<&PullConsumer::setTcpTransportConnectTimeout>("setTcpTransportConnectTimeout", {Php::ByVal("timeout", Php::Type::Numeric), });
+    pullConsumer.method<&PullConsumer::getTcpTransportPullThreadNum>("getTcpTransportPullThreadNum", {Php::ByVal("threadNum", Php::Type::Numeric), });
+    pullConsumer.method<&PullConsumer::setTcpTransportPullThreadNum>("setTcpTransportPullThreadNum", {Php::ByVal("threadNum", Php::Type::Numeric), });
+    pullConsumer.method<&PullConsumer::getUnitName>("getUnitName");
+    pullConsumer.method<&PullConsumer::setUnitName>("setUnitName", {Php::ByVal("unitName", Php::Type::String),});
+
+
     rocketMQNamespace.add(pullConsumer);
 }

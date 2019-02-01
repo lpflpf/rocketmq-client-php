@@ -107,6 +107,45 @@ void Producer::setRetryTimes(Php::Parameters &param){
     this->producer->setRetryTimes(param[0]);
 }
 
+        // void setTcpTransportPullThreadNum(int num);
+void Producer::setTcpTransportPullThreadNum(Php::Parameters &param){
+    this->producer->setTcpTransportPullThreadNum((int64_t)param[0]);
+}
+
+// const int getTcpTransportPullThreadNum() const;
+Php::Value Producer::getTcpTransportPullThreadNum(){
+    return (int64_t)this->producer->getTcpTransportPullThreadNum();
+}
+
+// void setTcpTransportConnectTimeout(uint64_t timeout);  // ms
+void Producer::setTcpTransportConnectTimeout(Php::Parameters &param){
+    this->producer->setTcpTransportConnectTimeout((int64_t)param[0]);
+}
+// const uint64_t getTcpTransportConnectTimeout() const;
+Php::Value Producer::getTcpTransportConnectTimeout(){
+    return (int64_t)this->producer->getTcpTransportConnectTimeout();
+}
+
+// void setTcpTransportTryLockTimeout(uint64_t timeout);  // ms
+void Producer::setTcpTransportTryLockTimeout(Php::Parameters &param){
+    this->producer->setTcpTransportTryLockTimeout((int64_t)param[0]);
+}
+
+// const uint64_t getTcpTransportConnectTimeout() const;
+Php::Value Producer::getTcpTransportTryLockTimeout(){
+    return (int64_t)this->producer->getTcpTransportTryLockTimeout();
+}
+
+//void setUnitName(std::string unitName);
+void Producer::setUnitName(Php::Parameters &param){
+    this->producer->setUnitName(param[0]);
+}
+//const std::string& getUnitName();
+Php::Value Producer::getUnitName(){
+    return this->producer->getUnitName();
+}
+
+
 void registerProducer(Php::Namespace &rocketMQNamespace){
     Php::Class<Producer> producerClass("Producer");
     producerClass.method<&Producer::getMQClientId>("getMQClientId");
@@ -150,6 +189,15 @@ void registerProducer(Php::Namespace &rocketMQNamespace){
 
     producerClass.method<&Producer::setRetryTimes>("setRetryTimes", { Php::ByVal("retryTimes", Php::Type::Numeric), });
     producerClass.method<&Producer::getRetryTimes>("getRetryTimes");
+
+    producerClass.method<&Producer::getTcpTransportTryLockTimeout>("getTcpTransportTryLockTimeout");
+    producerClass.method<&Producer::setTcpTransportTryLockTimeout>("setTcpTransportTryLockTimeout",{ Php::ByVal("timeout", Php::Type::Numeric), });
+    producerClass.method<&Producer::getTcpTransportConnectTimeout>("getTcpTransportConnectTimeout");
+    producerClass.method<&Producer::setTcpTransportConnectTimeout>("setTcpTransportConnectTimeout", {Php::ByVal("timeout", Php::Type::Numeric), });
+    producerClass.method<&Producer::getTcpTransportPullThreadNum>("getTcpTransportPullThreadNum", {Php::ByVal("threadNum", Php::Type::Numeric), });
+    producerClass.method<&Producer::setTcpTransportPullThreadNum>("setTcpTransportPullThreadNum", {Php::ByVal("threadNum", Php::Type::Numeric), });
+    producerClass.method<&Producer::getUnitName>("getUnitName");
+    producerClass.method<&Producer::setUnitName>("setUnitName", {Php::ByVal("unitName", Php::Type::String),});
 
     rocketMQNamespace.add(producerClass);
 }

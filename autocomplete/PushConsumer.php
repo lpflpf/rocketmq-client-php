@@ -39,4 +39,27 @@ class PushConsumer{
     public function getMessageModel($model){
     }
 
+    public function setTcpTransportPullThreadNum(int $num){
+    }
+
+    public function getTcpTransportPullThreadNum(){
+    }
+
+    public function setTcpTransportConnectTimeout(int $timeout){
+    }
+
+    public function getTcpTransportConnectTimeout(){
+    }
+    
+    public function setTcpTransportTryLockTimeout(int $timeout){
+    }
+
+    public function getTcpTransportTryLockTimeout(){
+    }
+
+    public function setUnitName(string $unitName){
+    }
+
+    public function getUnitName(){
+    }
 }

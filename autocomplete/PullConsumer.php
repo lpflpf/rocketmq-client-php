@@ -37,8 +37,8 @@ class PullConsumer{
     public function setSessionCredentials(string $accessKey, string $secretKey, string $authChannel){
     }
 
-
-    void updateConsumeOffset(Rocketmq\\MessageQueue $messageQueue, int $offset);
+    void updateConsumeOffset(Rocketmq\\MessageQueue $messageQueue, int $offset){
+    }
 
     public function removeConsumeOffset(Rocketmq\\MessageQueue $messageQueue){
     }
@@ -50,5 +50,29 @@ class PullConsumer{
     }
 
     public function getMessageModel($model){
+    }
+
+    public function setTcpTransportPullThreadNum(int $num){
+    }
+
+    public function getTcpTransportPullThreadNum(){
+    }
+
+    public function setTcpTransportConnectTimeout(int $timeout){
+    }
+
+    public function getTcpTransportConnectTimeout(){
+    }
+    
+    public function setTcpTransportTryLockTimeout(int $timeout){
+    }
+
+    public function getTcpTransportTryLockTimeout(){
+    }
+
+    public function setUnitName(string $unitName){
+    }
+
+    public function getUnitName(){
     }
 }

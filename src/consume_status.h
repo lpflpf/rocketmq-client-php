@@ -1,5 +1,6 @@
 #ifndef ROCKETMQ_CLIENT_PHP_CONSUME_STATUS_H_
 #define ROCKETMQ_CLIENT_PHP_CONSUME_STATUS_H_
+
 #include "common.h"
 
 class ConsumeStatus: public Php::Base
@@ -16,4 +17,5 @@ void registerConsumeStatus(Php::Namespace &rocketMQNamespace){
     consumeStatusClass.constant("RECONSUME_LATER", (int) rocketmq::RECONSUME_LATER);
     rocketMQNamespace.add(consumeStatusClass);
 }
+
 #endif

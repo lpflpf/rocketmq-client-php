@@ -69,6 +69,28 @@ class PushConsumer : public Php::Base{
         Php::Value getMessageModel();
         void setMessageModel(Php::Parameters &params);
 
+        // void setTcpTransportPullThreadNum(int num);
+        void setTcpTransportPullThreadNum(Php::Parameters &param);
+
+        // const int getTcpTransportPullThreadNum() const;
+        Php::Value getTcpTransportPullThreadNum();
+
+        // void setTcpTransportConnectTimeout(uint64_t timeout);  // ms
+        void setTcpTransportConnectTimeout(Php::Parameters &param);
+        // const uint64_t getTcpTransportConnectTimeout() const;
+        Php::Value getTcpTransportConnectTimeout();
+
+        // void setTcpTransportTryLockTimeout(uint64_t timeout);  // ms
+        void setTcpTransportTryLockTimeout(Php::Parameters &param);
+        // const uint64_t getTcpTransportConnectTimeout() const;
+        Php::Value getTcpTransportTryLockTimeout();
+
+        //void setUnitName(std::string unitName);
+        void setUnitName(Php::Parameters &param);
+        //const std::string& getUnitName();
+        Php::Value getUnitName();
+
+
 };
 
 void registerPushConsumer(Php::Namespace &rocketMQNamespace);

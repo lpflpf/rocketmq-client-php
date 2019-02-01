@@ -29,8 +29,6 @@ class Producer : public Php::Base
         void setGroupName(Php::Parameters &param);
         Php::Value getGroupName();
 
-        //		void setTcpTransportPullThreadNum(Php::Parameters &param);
-
         void start();
 
 
@@ -43,6 +41,27 @@ class Producer : public Php::Base
 
         Php::Value getRetryTimes();
         void setRetryTimes(Php::Parameters &param);
+
+        // void setTcpTransportPullThreadNum(int num);
+        void setTcpTransportPullThreadNum(Php::Parameters &param);
+
+        // const int getTcpTransportPullThreadNum() const;
+        Php::Value getTcpTransportPullThreadNum();
+
+        // void setTcpTransportConnectTimeout(uint64_t timeout);  // ms
+        void setTcpTransportConnectTimeout(Php::Parameters &param);
+        // const uint64_t getTcpTransportConnectTimeout() const;
+        Php::Value getTcpTransportConnectTimeout();
+
+        // void setTcpTransportTryLockTimeout(uint64_t timeout);  // ms
+        void setTcpTransportTryLockTimeout(Php::Parameters &param);
+        // const uint64_t getTcpTransportConnectTimeout() const;
+        Php::Value getTcpTransportTryLockTimeout();
+
+        //void setUnitName(std::string unitName);
+        void setUnitName(Php::Parameters &param);
+        //const std::string& getUnitName();
+        Php::Value getUnitName();
 
         virtual void __destruct(){
             if (this->producer != nullptr){
