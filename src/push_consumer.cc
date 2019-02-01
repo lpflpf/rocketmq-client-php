@@ -126,6 +126,13 @@ Php::Value PushConsumer::getSessionCredentials(){
     return pv;
 }
 
+Php::Value PushConsumer::getMessageModel(){
+    return this->consumer->getMessageModel();
+}
+void PushConsumer::setMessageModel(Php::Parameters &params){
+    this->consumer->setMessageModel(rocketmq::MessageModel((int)params[0]));
+}
+
 
 
 void registerPushConsumer(Php::Namespace &rocketMQNamespace){
@@ -159,6 +166,10 @@ void registerPushConsumer(Php::Namespace &rocketMQNamespace){
             Php::ByVal("authChannel", Php::Type::String),
             });
     pushConsumer.method<&PushConsumer::getSessionCredentials>("getSessionCredentials");
+    pushConsumer.method<&PushConsumer::getMessageModel>("getMessageModel");
+    pushConsumer.method<&PushConsumer::setMessageModel>("setMessageModel", {
+            Php::ByVal("messageModel", Php::Type::Numeric),
+            });
 
 
     rocketMQNamespace.add(pushConsumer);
