@@ -49,24 +49,28 @@ class Producer {
     public function getRetryTimes(){
     }
 
+    // default = cpu core.
     public function setTcpTransportPullThreadNum(int $num){
     }
 
     public function getTcpTransportPullThreadNum(){
     }
 
+    // default = 3000 ms
     public function setTcpTransportConnectTimeout(int $timeout){
     }
 
     public function getTcpTransportConnectTimeout(){
     }
     
+    // default 3000ms 
     public function setTcpTransportTryLockTimeout(int $timeout){
     }
 
     public function getTcpTransportTryLockTimeout(){
     }
 
+    // default unitName = ""
     public function setUnitName(string $unitName){
     }
 

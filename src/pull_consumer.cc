@@ -28,9 +28,17 @@ Php::Value PullConsumer::getQueues(){
     return result;
 }
 
+Php::Value PullConsumer::getNamesrvDomain(){
+    return this->consumer->getNamesrvDomain();
+}
+
 void PullConsumer::setNamesrvDomain(Php::Parameters &param){
     std::string namesrv_domain = param[0];
     this->consumer->setNamesrvDomain(namesrv_domain);
+}
+
+Php::Value PullConsumer::getNamesrvAddr(){
+    return this->consumer->getNamesrvAddr();
 }
 
 void PullConsumer::setNamesrvAddr(Php::Parameters &param){
@@ -169,11 +177,14 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
     Php::Class<PullConsumer> pullConsumer("PullConsumer");
     pullConsumer.method<&PullConsumer::__construct>("__construct", { Php::ByVal("groupName", Php::Type::String), });
     pullConsumer.method<&PullConsumer::setInstanceName>("setInstanceName", { Php::ByVal("instance", Php::Type::String), });
-    pullConsumer.method<&PullConsumer::setNamesrvDomain>("setNamesrvDomain", { Php::ByVal("nameserver", Php::Type::String), });
     pullConsumer.method<&PullConsumer::setTopic>("setTopic", { Php::ByVal("topic", Php::Type::String), });
     pullConsumer.method<&PullConsumer::start>("start");
     pullConsumer.method<&PullConsumer::getQueues>("getQueues");
     pullConsumer.method<&PullConsumer::setNamesrvAddr>("setNamesrvAddr", { Php::ByVal("namesrvAddr", Php::Type::String), });
+    pullConsumer.method<&PullConsumer::getNamesrvAddr>("getNamesrvAddr");
+    pullConsumer.method<&PullConsumer::setNamesrvDomain>("setNamesrvDomain", { Php::ByVal("nameserver", Php::Type::String), });
+    pullConsumer.method<&PullConsumer::getNamesrvDomain>("getNamesrvDomain");
+
     pullConsumer.method<&PullConsumer::setGroup>("setGroup", { Php::ByVal("group", Php::Type::String), });
     pullConsumer.method<&PullConsumer::pull>("pull", {
             Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME),
@@ -197,9 +208,7 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
             Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME),
             Php::ByVal("offset", Php::Type::Numeric),
             });
-    pullConsumer.method<&PullConsumer::removeConsumeOffset>("removeConsumeOffset", {
-            Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME),
-            });
+    pullConsumer.method<&PullConsumer::removeConsumeOffset>("removeConsumeOffset", { Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME), });
     pullConsumer.method<&PullConsumer::fetchConsumeOffset>("fetchConsumeOffset", {
             Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME),
             Php::ByVal("fromStore", Php::Type::Bool),

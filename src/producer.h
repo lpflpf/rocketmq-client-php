@@ -20,6 +20,8 @@ class Producer : public Php::Base
 
         void setNamesrvAddr(Php::Parameters &param);
         Php::Value getNamesrvAddr();
+
+        Php::Value getNamesrvDomain();
         void setNamesrvDomain(Php::Parameters &param);
 
         Php::Value getTopicMessageQueueInfo(Php::Parameters &param);

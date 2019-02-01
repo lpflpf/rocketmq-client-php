@@ -18,9 +18,17 @@ void PushConsumer::setNamesrvDomain(Php::Parameters &param){
     this->consumer->setNamesrvDomain(nameserver);
 }
 
+Php::Value PushConsumer::getNamesrvDomain(){
+    return this->consumer->getNamesrvDomain();
+}
+
 void PushConsumer::setNamesrvAddr(Php::Parameters &param){
     std::string namesrvAddr = param[0];
     this->consumer->setNamesrvAddr(namesrvAddr);
+}
+
+Php::Value PushConsumer::getNamesrvAddr(){
+    return this->consumer->getNamesrvAddr();
 }
 
 

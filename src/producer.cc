@@ -94,7 +94,11 @@ Php::Value Producer::getSessionCredentials(){
 
 void Producer::setNamesrvDomain(Php::Parameters &param){
     std::string domain = param[0];
-    return this->producer->setNamesrvDomain(domain);
+    this->producer->setNamesrvDomain(domain);
+}
+
+Php::Value Producer::getNamesrvDomain(){
+    return this->producer->getNamesrvDomain();
 }
 
 // int getRetryTimes() const;
@@ -162,9 +166,8 @@ void registerProducer(Php::Namespace &rocketMQNamespace){
     producerClass.method<&Producer::setNamesrvAddr>("setNamesrvAddr", { 
             Php::ByVal("nameserver", Php::Type::String), 
             });
-    producerClass.method<&Producer::setNamesrvDomain>("setNamesrvDomain", {
-            Php::ByVal("domain", Php::Type::String),
-            });
+    producerClass.method<&Producer::setNamesrvDomain>("setNamesrvDomain", { Php::ByVal("domain", Php::Type::String), });
+    producerClass.method<&Producer::getNamesrvDomain>("getNamesrvDomain");
 
     producerClass.method<&Producer::getGroupName>("getGroupName");
     producerClass.method<&Producer::setGroupName>("setGroupName", {

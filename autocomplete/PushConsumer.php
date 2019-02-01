@@ -6,6 +6,15 @@ class PushConsumer{
 	public function setNamesrvDomain($nameserver){
 	}
 
+    public function getNamesrvDomain(){
+    }
+
+    public function setNamesrvAddr($nameserverAddr){
+
+    }
+    public function getNamesrvAddr(){
+    }
+
 	public function setInstanceName($groupName){
 	}
 

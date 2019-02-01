@@ -28,8 +28,10 @@ class PullConsumer:public Php::Base
 
         Php::Value getQueues();
 
+        Php::Value getNamesrvDomain();
         void setNamesrvDomain(Php::Parameters &param);
 
+        Php::Value getNamesrvAddr();
         void setNamesrvAddr(Php::Parameters &param);
 
         void setInstanceName(Php::Parameters &param);

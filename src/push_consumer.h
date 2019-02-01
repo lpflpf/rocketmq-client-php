@@ -13,10 +13,6 @@ class PushConsumer : public Php::Base{
         std::string topic;
         rocketmq::DefaultMQPushConsumer *consumer;
         Php::Value    callback;
-        int tryLockTimeout = 1000;
-        int connectTimeout = 400;
-        int threadCount = 1;
-        std::string tag = "*";
         int msgListenerType;
         int maxRequestTime = 3600;
 
@@ -33,7 +29,11 @@ class PushConsumer : public Php::Base{
 
         void setNamesrvDomain(Php::Parameters &param);
 
+        Php::Value getNamesrvDomain();
+
         void setNamesrvAddr(Php::Parameters &param);
+
+        Php::Value getNamesrvAddr(); 
 
         void setInstanceName(Php::Parameters &param);
 

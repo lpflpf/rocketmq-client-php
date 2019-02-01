@@ -10,8 +10,14 @@ class PullConsumer{
     public function setNamesrvAddr($address){
     }
 
+    public function getNamesrvAddr(){
+    }
+
 	public function setNamesrvDomain($nameserver){
 	}
+
+    public function getNamesrvDomain(){
+    }
 
 	public function setTopic($topic){
 	}
