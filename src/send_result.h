@@ -13,30 +13,17 @@ class SendResult: public Php::Base
         rocketmq::SendResult sendResult;
 
     public:
-        SendResult(rocketmq::SendResult& sendResult){
-            this->sendResult = sendResult;
-        }
+        SendResult(rocketmq::SendResult& sendResult);
 
-        Php::Value getMsgId(){
-            return this->sendResult.getMsgId();
-        }
+        Php::Value getMsgId();
 
-        Php::Value getOffsetMsgId(){
-            return this->sendResult.getOffsetMsgId();
-        }
+        Php::Value getOffsetMsgId();
 
-        Php::Value getSendStatus(){
-            return (int64_t)this->sendResult.getSendStatus();
-        }
+        Php::Value getSendStatus();
 
-        Php::Value getMessageQueue(){
-            rocketmq::MQMessageQueue mq = this->sendResult.getMessageQueue();
-            return Php::Object(MESSAGE_QUEUE_CLASS_NAME, new MessageQueue(mq));
-        }
+        Php::Value getMessageQueue();
 
-        Php::Value getQueueOffset(){
-            return (int64_t) this->sendResult.getQueueOffset();
-        }
+        Php::Value getQueueOffset();
 };
 
 void registerSendResult(Php::Namespace &rocketMQNamespace);

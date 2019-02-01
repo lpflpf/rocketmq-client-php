@@ -36,6 +36,7 @@ void Producer::start(){
     this->producer->start();
 }
 
+//  @see SendResult send(MQMessage& msg, const MQMessageQueue& mq);
 Php::Value Producer::send(Php::Parameters &params){
     Php::Value pvMessage = params[0];
     Message *message = (Message *)pvMessage.implementation();
@@ -51,19 +52,6 @@ Php::Value Producer::send(Php::Parameters &params){
     Php::Value pv(Php::Object(SEND_RESULT_CLASS_NAME, new SendResult(sr)));
     return pv;
 }
-
-//void Producer::push(Php::Parameters &params){
-//	std::string topic = params[0];
-//	std::string tag = params[1];
-//	std::string body = params[2];
-//
-//	rocketmq::MQMessage msg(topic, tag, body);
-//	try {
-//		this->producer->send(msg);
-//	}catch (rocketmq::MQException& e){
-//		std::cout <<e << std::endl;
-//	}
-//}
 
 Php::Value Producer::getMQClientId(){
     return this->producer->getMQClientId();

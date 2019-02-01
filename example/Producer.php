@@ -19,7 +19,7 @@ foreach($queues as $queue){
 
 for ($i = 0; $i < 10000; $i ++){
 	$message = new Message("TopicTest", "*", "hello world $i");
-	$sendResult = $producer->send($message, $queues[$i % 4]);
+	$sendResult = $producer->send($message, $queues[3]);
 	printf("|%-30s|%-40s|\n", "msgId", $sendResult->getMsgId());
 	printf("|%-30s|%-40s|\n", "offsetMsgId", $sendResult->getOffsetMsgId());
 	printf("|%-30s|%-40s|\n", "sendStatus", $sendResult->getSendStatus());
