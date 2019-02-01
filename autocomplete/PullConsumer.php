@@ -45,4 +45,10 @@ class PullConsumer{
 
     public function fetchConsumeOffset(Rocketmq\\MessageQueue $messageQueue, string $fromStore){
     }
+
+    public function setMessageModel($model){
+    }
+
+    public function getMessageModel($model){
+    }
 }

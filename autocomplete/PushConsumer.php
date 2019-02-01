@@ -32,4 +32,11 @@ class PushConsumer{
 
 	public function setCallback(callable $callback){
 	}
+
+    public function setMessageModel($model){
+    }
+
+    public function getMessageModel($model){
+    }
+
 }
