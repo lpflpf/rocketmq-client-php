@@ -1,5 +1,7 @@
 <?php
 
+namespace RocketMQ;
+
 class SendStatus{
     const SEND_OK;
     const SEND_FLUSH_DISK_TIMEOUT;

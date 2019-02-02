@@ -1,5 +1,8 @@
 <?php
 
+namespace RocketMQ;
+
+
 class PullConsumer{
     public function __construct(string $groupName){
     }

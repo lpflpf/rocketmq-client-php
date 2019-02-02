@@ -1,5 +1,8 @@
 <?php
 
+namespace RocketMQ;
+
+
 class SessionCredentials {
     public function __construct($accessKey, $secretKey, $authChannel){
     }

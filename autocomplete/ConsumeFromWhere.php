@@ -1,5 +1,7 @@
 <?php
 
+namespace RocketMQ;
+
 class ConsumeFromWhere {
 	const CONSUME_FROM_LAST_OFFSET = 0;
 

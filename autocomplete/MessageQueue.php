@@ -1,5 +1,8 @@
 <?php
 
+namespace RocketMQ;
+
+
 class MessageQueue{
 	public function getMessageQueueOffset() {
 	}

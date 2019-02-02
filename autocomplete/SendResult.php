@@ -1,5 +1,8 @@
 <?php
 
+namespace RocketMQ;
+
+
 class SendResult{
     public function getMsgId(){
     }

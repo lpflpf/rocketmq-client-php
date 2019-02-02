@@ -1,5 +1,8 @@
 <?php
 
+namespace RocketMQ;
+
+
 class Producer {
     public function __construct(string $groupName){
     }
