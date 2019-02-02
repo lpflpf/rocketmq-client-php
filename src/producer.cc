@@ -111,7 +111,47 @@ void Producer::setRetryTimes(Php::Parameters &param){
     this->producer->setRetryTimes(param[0]);
 }
 
-        // void setTcpTransportPullThreadNum(int num);
+
+//int getSendMsgTimeout() const;
+Php::Value Producer::getSendMsgTimeout(){
+    return this->producer->getSendMsgTimeout();
+}
+//void setSendMsgTimeout(int sendMsgTimeout);
+void Producer::setSendMsgTimeout(Php::Parameters &param){
+    this->producer->setSendMsgTimeout(param[0]);
+}
+
+//int getCompressMsgBodyOverHowmuch() const;
+Php::Value Producer::getCompressMsgBodyOverHowmuch(){
+    return this->producer->getCompressMsgBodyOverHowmuch();
+}
+
+//void setCompressMsgBodyOverHowmuch(int compressMsgBodyOverHowmuch);
+void Producer::setCompressMsgBodyOverHowmuch(Php::Parameters &param){
+    this->producer->setCompressMsgBodyOverHowmuch(param[0]);
+}
+
+//int getCompressLevel() const;
+Php::Value Producer::getCompressLevel(){
+    return this->producer->getCompressLevel();
+}
+
+//void setCompressLevel(int compressLevel);
+void Producer::setCompressLevel(Php::Parameters &param){
+    this->producer->setCompressLevel(param[0]);
+}
+
+//int getMaxMessageSize() const;
+Php::Value Producer::getMaxMessageSize(){
+    return this->producer->getMaxMessageSize();
+}
+
+//void setMaxMessageSize(int maxMessageSize);
+void Producer::setMaxMessageSize(Php::Parameters &param){
+    this->producer->setMaxMessageSize(param[0]);
+}
+
+// void setTcpTransportPullThreadNum(int num);
 void Producer::setTcpTransportPullThreadNum(Php::Parameters &param){
     this->producer->setTcpTransportPullThreadNum((int64_t)param[0]);
 }
@@ -192,6 +232,9 @@ void registerProducer(Php::Namespace &rocketMQNamespace){
 
     producerClass.method<&Producer::setRetryTimes>("setRetryTimes", { Php::ByVal("retryTimes", Php::Type::Numeric), });
     producerClass.method<&Producer::getRetryTimes>("getRetryTimes");
+
+    producerClass.method<&Producer::getSendMsgTimeout>("getSendMsgTimeout");
+    producerClass.method<&Producer::setSendMsgTimeout>("setSendMsgTimeout", {Php::ByVal("sendMsgTimeout", Php::Type::Numeric),});
 
     producerClass.method<&Producer::getTcpTransportTryLockTimeout>("getTcpTransportTryLockTimeout");
     producerClass.method<&Producer::setTcpTransportTryLockTimeout>("setTcpTransportTryLockTimeout",{ Php::ByVal("timeout", Php::Type::Numeric), });

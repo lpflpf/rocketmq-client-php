@@ -34,10 +34,10 @@ class Producer {
     public function getSessionCredentials(){
     }
 
-    public function setSessionCredentials(string accessKey, string secretKey, string autChannel){
+    public function setSessionCredentials(string $accessKey, string $secretKey, string $autChannel){
     }
 
-    public function getTopicMessageQueueInfo(string topic){
+    public function getTopicMessageQueueInfo(string $topic){
     }
 
     public function start(){
@@ -47,6 +47,31 @@ class Producer {
     }
 
     public function getRetryTimes(){
+    }
+
+    public function getSendMsgTimeout(){
+    }
+
+    public function setSendMsgTimeout($sendMsgTimeout){
+    }
+
+    public function  getCompressMsgBodyOverHowmuch(){
+
+    }
+
+    public function setCompressMsgBodyOverHowmuch($compressMsgBodyOverHowmuch){
+    }
+
+    public function getCompressLevel(){
+    }
+
+    public function setCompressLevel($compressLevel){
+    }
+
+    public function getMaxMessageSize(){
+    }
+
+    public function setMaxMessageSize($messageSize){
     }
 
     // default = cpu core.
@@ -62,7 +87,7 @@ class Producer {
 
     public function getTcpTransportConnectTimeout(){
     }
-    
+
     // default 3000ms 
     public function setTcpTransportTryLockTimeout(int $timeout){
     }

@@ -44,6 +44,25 @@ class Producer : public Php::Base
         Php::Value getRetryTimes();
         void setRetryTimes(Php::Parameters &param);
 
+        //int getSendMsgTimeout() const;
+        Php::Value getSendMsgTimeout();
+
+        //void setSendMsgTimeout(int sendMsgTimeout);
+        void setSendMsgTimeout(Php::Parameters &param);
+        
+        //int getCompressMsgBodyOverHowmuch() const;
+        Php::Value getCompressMsgBodyOverHowmuch();
+        //void setCompressMsgBodyOverHowmuch(int compressMsgBodyOverHowmuch);
+        void setCompressMsgBodyOverHowmuch(Php::Parameters &param);
+        //int getCompressLevel() const;
+        Php::Value getCompressLevel();
+        //void setCompressLevel(int compressLevel);
+        void setCompressLevel(Php::Parameters &param);
+        //int getMaxMessageSize() const;
+        Php::Value getMaxMessageSize();
+        //void setMaxMessageSize(int maxMessageSize);
+        void setMaxMessageSize(Php::Parameters &param);
+
         // void setTcpTransportPullThreadNum(int num);
         void setTcpTransportPullThreadNum(Php::Parameters &param);
 
