@@ -62,9 +62,11 @@ class Producer {
     public function setCompressMsgBodyOverHowmuch($compressMsgBodyOverHowmuch){
     }
 
+    //   level = [-1, 9]
     public function getCompressLevel(){
     }
 
+    //   level = [-1, 9]
     public function setCompressLevel($compressLevel){
     }
 

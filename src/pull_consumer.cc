@@ -180,8 +180,10 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
     pullConsumer.method<&PullConsumer::setTopic>("setTopic", { Php::ByVal("topic", Php::Type::String), });
     pullConsumer.method<&PullConsumer::start>("start");
     pullConsumer.method<&PullConsumer::getQueues>("getQueues");
+
     pullConsumer.method<&PullConsumer::setNamesrvAddr>("setNamesrvAddr", { Php::ByVal("namesrvAddr", Php::Type::String), });
     pullConsumer.method<&PullConsumer::getNamesrvAddr>("getNamesrvAddr");
+
     pullConsumer.method<&PullConsumer::setNamesrvDomain>("setNamesrvDomain", { Php::ByVal("nameserver", Php::Type::String), });
     pullConsumer.method<&PullConsumer::getNamesrvDomain>("getNamesrvDomain");
 
@@ -192,12 +194,14 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
             Php::ByVal("offset", Php::Type::Numeric),
             Php::ByVal("maxNums", Php::Type::Numeric),
             });
+
     pullConsumer.method<&PullConsumer::pullBlockIfNotFound>("pullBlockIfNotFound", {
             Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME),
             Php::ByVal("subExpression", Php::Type::String),
             Php::ByVal("offset", Php::Type::Numeric),
             Php::ByVal("maxNums", Php::Type::Numeric),
             });
+
     pullConsumer.method<&PullConsumer::setSessionCredentials>("setSessionCredentials", {
             Php::ByVal("accessKey", Php::Type::String),
             Php::ByVal("secretKey", Php::Type::String),
@@ -214,16 +218,17 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
             Php::ByVal("fromStore", Php::Type::Bool),
             });
     pullConsumer.method<&PullConsumer::getMessageModel>("getMessageModel");
-    pullConsumer.method<&PullConsumer::setMessageModel>("setMessageModel", {
-            Php::ByVal("messageModel", Php::Type::Numeric),
-            });
+    pullConsumer.method<&PullConsumer::setMessageModel>("setMessageModel", { Php::ByVal("messageModel", Php::Type::Numeric), });
 
     pullConsumer.method<&PullConsumer::getTcpTransportTryLockTimeout>("getTcpTransportTryLockTimeout");
     pullConsumer.method<&PullConsumer::setTcpTransportTryLockTimeout>("setTcpTransportTryLockTimeout",{ Php::ByVal("timeout", Php::Type::Numeric), });
+
     pullConsumer.method<&PullConsumer::getTcpTransportConnectTimeout>("getTcpTransportConnectTimeout");
     pullConsumer.method<&PullConsumer::setTcpTransportConnectTimeout>("setTcpTransportConnectTimeout", {Php::ByVal("timeout", Php::Type::Numeric), });
+
     pullConsumer.method<&PullConsumer::getTcpTransportPullThreadNum>("getTcpTransportPullThreadNum", {Php::ByVal("threadNum", Php::Type::Numeric), });
     pullConsumer.method<&PullConsumer::setTcpTransportPullThreadNum>("setTcpTransportPullThreadNum", {Php::ByVal("threadNum", Php::Type::Numeric), });
+
     pullConsumer.method<&PullConsumer::getUnitName>("getUnitName");
     pullConsumer.method<&PullConsumer::setUnitName>("setUnitName", {Php::ByVal("unitName", Php::Type::String),});
 

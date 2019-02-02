@@ -33,13 +33,10 @@ class Producer : public Php::Base
 
         void start();
 
-
         Php::Value send(Php::Parameters &params);
-
 
         void setSessionCredentials(Php::Parameters &param);
         Php::Value getSessionCredentials();
-
 
         Php::Value getRetryTimes();
         void setRetryTimes(Php::Parameters &param);
@@ -49,15 +46,17 @@ class Producer : public Php::Base
 
         //void setSendMsgTimeout(int sendMsgTimeout);
         void setSendMsgTimeout(Php::Parameters &param);
-        
+
         //int getCompressMsgBodyOverHowmuch() const;
         Php::Value getCompressMsgBodyOverHowmuch();
         //void setCompressMsgBodyOverHowmuch(int compressMsgBodyOverHowmuch);
         void setCompressMsgBodyOverHowmuch(Php::Parameters &param);
+
         //int getCompressLevel() const;
         Php::Value getCompressLevel();
         //void setCompressLevel(int compressLevel);
         void setCompressLevel(Php::Parameters &param);
+
         //int getMaxMessageSize() const;
         Php::Value getMaxMessageSize();
         //void setMaxMessageSize(int maxMessageSize);

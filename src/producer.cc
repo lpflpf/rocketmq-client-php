@@ -36,7 +36,7 @@ void Producer::start(){
     this->producer->start();
 }
 
-//  @see SendResult send(MQMessage& msg, const MQMessageQueue& mq);
+// SendResult send(MQMessage& msg, const MQMessageQueue& mq);
 Php::Value Producer::send(Php::Parameters &params){
     Php::Value pvMessage = params[0];
     Message *message = (Message *)pvMessage.implementation();
@@ -116,6 +116,7 @@ void Producer::setRetryTimes(Php::Parameters &param){
 Php::Value Producer::getSendMsgTimeout(){
     return this->producer->getSendMsgTimeout();
 }
+
 //void setSendMsgTimeout(int sendMsgTimeout);
 void Producer::setSendMsgTimeout(Php::Parameters &param){
     this->producer->setSendMsgTimeout(param[0]);
@@ -189,34 +190,29 @@ Php::Value Producer::getUnitName(){
     return this->producer->getUnitName();
 }
 
-
 void registerProducer(Php::Namespace &rocketMQNamespace){
     Php::Class<Producer> producerClass("Producer");
+
     producerClass.method<&Producer::getMQClientId>("getMQClientId");
-    producerClass.method<&Producer::__construct>("__construct", { 
-            Php::ByVal("groupName", Php::Type::String), 
-            });
+
+    producerClass.method<&Producer::__construct>("__construct", { Php::ByVal("groupName", Php::Type::String), });
+    producerClass.method<&Producer::__destruct>("__desatruct");
 
     producerClass.method<&Producer::getInstanceName>("getInstanceName");
-    producerClass.method<&Producer::setInstanceName>("setInstanceName", { 
-            Php::ByVal("groupName", Php::Type::String), 
-            });
+    producerClass.method<&Producer::setInstanceName>("setInstanceName", { Php::ByVal("groupName", Php::Type::String), });
 
     producerClass.method<&Producer::getNamesrvAddr>("getNamesrvAddr");
-    producerClass.method<&Producer::setNamesrvAddr>("setNamesrvAddr", { 
-            Php::ByVal("nameserver", Php::Type::String), 
-            });
+    producerClass.method<&Producer::setNamesrvAddr>("setNamesrvAddr", { Php::ByVal("nameserver", Php::Type::String), });
+
     producerClass.method<&Producer::setNamesrvDomain>("setNamesrvDomain", { Php::ByVal("domain", Php::Type::String), });
     producerClass.method<&Producer::getNamesrvDomain>("getNamesrvDomain");
 
     producerClass.method<&Producer::getGroupName>("getGroupName");
-    producerClass.method<&Producer::setGroupName>("setGroupName", {
-            Php::ByVal("groupName", Php::Type::String),
-            });
+    producerClass.method<&Producer::setGroupName>("setGroupName", { Php::ByVal("groupName", Php::Type::String), });
 
-    producerClass.method<&Producer::send>("send", {
-            Php::ByVal("message", MESSAGE_CLASS_NAME),
-            });
+    producerClass.method<&Producer::start>("start");
+    producerClass.method<&Producer::send>("send", { Php::ByVal("message", MESSAGE_CLASS_NAME), });
+
     producerClass.method<&Producer::getSessionCredentials>("getSessionCredentials");
     producerClass.method<&Producer::setSessionCredentials>("setSessionCredentials", {
             Php::ByVal("accessKey", Php::Type::String),
@@ -224,11 +220,8 @@ void registerProducer(Php::Namespace &rocketMQNamespace){
             Php::ByVal("authChannel", Php::Type::String),
             });
 
-    producerClass.method<&Producer::getTopicMessageQueueInfo>("getTopicMessageQueueInfo", {
-            Php::ByVal("topic", Php::Type::String),
-            });
+    producerClass.method<&Producer::getTopicMessageQueueInfo>("getTopicMessageQueueInfo", { Php::ByVal("topic", Php::Type::String), });
 
-    producerClass.method<&Producer::start>("start");
 
     producerClass.method<&Producer::setRetryTimes>("setRetryTimes", { Php::ByVal("retryTimes", Php::Type::Numeric), });
     producerClass.method<&Producer::getRetryTimes>("getRetryTimes");
@@ -236,12 +229,24 @@ void registerProducer(Php::Namespace &rocketMQNamespace){
     producerClass.method<&Producer::getSendMsgTimeout>("getSendMsgTimeout");
     producerClass.method<&Producer::setSendMsgTimeout>("setSendMsgTimeout", {Php::ByVal("sendMsgTimeout", Php::Type::Numeric),});
 
+    producerClass.method<&Producer::getCompressMsgBodyOverHowmuch>("getCompressMsgBodyOverHowmuch");
+    producerClass.method<&Producer::setCompressMsgBodyOverHowmuch>("setCompressMsgBodyOverHowmuch", {Php::ByVal("compressMsgBodyOverHowmuch", Php::Type::Numeric),});
+
+    producerClass.method<&Producer::getCompressLevel>("getCompressLevel");
+    producerClass.method<&Producer::setCompressLevel>("setCompressLevel", {Php::ByVal("compressLevel", Php::Type::Numeric),});
+
+    producerClass.method<&Producer::getMaxMessageSize>("getMaxMessageSize");
+    producerClass.method<&Producer::setMaxMessageSize>("setMaxMessageSize", {Php::ByVal("maxMessageSize", Php::Type::Numeric),});
+
     producerClass.method<&Producer::getTcpTransportTryLockTimeout>("getTcpTransportTryLockTimeout");
     producerClass.method<&Producer::setTcpTransportTryLockTimeout>("setTcpTransportTryLockTimeout",{ Php::ByVal("timeout", Php::Type::Numeric), });
+    
     producerClass.method<&Producer::getTcpTransportConnectTimeout>("getTcpTransportConnectTimeout");
     producerClass.method<&Producer::setTcpTransportConnectTimeout>("setTcpTransportConnectTimeout", {Php::ByVal("timeout", Php::Type::Numeric), });
+
     producerClass.method<&Producer::getTcpTransportPullThreadNum>("getTcpTransportPullThreadNum", {Php::ByVal("threadNum", Php::Type::Numeric), });
     producerClass.method<&Producer::setTcpTransportPullThreadNum>("setTcpTransportPullThreadNum", {Php::ByVal("threadNum", Php::Type::Numeric), });
+
     producerClass.method<&Producer::getUnitName>("getUnitName");
     producerClass.method<&Producer::setUnitName>("setUnitName", {Php::ByVal("unitName", Php::Type::String),});
 

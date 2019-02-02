@@ -48,6 +48,7 @@ class Message: public Php::Base {
 
         //void setDelayTimeLevel(int level);
         void setDelayTimeLevel(Php::Parameters &params);
+
         //bool isWaitStoreMsgOK();
         Php::Value isWaitStoreMsgOK();
 
@@ -56,16 +57,19 @@ class Message: public Php::Base {
 
         //int getFlag() const;
         Php::Value getFlag();
+
         //void setFlag(int flag);
         void setFlag(Php::Parameters &params);
 
         //int getSysFlag() const;
         Php::Value getSysFlag();
+
         //void setSysFlag(int sysFlag);
         void setSysFlag(Php::Parameters &params);
 
         //const std::string &getBody() const;
         Php::Value getBody();
+
         //void setBody(const char* body, int len);
         //void setBody(const std::string& body);
         void setBody(Php::Parameters &params);
