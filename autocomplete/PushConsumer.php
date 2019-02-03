@@ -71,4 +71,10 @@ class PushConsumer{
 
     public function getUnitName(){
     }
+
+    public function getConsumeFromWhere(){
+    }
+
+    public function setConsumeFromWhere(int $consumeFromWhere){
+    }
 }

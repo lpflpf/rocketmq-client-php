@@ -2,7 +2,10 @@
 
 namespace RocketMQ;
 
-
+/**
+ * Pull method consumer.
+ *
+ */
 class PullConsumer{
     public function __construct(string $groupName){
     }
@@ -83,5 +86,11 @@ class PullConsumer{
     }
 
     public function getUnitName(){
+    }
+
+    public function getConsumeFromWhere(){
+    }
+
+    public function setConsumeFromWhere(int $consumeFromWhere){
     }
 }
