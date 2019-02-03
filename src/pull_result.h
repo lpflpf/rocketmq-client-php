@@ -6,28 +6,15 @@
 #include "message_ext.h"
 #define PULL_RESULT_CLASS_NAME   NAMESPACE_NAME"\\PullResult"
 
-class PullResult: public Php::Base
+class PullResult: public Php::Base, public Php::Countable, public Php::Traversable
 {
     private:
         rocketmq::PullResult result;
-        int64_t position = 0;
     public :
         ~PullResult(){ }
         PullResult(rocketmq::PullResult result);
-        Php::Value getCount(){
-            return (int64_t)this->result.msgFoundList.size();
-        }
 
-        Php::Value getMessage(Php::Parameters &param){
-            Php::Value idx_val = param[0];
-            int idx = idx_val;
-
-            if (idx < (int)this->result.msgFoundList.size()){
-                Php::Value msg(Php::Object(MESSAGE_EXT_CLASS_NAME, new MessageExt(this->result.msgFoundList[idx])));
-                return msg;
-            }
-            return nullptr;
-        }
+        Php::Value getMessage(Php::Parameters &param);
 
         Php::Value getNextBeginOffset();
 
@@ -36,6 +23,10 @@ class PullResult: public Php::Base
         Php::Value getMaxOffset();
 
         Php::Value getPullStatus();
+
+        virtual long count() override;
+
+        virtual Php::Iterator *getIterator() override;
 };
 
 void registerPullResult(Php::Namespace &rocketMQNamespace);
