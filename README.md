@@ -19,6 +19,10 @@ A Php Client for Apache RocketMQ.
 4. update php.ini file, add line `extension=rocketmq.so`;
 5. try to run example in example directory.
 
+## Usage
+
+   [GOTO](https://github.com/lpflpf/rocketmq-client-php/wiki/Usage)
+
 ## Example 
 
 ### Producer Example
@@ -33,13 +37,9 @@ $producer->setNamesrvAddr("127.0.0.1:9876");
 $producer->start();
 
 for ($i = 0; $i < 10000; $i ++){
-	$message = new Message("TopicTest", "*", "hello world $i");
-	$sendResult = $producer->send($message);
-	echo $sendResult->getMsgId() . "\n";
-	echo $sendResult->getOffsetMsgId() . "\n";
-	echo $sendResult->getSendStatus() . "\n";
-	//echo $sendResult->getMessageQueue();
-	echo $sendResult->getQueueOffset() . "\n";
+    $message = new Message("TopicTest", "*", "hello world $i");
+    $sendResult = $producer->send($message);
+    echo $sendResult->getSendStatus() . "\n";
 }
 ```
 
@@ -53,7 +53,6 @@ namespace RocketMQ;
 include("message.php");
 
 $consumer = new PullConsumer("pullTestGroup");
-$consumer->setGroup("pullTestGroup");
 $consumer->setInstanceName("testGroup");
 $consumer->setTopic("TopicTest");
 $consumer->setNamesrvAddr("127.0.0.1:9876");
@@ -61,29 +60,23 @@ $consumer->start();
 $queues = $consumer->getQueues();
 
 foreach($queues as $queue){
-	$newMsg = true;
-	$offset = 0;
-	while($newMsg){
-		$pullResult = $consumer->pull($queue, "*", $offset, 8);
-	
-		switch ($pullResult->getPullStatus()){
-		case PullStatus::FOUND:
+    $newMsg = true;
+    $offset = 0;
+    while($newMsg){
+        $pullResult = $consumer->pull($queue, "*", $offset, 8);
+    
+        switch ($pullResult->getPullStatus()){
+        case PullStatus::FOUND:
             foreach($pullResult as $key => $val){
-        		echo $val->getMessage()->getBody() . "\n";
+                echo $val->getMessage()->getBody() . "\n";
             }
-			break;
-		case PullStatus::NO_MATCHED_MSG:
-		case PullStatus::OFFSET_ILLEGAL:
-			$newMsg = false;
-		case PullStatus::BROKER_TIMEOUT:
-			$newMsg = false;
-		case PullStatus::NO_NEW_MSG:
-			$newMsg = false;
-			break;
-		default:
-		}
-		$offset += count($pullResult);
-	}
+            $offset += count($pullResult);
+            break;
+        default:
+            $newMsg = false;
+            break;
+        }
+    }
 }
 ```
 
@@ -99,20 +92,16 @@ $consumer->setInstanceName("testGroup");
 $consumer->setNamesrvAddr("127.0.0.1:9876");
 $consumer->setThreadCount(10);
 $consumer->setListenerType(MessageListenerType::LISTENER_ORDERLY);
-$result = array();
 $count = 0;
 $consumer->setCallback(function ($msg) use (&$count){
     echo $msg->getMessage->getBody() . "\n";
-	$count ++;
+    $count ++;
 });
 $consumer->subscribe("TopicTest", "*");
 $consumer->start();
 $consumer->shutdown();
 
 ```
-
-## [Usage](https://github.com/lpflpf/rocketmq-client-php/wiki/Usage)
-
 ## TODO
 
 1. Manual commit an offset.
