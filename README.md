@@ -105,4 +105,5 @@ $consumer->shutdown();
 ## TODO
 
 1. Manual commit an offset.
-2. log handle.
+2. Log handle.
+3. Doc.
