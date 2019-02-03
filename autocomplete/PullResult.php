@@ -2,10 +2,7 @@
 
 namespace RocketMQ;
 
-class PullResult{
-	public function getCount(){
-	}
-
+class PullResult implements Countable, Iterator{
 	public function getMessage($index){
 	}
 
