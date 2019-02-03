@@ -19,10 +19,6 @@ A Php Client for Apache RocketMQ.
 4. update php.ini file, add line `extension=rocketmq.so`;
 5. try to run example in example directory.
 
-## TODO
-
-1. Manual commit an offset.
-
 ## Example 
 
 ### Producer Example
@@ -72,36 +68,8 @@ foreach($queues as $queue){
 	
 		switch ($pullResult->getPullStatus()){
 		case PullStatus::FOUND:
-			echo "pullStatus: " . $pullResult->getPullStatus() . "\n";
-			echo "count: " . count($pullResult) . "\n";
-			echo "nextBeginOffset: " . $pullResult->getNextBeginOffset() . "\n";
-			echo "minOffset: " . $pullResult->getMinOffset() . "\n";
-			echo "maxOffset: " . $pullResult->getMaxOffset() . "\n";
-			echo "pullStatus: " . $pullResult->getPullStatus() . "\n";
-			echo "\n";
-            foreach($pullResult as $key => $msg_ext){
-        		$msg = $msg_ext->getMessage();
-				printf("|%-30s|%-40s|\n", "msgId", $msg_ext->getMsgId());
-				printf("|%-30s|%-40s|\n", "topic", $msg->getTopic());
-				printf("|%-30s|%-40s|\n", "tags", $msg->getTags());
-				printf("|%-30s|%-40s|\n", "storeHostString", $msg_ext->getStoreHostString());
-				printf("|%-30s|%-40s|\n", "bornTimestamp", $msg_ext->getBornTimestamp());
-				printf("|%-30s|%-40s|\n", "queueId", $msg_ext->getQueue());
-				printf("|%-30s|%-40s|\n", "getBornTimestamp", $msg_ext->getBornTimestamp());
-				printf("|%-30s|%-40s|\n", "offsetMsgId", $msg_ext->getOffsetMsgId());
-				printf("|%-30s|%-40s|\n", "bodyCRC", $msg_ext->getBodyCRC());
-				printf("|%-30s|%-40s|\n", "queueOffset", $msg_ext->getQueueOffset());
-				printf("|%-30s|%-40s|\n", "commitLogOffset", $msg_ext->getCommitLogOffset());
-				printf("|%-30s|%-40s|\n", "storeSize", $msg_ext->getStoreSize());
-				printf("|%-30s|%-40s|\n", "reconsumeTimes", $msg_ext->getReconsumeTimes());
-				printf("|%-30s|%-40s|\n", "preparedTransactionOffset", $msg_ext->getPreparedTransactionOffset());
-				printf("|%-30s|%-40s|\n", "keys", $msg->getKeys());
-				printf("|%-30s|%-40s|\n", "delayTimeLevel", $msg->getDelayTimeLevel());
-				printf("|%-30s|%-40s|\n", "isWaitStoreMsgOK", $msg->isWaitStoreMsgOK() ? "true" : "false");
-				printf("|%-30s|%-40s|\n", "flag", $msg->getFlag());
-				printf("|%-30s|%-40s|\n", "sysFlag", $msg->getSysFlag());
-				printf("|%-30s|%-40s|\n", "body", substr($msg->getBody(),0,40));
-				echo "-------------------------------------------------------------------------\n";
+            foreach($pullResult as $key => $val){
+        		echo $val->getMessage()->getBody() . "\n";
             }
 			break;
 		case PullStatus::NO_MATCHED_MSG:
@@ -134,31 +102,7 @@ $consumer->setListenerType(MessageListenerType::LISTENER_ORDERLY);
 $result = array();
 $count = 0;
 $consumer->setCallback(function ($msg) use (&$count){
-	// if thread > 1 & use echo method will core dump.
-	//file_put_contents("1", $msg->getMsgId() .  "\t" . $count .  "\n", FILE_APPEND);
-	$msg = $msg_ext->getMessage();
-	printf("|%-30s|%-40s|\n", "msgId", $msg_ext->getMsgId());
-	printf("|%-30s|%-40s|\n", "topic", $msg->getTopic());
-	printf("|%-30s|%-40s|\n", "tags", $msg->getTags());
-	printf("|%-30s|%-40s|\n", "storeHostString", $msg_ext->getStoreHostString());
-	printf("|%-30s|%-40s|\n", "bornTimestamp", $msg_ext->getBornTimestamp());
-	printf("|%-30s|%-40s|\n", "queueId", $msg_ext->getQueue());
-	printf("|%-30s|%-40s|\n", "getBornTimestamp", $msg_ext->getBornTimestamp());
-	printf("|%-30s|%-40s|\n", "offsetMsgId", $msg_ext->getOffsetMsgId());
-	printf("|%-30s|%-40s|\n", "bodyCRC", $msg_ext->getBodyCRC());
-	printf("|%-30s|%-40s|\n", "queueOffset", $msg_ext->getQueueOffset());
-	printf("|%-30s|%-40s|\n", "commitLogOffset", $msg_ext->getCommitLogOffset());
-	printf("|%-30s|%-40s|\n", "storeSize", $msg_ext->getStoreSize());
-	printf("|%-30s|%-40s|\n", "reconsumeTimes", $msg_ext->getReconsumeTimes());
-	printf("|%-30s|%-40s|\n", "preparedTransactionOffset", $msg_ext->getPreparedTransactionOffset());
-	printf("|%-30s|%-40s|\n", "keys", $msg->getKeys());
-	printf("|%-30s|%-40s|\n", "delayTimeLevel", $msg->getDelayTimeLevel());
-	printf("|%-30s|%-40s|\n", "isWaitStoreMsgOK", $msg->isWaitStoreMsgOK() ? "true" : "false");
-	printf("|%-30s|%-40s|\n", "flag", $msg->getFlag());
-	printf("|%-30s|%-40s|\n", "sysFlag", $msg->getSysFlag());
-	printf("|%-30s|%-40s|\n", "body", substr($msg->getBody(),0,40));
-	echo "-------------------------------------------------------------------------\n";
-
+    echo $msg->getMessage->getBody() . "\n";
 	$count ++;
 });
 $consumer->subscribe("TopicTest", "*");
@@ -168,3 +112,8 @@ $consumer->shutdown();
 ```
 
 ## [Usage](https://github.com/lpflpf/rocketmq-client-php/wiki/Usage)
+
+## TODO
+
+1. Manual commit an offset.
+
