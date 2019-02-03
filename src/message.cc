@@ -160,19 +160,13 @@ void registerMessage(Php::Namespace &rocketMQNamespace){
             Php::ByVal("name", Php::Type::String),
             Php::ByVal("value", Php::Type::String),
             });
-    messageClass.method<&Message::getProperty>("getProperty", {
-            Php::ByVal("name", Php::Type::String),
-            });
+    messageClass.method<&Message::getProperty>("getProperty", { Php::ByVal("name", Php::Type::String), });
 
     messageClass.method<&Message::getTopic>("getTopic");
-    messageClass.method<&Message::setTopic>("setTopic", {
-            Php::ByVal("topic", Php::Type::String),
-            });
+    messageClass.method<&Message::setTopic>("setTopic", { Php::ByVal("topic", Php::Type::String), });
 
     messageClass.method<&Message::getTags>("getTags");
-    messageClass.method<&Message::setTags>("setTags", {
-            Php::ByVal("tags", Php::Type::String),
-            });
+    messageClass.method<&Message::setTags>("setTags", { Php::ByVal("tags", Php::Type::String), });
 
     messageClass.method<&Message::getKeys>("getKeys"); 
     messageClass.method<&Message::setKeys>("setKeys", {

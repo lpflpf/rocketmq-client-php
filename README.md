@@ -73,15 +73,14 @@ foreach($queues as $queue){
 		switch ($pullResult->getPullStatus()){
 		case PullStatus::FOUND:
 			echo "pullStatus: " . $pullResult->getPullStatus() . "\n";
-			echo "count: " . $pullResult->getCount() . "\n";
+			echo "count: " . count($pullResult) . "\n";
 			echo "nextBeginOffset: " . $pullResult->getNextBeginOffset() . "\n";
 			echo "minOffset: " . $pullResult->getMinOffset() . "\n";
 			echo "maxOffset: " . $pullResult->getMaxOffset() . "\n";
 			echo "pullStatus: " . $pullResult->getPullStatus() . "\n";
 			echo "\n";
-			for($i = 0; $i < $pullResult->getCount(); $i ++){
-				$msg_ext = $pullResult->getMessage($i);
-				$msg = $msg_ext->getMessage();
+            foreach($pullResult as $key => $msg_ext){
+        		$msg = $msg_ext->getMessage();
 				printf("|%-30s|%-40s|\n", "msgId", $msg_ext->getMsgId());
 				printf("|%-30s|%-40s|\n", "topic", $msg->getTopic());
 				printf("|%-30s|%-40s|\n", "tags", $msg->getTags());
@@ -103,7 +102,7 @@ foreach($queues as $queue){
 				printf("|%-30s|%-40s|\n", "sysFlag", $msg->getSysFlag());
 				printf("|%-30s|%-40s|\n", "body", substr($msg->getBody(),0,40));
 				echo "-------------------------------------------------------------------------\n";
-			}
+            }
 			break;
 		case PullStatus::NO_MATCHED_MSG:
 		case PullStatus::OFFSET_ILLEGAL:
@@ -115,8 +114,7 @@ foreach($queues as $queue){
 			break;
 		default:
 		}
-		$offset += $pullResult->getCount();
-//		$queue->setMessageQueueOffset($position + $pullResult->getCount());
+		$offset += count($pullResult);
 	}
 }
 ```
