@@ -20,7 +20,7 @@ A Php Client for Apache RocketMQ.
 5. try to run example in example directory.
 
 ## Usage
-    to see autocompelete file.
+   to see autocompelete file.
 
 ## Example 
 

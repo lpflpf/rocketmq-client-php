@@ -3,8 +3,8 @@
 namespace RocketMQ;
 
 class PushConsumer{
-	public function setNamesrvDomain($nameserver){
-	}
+    public function setNamesrvDomain($nameserver){
+    }
 
     public function getNamesrvDomain(){
     }
@@ -15,32 +15,32 @@ class PushConsumer{
     public function getNamesrvAddr(){
     }
 
-	public function setInstanceName($groupName){
-	}
+    public function setInstanceName($groupName){
+    }
 
-	public function setTryLockTimeout($tryLockTimeout){
-	}
+    public function setTryLockTimeout($tryLockTimeout){
+    }
 
-	public function setConnectTimeout($connectTimeout){
-	}
+    public function setConnectTimeout($connectTimeout){
+    }
 
-	public function setThreadCount($threadCount){
-	}
+    public function setThreadCount($threadCount){
+    }
 
-	public function setListenerType($listenerType){
-	}
+    public function setListenerType($listenerType){
+    }
 
-	public function subscribe($topic, $tag){
-	}
+    public function subscribe($topic, $tag){
+    }
 
-	public function start(){
-	}
+    public function start(){
+    }
 
-	public function shutdown(){
-	}
+    public function shutdown(){
+    }
 
-	public function setCallback(callable $callback){
-	}
+    public function setCallback(callable $callback){
+    }
 
     public function setMessageModel($model){
     }
@@ -59,7 +59,7 @@ class PushConsumer{
 
     public function getTcpTransportConnectTimeout(){
     }
-    
+
     public function setTcpTransportTryLockTimeout(int $timeout){
     }
 

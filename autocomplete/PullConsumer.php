@@ -10,8 +10,8 @@ class PullConsumer{
     public function __construct(string $groupName){
     }
 
-	public function setInstanceName($instanceName){
-	}
+    public function setInstanceName($instanceName){
+    }
 
     public function setNamesrvAddr($address){
     }
@@ -19,20 +19,20 @@ class PullConsumer{
     public function getNamesrvAddr(){
     }
 
-	public function setNamesrvDomain($nameserver){
-	}
+    public function setNamesrvDomain($nameserver){
+    }
 
     public function getNamesrvDomain(){
     }
 
-	public function setTopic($topic){
-	}
+    public function setTopic($topic){
+    }
 
-	public function start(){
-	}
+    public function start(){
+    }
 
-	public function getQueues(){
-	}
+    public function getQueues(){
+    }
 
     public function setGroup(string $group){
     }
@@ -75,7 +75,7 @@ class PullConsumer{
 
     public function getTcpTransportConnectTimeout(){
     }
-    
+
     public function setTcpTransportTryLockTimeout(int $timeout){
     }
 
