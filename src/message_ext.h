@@ -27,6 +27,7 @@ class MessageExt: public Php::Base {
         Php::Value getQueueId(){
             return this->messageExt.getQueueId();
         }
+
         // void setQueueId(int queueId);
         void setQueueId(Php::Parameters &params){
             this->messageExt.setQueueId(params[0]);
@@ -36,6 +37,7 @@ class MessageExt: public Php::Base {
         Php::Value getBornTimestamp(){
             return (int64_t)this->messageExt.getBornTimestamp();
         }
+
         //void setBornTimestamp(int64 bornTimestamp);
         void setBornTimestamp(Php::Parameters &param){
             this->messageExt.setBornTimestamp((int64_t)param[0]);
@@ -46,6 +48,7 @@ class MessageExt: public Php::Base {
         Php::Value getStoreHostString(){
             return this->messageExt.getStoreHostString();
         }
+
         //void setStoreHost(const sockaddr& storeHost);
         // TODO
         //void setStoreHost(Php::Parameters &params){ }
@@ -54,6 +57,7 @@ class MessageExt: public Php::Base {
         Php::Value getMsgId(){
             return this->messageExt.getMsgId();
         }
+
         //void setMsgId(const std::string& msgId);
         void setMsgId(Php::Parameters &params){
             std::string msgId = params[0];
@@ -64,6 +68,7 @@ class MessageExt: public Php::Base {
         Php::Value getOffsetMsgId(){
             return this->messageExt.getOffsetMsgId();
         }
+
         //void setOffsetMsgId(const std::string& offsetMsgId);
         void setOffsetMsgId(Php::Parameters &params){
             std::string offsetMsgId =params[0];
@@ -74,6 +79,7 @@ class MessageExt: public Php::Base {
         Php::Value getBodyCRC(){
             return this->messageExt.getBodyCRC();
         }
+
         //void setBodyCRC(int bodyCRC);
         void setBodyCRC(Php::Parameters &params){
             this->messageExt.setBodyCRC(params[0]);
@@ -83,6 +89,7 @@ class MessageExt: public Php::Base {
         Php::Value getQueueOffset(){
             return (int64_t)this->messageExt.getQueueOffset();
         }
+
         //void setQueueOffset(int64 queueOffset);
         void setQueueOffset(Php::Parameters &params){
             this->messageExt.setQueueOffset((int64_t)params[0]);
@@ -92,6 +99,7 @@ class MessageExt: public Php::Base {
         Php::Value getCommitLogOffset(){
             return (int64_t)this->messageExt.getCommitLogOffset();
         }
+
         //void setCommitLogOffset(int64 physicOffset);
         void setCommitLogOffset(Php::Parameters &params){
             this->messageExt.setCommitLogOffset((int64_t)params[0]);
@@ -101,6 +109,7 @@ class MessageExt: public Php::Base {
         Php::Value getStoreSize(){
             return this->messageExt.getStoreSize();
         }
+
         //void setStoreSize(int storeSize);
         void setStoreSize(Php::Parameters &params){
             this->messageExt.setStoreSize(params[0]);
@@ -110,6 +119,7 @@ class MessageExt: public Php::Base {
         Php::Value getReconsumeTimes(){
             return this->messageExt.getReconsumeTimes();
         }
+
         //void setReconsumeTimes(int reconsumeTimes);
         void setReconsumeTimes(Php::Parameters &params){
             this->messageExt.setReconsumeTimes(params[0]);
@@ -119,6 +129,7 @@ class MessageExt: public Php::Base {
         Php::Value getPreparedTransactionOffset(){
             return (int64_t)this->messageExt.getPreparedTransactionOffset();
         }
+
         //void setPreparedTransactionOffset(int64 preparedTransactionOffset);
         void setPreparedTransactionOffset(Php::Parameters &params){
             this->messageExt.setPreparedTransactionOffset((int64_t)params[0]);

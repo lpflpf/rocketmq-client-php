@@ -80,6 +80,7 @@ void Message::setDelayTimeLevel(Php::Parameters &params){
 Php::Value Message::isWaitStoreMsgOK(){
     return this->message.isWaitStoreMsgOK();
 }
+
 // void setWaitStoreMsgOK(bool waitStoreMsgOK);
 void Message::setWaitStoreMsgOK(Php::Parameters &params){
     this->message.setWaitStoreMsgOK(params[0]);
@@ -89,6 +90,7 @@ void Message::setWaitStoreMsgOK(Php::Parameters &params){
 Php::Value Message::getFlag(){
     return this->message.getFlag();
 }
+
 //void setFlag(int flag);
 void Message::setFlag(Php::Parameters &params){
     this->message.setFlag(params[0]);
@@ -108,6 +110,7 @@ void Message::setSysFlag(Php::Parameters &params){
 Php::Value Message::getBody(){
     return this->message.getBody();
 }
+
 //void setBody(const char* body, int len);
 //void setBody(const std::string& body);
 void Message::setBody(Php::Parameters &params){
@@ -169,39 +172,25 @@ void registerMessage(Php::Namespace &rocketMQNamespace){
     messageClass.method<&Message::setTags>("setTags", { Php::ByVal("tags", Php::Type::String), });
 
     messageClass.method<&Message::getKeys>("getKeys"); 
-    messageClass.method<&Message::setKeys>("setKeys", {
-            Php::ByVal("keys", Php::Type::String),
-            });
+    messageClass.method<&Message::setKeys>("setKeys", { Php::ByVal("keys", Php::Type::String), });
 
     messageClass.method<&Message::getDelayTimeLevel>("getDelayTimeLevel");
-    messageClass.method<&Message::setDelayTimeLevel>("setDelayTimeLevel", {
-            Php::ByVal("delayTimeLevel", Php::Type::Numeric),
-            });
+    messageClass.method<&Message::setDelayTimeLevel>("setDelayTimeLevel", { Php::ByVal("delayTimeLevel", Php::Type::Numeric), });
 
     messageClass.method<&Message::isWaitStoreMsgOK>("isWaitStoreMsgOK");
-    messageClass.method<&Message::setWaitStoreMsgOK>("setWaitStoreMsgOK", {
-            Php::ByVal("waitStoreMsgOK", Php::Type::Bool),
-            });
+    messageClass.method<&Message::setWaitStoreMsgOK>("setWaitStoreMsgOK", { Php::ByVal("waitStoreMsgOK", Php::Type::Bool), });
 
     messageClass.method<&Message::getFlag>("getFlag");
-    messageClass.method<&Message::setFlag>("setFlag", {
-            Php::ByVal("flag", Php::Type::Numeric),
-            });
+    messageClass.method<&Message::setFlag>("setFlag", { Php::ByVal("flag", Php::Type::Numeric), });
 
     messageClass.method<&Message::getSysFlag>("getSysFlag");
-    messageClass.method<&Message::setSysFlag>("setSysFlag", {
-            Php::ByVal("sysFlag", Php::Type::Numeric),
-            });
+    messageClass.method<&Message::setSysFlag>("setSysFlag", { Php::ByVal("sysFlag", Php::Type::Numeric), });
 
     messageClass.method<&Message::getBody>("getBody");
-    messageClass.method<&Message::setBody>("setBody", {
-            Php::ByVal("body", Php::Type::String),
-            });
+    messageClass.method<&Message::setBody>("setBody", { Php::ByVal("body", Php::Type::String), });
 
     messageClass.method<&Message::getProperties>("getProperties");
-    messageClass.method<&Message::setProperties>("setProperties", {
-            Php::ByVal("properties", Php::Type::Array),
-            });
+    messageClass.method<&Message::setProperties>("setProperties", { Php::ByVal("properties", Php::Type::Array), });
 
     messageClass.method<&Message::toString>("toString");
 
