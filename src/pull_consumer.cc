@@ -173,6 +173,20 @@ Php::Value PullConsumer::getUnitName(){
     return this->consumer->getUnitName();
 }
 
+void PullConsumer::setLogLevel(Php::Parameters &param){
+    this->consumer->setLogLevel(rocketmq::elogLevel((int)param[0]));
+}
+
+Php::Value PullConsumer::getLogLevel(){
+    return this->consumer->getLogLevel();
+}
+
+void PullConsumer::setLogFileSizeAndNum(Php::Parameters &param){
+    this->consumer->setLogFileSizeAndNum(param[0], param[1]);
+}
+
+
+
 void registerPullConsumer(Php::Namespace &rocketMQNamespace){
     Php::Class<PullConsumer> pullConsumer("PullConsumer");
     pullConsumer.method<&PullConsumer::__construct>("__construct", { Php::ByVal("groupName", Php::Type::String), });
@@ -231,6 +245,11 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
 
     pullConsumer.method<&PullConsumer::getUnitName>("getUnitName");
     pullConsumer.method<&PullConsumer::setUnitName>("setUnitName", {Php::ByVal("unitName", Php::Type::String),});
+
+    pullConsumer.method<&PullConsumer::setLogLevel>("setLogLevel", {Php::ByVal("inputLevel", Php::Type::Numeric),});
+    pullConsumer.method<&PullConsumer::getLogLevel>("getLogLevel");
+    pullConsumer.method<&PullConsumer::setLogFileSizeAndNum>("setLogFileSizeAndNum", {Php::ByVal("fileNum", Php::Type::Numeric),Php::ByVal("perFileSize", Php::Type::Numeric),});
+
 
 
     rocketMQNamespace.add(pullConsumer);

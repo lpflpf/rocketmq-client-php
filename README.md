@@ -20,8 +20,7 @@ A Php Client for Apache RocketMQ.
 5. try to run example in example directory.
 
 ## Usage
-
-   [GOTO](https://github.com/lpflpf/rocketmq-client-php/wiki/Usage)
+    to see autocompelete file.
 
 ## Example 
 
@@ -105,5 +104,5 @@ $consumer->shutdown();
 ## TODO
 
 1. Manual commit an offset.
-2. Log handle.
+2. Log handle. ( specify log file is no support by rocketmq-client-cpp. )
 3. Doc.

@@ -190,6 +190,18 @@ Php::Value Producer::getUnitName(){
     return this->producer->getUnitName();
 }
 
+void Producer::setLogLevel(Php::Parameters &param){
+    this->producer->setLogLevel(rocketmq::elogLevel((int)param[0]));
+}
+
+Php::Value Producer::getLogLevel(){
+    return this->producer->getLogLevel();
+}
+
+void Producer::setLogFileSizeAndNum(Php::Parameters &param){
+    this->producer->setLogFileSizeAndNum(param[0], param[1]);
+}
+
 void registerProducer(Php::Namespace &rocketMQNamespace){
     Php::Class<Producer> producerClass("Producer");
 
@@ -249,6 +261,10 @@ void registerProducer(Php::Namespace &rocketMQNamespace){
 
     producerClass.method<&Producer::getUnitName>("getUnitName");
     producerClass.method<&Producer::setUnitName>("setUnitName", {Php::ByVal("unitName", Php::Type::String),});
+
+    producerClass.method<&Producer::setLogLevel>("setLogLevel", {Php::ByVal("inputLevel", Php::Type::Numeric),});
+    producerClass.method<&Producer::getLogLevel>("getLogLevel");
+    producerClass.method<&Producer::setLogFileSizeAndNum>("setLogFileSizeAndNum", {Php::ByVal("fileNum", Php::Type::Numeric),Php::ByVal("perFileSize", Php::Type::Numeric),});
 
     rocketMQNamespace.add(producerClass);
 }

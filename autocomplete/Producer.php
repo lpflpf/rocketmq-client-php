@@ -106,5 +106,14 @@ class Producer {
 
     public function getUnitName(){
     }
+
+    public function setLogLevel(int $inputLevel){
+    }
+
+    public function getLogLevel(){
+    }
+
+    public function setLogFileSizeAndNum($fileNum, $perFileSize){
+    }
 }
 

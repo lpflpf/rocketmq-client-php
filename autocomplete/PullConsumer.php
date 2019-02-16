@@ -93,4 +93,13 @@ class PullConsumer{
 
     public function setConsumeFromWhere(int $consumeFromWhere){
     }
+
+    public function setLogLevel(int $inputLevel){
+    }
+
+    public function getLogLevel(){
+    }
+
+    public function setLogFileSizeAndNum($fileNum, $perFileSize){
+    }
 }

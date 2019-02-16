@@ -179,6 +179,20 @@ Php::Value PushConsumer::getUnitName(){
     return this->consumer->getUnitName();
 }
 
+void PushConsumer::setLogLevel(Php::Parameters &param){
+    this->consumer->setLogLevel(rocketmq::elogLevel((int)param[0]));
+}
+
+Php::Value PushConsumer::getLogLevel(){
+    return this->consumer->getLogLevel();
+}
+
+void PushConsumer::setLogFileSizeAndNum(Php::Parameters &param){
+    this->consumer->setLogFileSizeAndNum(param[0], param[1]);
+}
+
+
+
 void registerPushConsumer(Php::Namespace &rocketMQNamespace){
     Php::Class<PushConsumer> pushConsumer("PushConsumer");
     pushConsumer.method<&PushConsumer::doRebalance>("doRebalance");
@@ -223,6 +237,11 @@ void registerPushConsumer(Php::Namespace &rocketMQNamespace){
     pushConsumer.method<&PushConsumer::setTcpTransportPullThreadNum>("setTcpTransportPullThreadNum", {Php::ByVal("threadNum", Php::Type::Numeric), });
     pushConsumer.method<&PushConsumer::getUnitName>("getUnitName");
     pushConsumer.method<&PushConsumer::setUnitName>("setUnitName", {Php::ByVal("unitName", Php::Type::String),});
+
+    pushConsumer.method<&PushConsumer::setLogLevel>("setLogLevel", {Php::ByVal("inputLevel", Php::Type::Numeric),});
+    pushConsumer.method<&PushConsumer::getLogLevel>("getLogLevel");
+    pushConsumer.method<&PushConsumer::setLogFileSizeAndNum>("setLogFileSizeAndNum", {Php::ByVal("fileNum", Php::Type::Numeric),Php::ByVal("perFileSize", Php::Type::Numeric),});
+
 
     rocketMQNamespace.add(pushConsumer);
 }
