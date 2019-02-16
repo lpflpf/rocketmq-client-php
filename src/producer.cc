@@ -252,7 +252,7 @@ void registerProducer(Php::Namespace &rocketMQNamespace){
 
     producerClass.method<&Producer::getTcpTransportTryLockTimeout>("getTcpTransportTryLockTimeout");
     producerClass.method<&Producer::setTcpTransportTryLockTimeout>("setTcpTransportTryLockTimeout",{ Php::ByVal("timeout", Php::Type::Numeric), });
-    
+
     producerClass.method<&Producer::getTcpTransportConnectTimeout>("getTcpTransportConnectTimeout");
     producerClass.method<&Producer::setTcpTransportConnectTimeout>("setTcpTransportConnectTimeout", {Php::ByVal("timeout", Php::Type::Numeric), });
 
