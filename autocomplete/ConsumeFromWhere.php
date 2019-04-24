@@ -19,6 +19,10 @@
 namespace RocketMQ;
 
 class ConsumeFromWhere {
+
+    /**
+     * 从哪里开始消费
+     */
 	const CONSUME_FROM_LAST_OFFSET = 0;
 
 	/**
