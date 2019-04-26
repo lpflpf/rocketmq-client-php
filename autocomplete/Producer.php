@@ -19,118 +19,215 @@
 
 namespace RocketMQ;
 
-
+/**
+ * 消息生产者
+ * Class Producer
+ * @package RocketMQ
+ */
 class Producer {
-    public function __construct(string $groupName){
-    }
 
-    public function getMQClientId(){
-    }
+    /**
+     * Producer constructor.
+     * @param string $instanceName  实例名,用来组合生成client_id
+     */
+    public function __construct(string $instanceName){}
 
-    public function getInstanceName(){
-    }
+    /**
+     * 获取clientId ,组成形式是 进程ID-ip@instanceName
+     */
+    public function getMQClientId(){}
 
-    public function setInstanceName(string $groupName){
-    }
+    /**
+     * 获取实例名
+     */
+    public function getInstanceName(){}
 
-    public function getNamesrvAddr(){
-    }
+    /**
+     * 设置实例名
+     * @param string $instanceName  实例名
+     */
+    public function setInstanceName(string $instanceName){}
 
-    public function setNamesrvAddr(string $nameserver){
-    }
+    /**
+     * 获取名字服务链接地址
+     */
+    public function getNamesrvAddr(){}
 
-    public function setNamesrvDomain($nameserver){
-    }
+    /**
+     * 设置名字服务链接地址
+     * @param string $nameserver
+     */
+    public function setNamesrvAddr(string $nameserver){}
 
-    public function getGroupName(){
-    }
+    /**
+     * 设置获取名字服务配置的http接口
+     * 比如http://nameserver.abc.com/get/nameserver 这个接口返回值是127.0.0.1:9876则程序会
+     * 自动链接到该地址，不需要显示的设置,便于更新
+     * @param $nameserver
+     */
+    public function setNamesrvDomain($nameserver){}
 
-    public function setGroupName(string $groupName){
-    }
+    /**
+     *  获取分组名称
+     */
+    public function getGroupName(){}
 
-    public function send(Message $message){
-    }
+    /**
+     * 设置分组名
+     * @param string $groupName
+     */
+    public function setGroupName(string $groupName){}
 
-    public function getSessionCredentials(){
-    }
+    /**
+     * 发送消息
+     * @param Message $message 消息对象
+     */
+    public function send(Message $message){}
 
-    public function setSessionCredentials(string $accessKey, string $secretKey, string $autChannel){
-    }
+    /**
+     * 阿里云商用版本需要使用这个方法链接，开源版本不需要管
+     */
+    public function getSessionCredentials(){}
 
-    public function getTopicMessageQueueInfo(string $topic){
-    }
+    /**
+     * 阿里云商用版本需要使用这个方法链接，开源版本不需要管
+     * @param string $accessKey
+     * @param string $secretKey
+     * @param string $autChannel
+     */
+    public function setSessionCredentials(string $accessKey, string $secretKey, string $autChannel){}
 
-    public function start(){
-    }
+    /**
+     * 获取topic中队列的详情
+     * @param string $topic
+     */
+    public function getTopicMessageQueueInfo(string $topic){}
 
-    public function setRetryTimes(int $retryTimes){
-    }
+    /**
+     * 启动
+     */
+    public function start(){}
 
-    public function getRetryTimes(){
-    }
+    /**
+     * 设置发送失败重试次数
+     * @param int $retryTimes 重试次数,默认重试5次
+     */
+    public function setRetryTimes(int $retryTimes){}
 
-    public function getSendMsgTimeout(){
-    }
+    /**
+     * 获取发送失败重试次数
+     */
+    public function getRetryTimes(){}
 
-    public function setSendMsgTimeout($sendMsgTimeout){
-    }
+    /**
+     * 获取发送消息超时时间
+     */
+    public function getSendMsgTimeout(){}
 
-    public function  getCompressMsgBodyOverHowmuch(){
+    /**
+     * 发送消息超时时间
+     * @param $sendMsgTimeout 单位是毫秒  默认3000毫秒
+     */
+    public function setSendMsgTimeout($sendMsgTimeout){}
 
-    }
+    /**
+     * 获取消息最大限制
+     */
+    public function  getCompressMsgBodyOverHowmuch(){}
 
-    public function setCompressMsgBodyOverHowmuch($compressMsgBodyOverHowmuch){
-    }
+    /**
+     * 设置消息最大限制
+     * @param $compressMsgBodyOverHowmuch //最大限制 单位是Bit,默认是4MB
+     */
+    public function setCompressMsgBodyOverHowmuch($compressMsgBodyOverHowmuch){}
 
-    //   level = [-1, 9]
-    public function getCompressLevel(){
-    }
 
-    //   level = [-1, 9]
-    public function setCompressLevel($compressLevel){
-    }
+    /**
+     * 获取 消息压缩等级 level = [-1, 9] 默认是5
+     */
+    public function getCompressLevel(){}
 
-    public function getMaxMessageSize(){
-    }
 
-    public function setMaxMessageSize($messageSize){
-    }
+    /**
+     * 设置消息压缩等级   level = [-1, 9]
+     * @param $compressLevel //默认是5
+     */
+    public function setCompressLevel($compressLevel){}
+
+    /**
+     * 获取消息长度最大限制
+     */
+    public function getMaxMessageSize(){}
+
+    /**
+     * 设置消息长度最大限制
+     * @param $messageSize
+     */
+    public function setMaxMessageSize($messageSize){}
 
     // default = cpu core.
-    public function setTcpTransportPullThreadNum(int $num){
-    }
 
-    public function getTcpTransportPullThreadNum(){
-    }
+    /**
+     * 设置传出链接线程数 默认是cpu core的数值
+     * @param int $num //default = cpu core.
+     */
+    public function setTcpTransportPullThreadNum(int $num){}
 
-    // default = 3000 ms
-    public function setTcpTransportConnectTimeout(int $timeout){
-    }
+    /**
+     * 获取传出链接线程数 默认是cpu core的数值
+     * @param int $num //default = cpu core.
+     */
+    public function getTcpTransportPullThreadNum(){}
 
-    public function getTcpTransportConnectTimeout(){
-    }
 
-    // default 3000ms 
-    public function setTcpTransportTryLockTimeout(int $timeout){
-    }
+    /**
+     * 设置tcp链接超时时间
+     * @param int $timeout //单位是毫秒 default = 3000 ms
+     */
+    public function setTcpTransportConnectTimeout(int $timeout){}
 
-    public function getTcpTransportTryLockTimeout(){
-    }
+    /**
+     * 获取tcp链接超时时间
+     */
+    public function getTcpTransportConnectTimeout(){}
+
+    /**
+     * 设置申请锁超时时间
+     * @param int $timeout //单位是毫秒,默认3000ms
+     */
+    public function setTcpTransportTryLockTimeout(int $timeout){}
+
+    /**
+     * 获取申请锁超时时间
+     */
+    public function getTcpTransportTryLockTimeout(){}
 
     // default unitName = ""
-    public function setUnitName(string $unitName){
-    }
 
-    public function getUnitName(){
-    }
+    /**
+     * 同一个实例链接多套rocketmq的时候需要传入，可以区别生成clientId
+     * @param string $unitName
+     */
+    public function setUnitName(string $unitName){}
 
-    public function setLogLevel(int $inputLevel){
-    }
+    public function getUnitName(){}
 
-    public function getLogLevel(){
-    }
+    /**
+     * 设置日志等级
+     * @param int $inputLevel
+     */
+    public function setLogLevel(int $inputLevel){}
 
-    public function setLogFileSizeAndNum($fileNum, $perFileSize){
-    }
+    /**
+     * 获取日志等级
+     */
+    public function getLogLevel(){}
+
+    /**
+     * 设置日志生成规则
+     * @param $fileNum //保留日志数目
+     * @param $perFileSize //每个日志多大
+     */
+    public function setLogFileSizeAndNum($fileNum, $perFileSize){}
 }
 

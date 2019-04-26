@@ -19,14 +19,25 @@
 
 namespace RocketMQ;
 
-
+/**
+ * 消息队列对象
+ * Class MessageQueue
+ * @package RocketMQ
+ */
 class MessageQueue{
+
+    /**
+     * 获取Topic
+     */
     public function getTopic(){
     }
 
     public function setTopic(){
     }
 
+    /**
+     * 
+     */
     public function getBrokerName(){
     }
 

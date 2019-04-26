@@ -19,88 +19,132 @@
 
 namespace RocketMQ;
 
+/**
+ * 长轮训推消费消息
+ * Class PushConsumer
+ * @package RocketMQ
+ */
 class PushConsumer{
-    public function setNamesrvDomain($nameserver){
-    }
 
-    public function getNamesrvDomain(){
-    }
 
-    public function setNamesrvAddr($nameserverAddr){
+    public function __construct(string $instanceName){}
 
-    }
-    public function getNamesrvAddr(){
-    }
+    /**
+     * 设置获取名字服务配置的http接口
+     * 比如http://nameserver.abc.com/get/nameserver 这个接口返回值是127.0.0.1:9876则程序会
+     * 自动链接到该地址，不需要显示的设置,便于更新
+     * @param $nameserver
+     */
+    public function setNamesrvDomain($nameserver){}
 
-    public function setInstanceName($groupName){
-    }
+    public function getNamesrvDomain(){}
 
-    public function setTryLockTimeout($tryLockTimeout){
-    }
+    /**
+     * 设置名字服务链接地址
+     * @param string $nameserver
+     */
+    public function setNamesrvAddr($nameserver){}
 
-    public function setConnectTimeout($connectTimeout){
-    }
+    public function getNamesrvAddr(){}
 
-    public function setThreadCount($threadCount){
-    }
+    /**
+     * 设置实例名
+     * @param string $instanceName  实例名
+     */
+    public function setInstanceName($instanceName){}
 
-    public function setListenerType($listenerType){
-    }
+    /**
+     * 设置枷锁超时时间
+     * @param $tryLockTimeout
+     */
+    public function setTryLockTimeout($tryLockTimeout){}
 
-    public function subscribe($topic, $tag){
-    }
+    /**
+     * 设置链接超时时间
+     * @param $connectTimeout
+     */
+    public function setConnectTimeout($connectTimeout){}
 
-    public function start(){
-    }
+    /**
+     * 设置消费进程数
+     * @param $threadCount
+     */
+    public function setThreadCount($threadCount){}
 
-    public function shutdown(){
-    }
+    /**
+     * 监听对象类型
+     * @param $listenerType
+     */
+    public function setListenerType($listenerType){}
 
-    public function setCallback(callable $callback){
-    }
+    /**
+     * 订阅
+     * @param $topic
+     * @param $tag
+     */
+    public function subscribe($topic, $tag){}
 
-    public function setMessageModel($model){
-    }
+    /**
+     * 开始
+     */
+    public function start(){}
 
-    public function getMessageModel($model){
-    }
+    /**
+     * 结束
+     */
+    public function shutdown(){}
 
-    public function setTcpTransportPullThreadNum(int $num){
-    }
+    /**
+     * 消息回调方法
+     * @param callable $callback
+     */
+    public function setCallback(callable $callback){}
 
-    public function getTcpTransportPullThreadNum(){
-    }
+    /**
+     * 设置消息类型
+     * @param $model
+     */
+    public function setMessageModel($model){}
 
-    public function setTcpTransportConnectTimeout(int $timeout){
-    }
+    public function getMessageModel($model){}
 
-    public function getTcpTransportConnectTimeout(){
-    }
+    /**
+     * 设置传出链接线程数 默认是cpu core的数值
+     * @param int $num
+     */
+    public function setTcpTransportPullThreadNum(int $num){}
+    public function getTcpTransportPullThreadNum(){}
 
-    public function setTcpTransportTryLockTimeout(int $timeout){
-    }
+    /**
+     *  设置tcp链接超时时间
+     * @param int $timeout
+     */
+    public function setTcpTransportConnectTimeout(int $timeout){}
+    public function getTcpTransportConnectTimeout(){}
 
-    public function getTcpTransportTryLockTimeout(){
-    }
+    /**
+     * 设置申请锁超时时间
+     * @param int $timeout
+     */
+    public function setTcpTransportTryLockTimeout(int $timeout){}
+    public function getTcpTransportTryLockTimeout(){}
 
-    public function setUnitName(string $unitName){
-    }
+    /**
+     * 同一个实例链接多套rocketmq的时候需要传入，可以区别生成clientId
+     * @param string $unitName
+     */
+    public function setUnitName(string $unitName){}
+    public function getUnitName(){}
 
-    public function getUnitName(){
-    }
+    /**
+     * 获取模式
+     */
+    public function getConsumeFromWhere(){}
+    public function setConsumeFromWhere(int $consumeFromWhere){}
 
-    public function getConsumeFromWhere(){
-    }
+    public function setLogLevel(int $inputLevel){}
 
-    public function setConsumeFromWhere(int $consumeFromWhere){
-    }
+    public function getLogLevel(){}
 
-    public function setLogLevel(int $inputLevel){
-    }
-
-    public function getLogLevel(){
-    }
-
-    public function setLogFileSizeAndNum($fileNum, $perFileSize){
-    }
+    public function setLogFileSizeAndNum($fileNum, $perFileSize){}
 }
