@@ -8,14 +8,13 @@ A Php Client for Apache RocketMQ.
 * php7
 
 ## INSTALL
-1. install rocketmq-client-cpp;
-2. in cpp directory, do shell:
+1. install rocketmq-client-cpp; (dist/Dockerfile is a example to build a librocketmq.so file)
+2. do shell:
 ``` 
     cp bin/librocketmq.so /usr/lib/; 
     mkdir /usr/include/rocketmq/ ; 
     cp include/* /usr/include/rocketmq/
  ```
-2. copy librocketmq.so into /usr/lib/ directory; copy includes/* files into /usr/include/rocketmq/ directory;
 3. install php-cpp
 4. download rocketmq-client-php  
 ```shell
