@@ -78,6 +78,19 @@ class PushConsumer{
     public function setListenerType($listenerType){}
 
     /**
+     * 阿里云商用版本需要使用这个方法链接，开源版本不需要管
+     */
+    public function getSessionCredentials(){}
+
+    /**
+     * 阿里云商用版本需要使用这个方法链接，开源版本不需要管
+     * @param string $accessKey
+     * @param string $secretKey
+     * @param string $autChannel
+     */
+    public function setSessionCredentials(string $accessKey, string $secretKey, string $autChannel){}
+
+    /**
      * 订阅
      * @param $topic
      * @param $tag
