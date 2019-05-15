@@ -101,20 +101,20 @@ $consumer->setCallback(function ($msg) use (&$count){
 $consumer->subscribe("TopicTest", "*");
 $consumer->start();
 $consumer->shutdown();
+```
 
 ## Docker
 
 1. Build rocketmq-client-cpp Container.
 ```
-    cd dist
-    docker build -t rocketmq-client-cpp:1.2.2 ./dist
+cd dist
+docker build -t rocketmq-client-cpp:1.2.2 ./dist
 ```
 2. Build rocketmq-client-php Container
 ```
-    docker build -t rocketmq-client-php:1.0.0 .
+docker build -t rocketmq-client-php:1.0.0 .
 ```
 
-```
 ## TODO
 
 1. Manual commit an offset.
