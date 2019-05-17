@@ -68,6 +68,8 @@ class PullConsumer:public Php::Base
 
         Php::Value fetchConsumeOffset(Php::Parameters &params);
 
+        void persistConsumerOffset4PullConsumer(Php::Parameters &params);
+
         Php::Value getMessageModel();
         void setMessageModel(Php::Parameters &params);
 

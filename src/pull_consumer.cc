@@ -144,6 +144,13 @@ Php::Value PullConsumer::fetchConsumeOffset(Php::Parameters &params){
     return (int64_t)this->consumer->fetchConsumeOffset(messageQueue->getInstance(), fromStore);
 }
 
+
+void PullConsumer::persistConsumerOffset4PullConsumer(Php::Parameters &params){
+    Php::Value mq = params[0];
+    MessageQueue* messageQueue = (MessageQueue*)mq.implementation();
+    this->consumer->persistConsumerOffset4PullConsumer(messageQueue->getInstance());
+}
+
 Php::Value PullConsumer::getMessageModel(){
     return this->consumer->getMessageModel();
 }
