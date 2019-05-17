@@ -118,6 +118,7 @@ class PullConsumer{
      */
     public function fetchConsumeOffset(MessageQueue $messageQueue, string $fromStore){}
 
+    public function persistConsumerOffset4PullConsumer(Message $messageQueue){}
     /**
      * 设置消息模式,广播消息或者集群消息
      * @param $model
