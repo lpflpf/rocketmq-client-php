@@ -249,6 +249,9 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
             Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME),
             Php::ByVal("offset", Php::Type::Numeric),
             });
+    pullConsumer.method<&PullConsumer::persistConsumerOffset4PullConsumer>("persistConsumerOffset4PullConsumer", {
+            Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME),
+            });
     pullConsumer.method<&PullConsumer::removeConsumeOffset>("removeConsumeOffset", { Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME), });
     pullConsumer.method<&PullConsumer::fetchConsumeOffset>("fetchConsumeOffset", {
             Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME),
