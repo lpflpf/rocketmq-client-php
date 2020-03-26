@@ -24,7 +24,7 @@ void registerMessageExt(Php::Namespace &rocketMQNamespace){
 
     messageExtClass.method<&MessageExt::getStoreHostString>("getStoreHostString");
 
-    messageExtClass.method<&MessageExt::getQueueId>("getQueue");
+    messageExtClass.method<&MessageExt::getQueueId>("getQueueId");
     messageExtClass.method<&MessageExt::setQueueId>("setQueueId", { Php::ByVal("queueId", Php::Type::Numeric), });
 
     messageExtClass.method<&MessageExt::getBornTimestamp>("getBornTimestamp");
@@ -56,5 +56,12 @@ void registerMessageExt(Php::Namespace &rocketMQNamespace){
 
     messageExtClass.method<&MessageExt::toString>("toString");
     messageExtClass.method<&MessageExt::getMessage>("getMessage");
+
+    messageExtClass.method<&MessageExt::getBornHostString>("getBornHostString");
+    messageExtClass.method<&MessageExt::getBornHostNameString>("getBornHostNameString");
+
+    messageExtClass.method<&MessageExt::getStoreTimestamp>("getStoreTimestamp");
+    messageExtClass.method<&MessageExt::setStoreTimestamp>("setStoreTimestamp", { Php::ByVal("storeTimeStamp", Php::Type::Numeric), }); 
+
     rocketMQNamespace.add(messageExtClass);
 }

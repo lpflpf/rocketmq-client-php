@@ -102,6 +102,9 @@ class Message {
 
 	public function setProperties(array $properties){}
 
+	public function getTransactionId();
+	public function setTransactionId();
+
 	public function toString(){}
 
 }

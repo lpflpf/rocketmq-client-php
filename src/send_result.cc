@@ -18,36 +18,53 @@
 #include "send_result.h"
 
 SendResult::SendResult(rocketmq::SendResult& sendResult){
-    this->sendResult = sendResult;
+	this->sendResult = sendResult;
 }
 Php::Value SendResult::getMsgId(){
-    return this->sendResult.getMsgId();
+	return this->sendResult.getMsgId();
 }
 Php::Value SendResult::getOffsetMsgId(){
-    return this->sendResult.getOffsetMsgId();
+	return this->sendResult.getOffsetMsgId();
 }
 Php::Value SendResult::getSendStatus(){
-    return (int64_t)this->sendResult.getSendStatus();
+	return (int64_t)this->sendResult.getSendStatus();
 }
 
 Php::Value SendResult::getMessageQueue(){
-    rocketmq::MQMessageQueue mq = this->sendResult.getMessageQueue();
-    return Php::Object(MESSAGE_QUEUE_CLASS_NAME, new MessageQueue(mq));
+	rocketmq::MQMessageQueue mq = this->sendResult.getMessageQueue();
+	return Php::Object(MESSAGE_QUEUE_CLASS_NAME, new MessageQueue(mq));
 }
 
 Php::Value SendResult::getQueueOffset(){
-    return (int64_t) this->sendResult.getQueueOffset();
+	return (int64_t) this->sendResult.getQueueOffset();
+}
+
+Php::Value SendResult::getRegionId(){
+	return this->sendResult.getRegionId();
+}
+
+Php::Value SendResult::getTransactionId(){
+	std::string transactionId = this->sendResult.getTransactionId();
+	return transactionId;
+}
+
+void SendResult::setRegionId(Php::Parameters &param){
+	std::string regionId = param[0];
+	this->sendResult.setRegionId(regionId);
 }
 
 void registerSendResult(Php::Namespace &rocketMQNamespace){
-    Php::Class<SendResult> sendResultClass("SendResult");
+	Php::Class<SendResult> sendResultClass("SendResult");
 
-    sendResultClass.method<&SendResult::getMsgId>("getMsgId");
-    sendResultClass.method<&SendResult::getOffsetMsgId>("getOffsetMsgId");
-    sendResultClass.method<&SendResult::getSendStatus>("getSendStatus");
-    sendResultClass.method<&SendResult::getMessageQueue>("getMessageQueue");
-    sendResultClass.method<&SendResult::getQueueOffset>("getQueueOffset");
+	sendResultClass.method<&SendResult::getMsgId>("getMsgId");
+	sendResultClass.method<&SendResult::getOffsetMsgId>("getOffsetMsgId");
+	sendResultClass.method<&SendResult::getSendStatus>("getSendStatus");
+	sendResultClass.method<&SendResult::getMessageQueue>("getMessageQueue");
+	sendResultClass.method<&SendResult::getQueueOffset>("getQueueOffset");
+	sendResultClass.method<&SendResult::getTransactionId>("getTransactionId");
+	sendResultClass.method<&SendResult::getRegionId>("getRegionId");
+	sendResultClass.method<&SendResult::setRegionId>("setRegionId", {Php::ByVal("regionId", Php::Type::String),});
 
-    rocketMQNamespace.add(sendResultClass);
+	rocketMQNamespace.add(sendResultClass);
 }
 

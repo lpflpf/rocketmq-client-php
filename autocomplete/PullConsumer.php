@@ -27,148 +27,159 @@ namespace RocketMQ;
 class PullConsumer{
 
 
-    public function __construct(string $instanceName){}
+	public function __construct(string $instanceName){}
 
-    /**
-     * 实例名,用来组合生成client_id
-     * @param $instanceName
-     *
-     */
-    public function setInstanceName($instanceName){}
+	/**
+	 * 实例名,用来组合生成client_id
+	 * @param $instanceName
+	 *
+	 */
+	public function setInstanceName($instanceName){}
 
-    /**
-     * 设置名字服务链接地址
-     * @param $address
-     */
-    public function setNamesrvAddr($address){}
+	/**
+	 * 设置名字服务链接地址
+	 * @param $address
+	 */
+	public function setNamesrvAddr($address){}
 
-    /**
-     * 获取名字服务链接地址
-     */
-    public function getNamesrvAddr(){}
+	/**
+	 * 获取名字服务链接地址
+	 */
+	public function getNamesrvAddr(){}
 
-    /**
-     * 设置获取名字服务配置的http接口
-     * 比如http://nameserver.abc.com/get/nameserver 这个接口返回值是127.0.0.1:9876则程序会
-     * 自动链接到该地址，不需要显示的设置,便于更新
-     * @param $nameserver
-     */
-    public function setNamesrvDomain($nameserver){}
+	/**
+	 * 设置获取名字服务配置的http接口
+	 * 比如http://nameserver.abc.com/get/nameserver 这个接口返回值是127.0.0.1:9876则程序会
+	 * 自动链接到该地址，不需要显示的设置,便于更新
+	 * @param $nameserver
+	 */
+	public function setNamesrvDomain($nameserver){}
 
-    public function getNamesrvDomain(){}
+	public function getNamesrvDomain(){}
 
-    /**
-     * 注册topic
-     * @param $topic
-     */
-    public function setTopic($topic){}
+	/**
+	 * 注册topic
+	 * @param $topic
+	 */
+	public function setTopic($topic){}
 
-    public function start(){}
+	public function start(){}
 
-    /**
-     * 获取队列对象(MessageQueue)列表
-     * return array
-     */
-    public function getQueues(){}
+	/**
+	 * 获取队列对象(MessageQueue)列表
+	 * return array
+	 */
+	public function getQueues(){}
 
-    /**
-     * 设置分组名
-     * @param string $group
-     */
-    public function setGroup(string $group){}
+	/**
+	 * 设置分组名
+	 * @param string $group
+	 */
+	public function setGroup(string $group){}
 
-    /**
-     * 拉取消息
-     * @param MessageQueue $messageQueue /指定对象
-     * @param string $subExpression //tag表达式
-     * @param int $offset //偏移值
-     * @param int $maxNums //每次最多取多少条消息
-     */
-    public function pull(MessageQueue $messageQueue, string $subExpression, int $offset, int $maxNums){}
+	/**
+	 * 拉取消息
+	 * @param MessageQueue $messageQueue /指定对象
+	 * @param string $subExpression //tag表达式
+	 * @param int $offset //偏移值
+	 * @param int $maxNums //每次最多取多少条消息
+	 */
+	public function pull(MessageQueue $messageQueue, string $subExpression, int $offset, int $maxNums){}
 
-    /**
-     * 批量取消息
-     * @param MessageQueue $messageQueue
-     * @param string $subExpression
-     * @param int $offset
-     * @param int $maxNums
-     */
-    public function pullBlockIfNotFound(MessageQueue $messageQueue, string $subExpression, int $offset, int $maxNums){}
+	/**
+	 * 批量取消息
+	 * @param MessageQueue $messageQueue
+	 * @param string $subExpression
+	 * @param int $offset
+	 * @param int $maxNums
+	 */
+	public function pullBlockIfNotFound(MessageQueue $messageQueue, string $subExpression, int $offset, int $maxNums){}
 
-    /**
-     * 阿里云的商用版本会用到
-     */
-    public function getSessionCredentials(){}
+	/**
+	 * 阿里云的商用版本会用到
+	 */
+	public function getSessionCredentials(){}
 
-    public function setSessionCredentials(string $accessKey, string $secretKey, string $authChannel){}
+	public function setSessionCredentials(string $accessKey, string $secretKey, string $authChannel){}
 
-    /**
-     * 更新消费队列偏移
-     * @param MessageQueue $messageQueue
-     * @param int $offset
-     */
-    public function updateConsumeOffset(MessageQueue $messageQueue, int $offset){}
+	/**
+	 * 更新消费队列偏移
+	 * @param MessageQueue $messageQueue
+	 * @param int $offset
+	 */
+	public function updateConsumeOffset(MessageQueue $messageQueue, int $offset){}
 
-    public function removeConsumeOffset(MessageQueue $messageQueue){}
+	public function removeConsumeOffset(MessageQueue $messageQueue){}
 
-    /**
-     * 获取偏移数
-     * @param MessageQueue $messageQueue
-     * @param string $fromStore
-     */
-    public function fetchConsumeOffset(MessageQueue $messageQueue, string $fromStore){}
+	/**
+	 * 获取偏移数
+	 * @param MessageQueue $messageQueue
+	 * @param string $fromStore
+	 */
+	public function fetchConsumeOffset(MessageQueue $messageQueue, string $fromStore){}
 
-    public function persistConsumerOffset4PullConsumer(Message $messageQueue){}
-    /**
-     * 设置消息模式,广播消息或者集群消息
-     * @param $model
-     */
-    public function setMessageModel($model){}
+	public function persistConsumerOffset4PullConsumer(Message $messageQueue){}
+	/**
+	 * 设置消息模式,广播消息或者集群消息
+	 * @param $model
+	 */
+	public function setMessageModel($model){}
 
-    public function getMessageModel($model){}
+	public function getMessageModel($model){}
 
-    /**
-     * 设置传出链接线程数 默认是cpu core的数值
-     * @param int $num
-     */
-    public function setTcpTransportPullThreadNum(int $num){}
+	/**
+	 * 设置传出链接线程数 默认是cpu core的数值
+	 * @param int $num
+	 */
+	public function setTcpTransportPullThreadNum(int $num){}
 
-    public function getTcpTransportPullThreadNum(){}
+	public function getTcpTransportPullThreadNum(){}
 
-    /**
-     * 设置tcp链接超时时间
-     * @param int $timeout
-     */
-    public function setTcpTransportConnectTimeout(int $timeout){}
+	/**
+	 * 设置tcp链接超时时间
+	 * @param int $timeout
+	 */
+	public function setTcpTransportConnectTimeout(int $timeout){}
 
-    public function getTcpTransportConnectTimeout(){}
+	public function getTcpTransportConnectTimeout(){}
 
-    /**
-     * 设置申请锁超时时间
-     * @param int $timeout
-     */
-    public function setTcpTransportTryLockTimeout(int $timeout){}
+	/**
+	 * 设置申请锁超时时间
+	 * @param int $timeout
+	 */
+	public function setTcpTransportTryLockTimeout(int $timeout){}
 
-    public function getTcpTransportTryLockTimeout(){}
+	public function getTcpTransportTryLockTimeout(){}
 
-    /**
-     * 同一个实例链接多套rocketmq的时候需要传入，可以区别生成clientId
-     * @param string $unitName
-     */
-    public function setUnitName(string $unitName){}
+	/**
+	 * 同一个实例链接多套rocketmq的时候需要传入，可以区别生成clientId
+	 * @param string $unitName
+	 */
+	public function setUnitName(string $unitName){}
 
-    public function getUnitName(){}
+	public function getUnitName(){}
 
-    /**
-     * 获取模式
-     */
-    public function getConsumeFromWhere(){}
+	/**
+	 * 获取模式
+	 */
+	public function getConsumeFromWhere(){}
 
-    public function setConsumeFromWhere(int $consumeFromWhere){}
+	public function setConsumeFromWhere(int $consumeFromWhere){}
 
-    public function setLogLevel(int $inputLevel){}
+	public function setLogLevel(int $inputLevel){}
 
-    public function getLogLevel(){}
+	public function getLogLevel(){}
 
-    public function setLogFileSizeAndNum($fileNum, $perFileSize){}
+	public function setLogFileSizeAndNum($fileNum, $perFileSize){}
+
+	public function setLogPath(string $logPath){}
+
+	public function getNameSpace(){}
+	public function setNameSpace(){}
+
+	public function getGroupName(){}
+	public function setGroupName(){}
+
+	public function getInstanceName(){}
+	public function version(){}
 }

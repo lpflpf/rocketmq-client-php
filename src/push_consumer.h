@@ -38,12 +38,6 @@ class PushConsumer : public Php::Base{
         virtual ~PushConsumer(){}
         virtual void __construct(Php::Parameters &params);
 
-        void doRebalance();
-
-        void persistConsumerOffset();
-
-        void persistConsumerOffsetByResetOffset();
-
         void setNamesrvDomain(Php::Parameters &param);
 
         Php::Value getNamesrvDomain();
@@ -65,8 +59,6 @@ class PushConsumer : public Php::Base{
         void subscribe(Php::Parameters &param);
 
         void setCallback(Php::Parameters &param);
-
-        Php::Value getConsumeType();
 
         Php::Value getConsumeFromWhere();
 
@@ -114,7 +106,63 @@ class PushConsumer : public Php::Base{
         //void setLogFileSizeAndNum(int fileNum, long perFileSize);  // perFileSize is MB unit
         void setLogFileSizeAndNum(Php::Parameters &param);
  
+  	//void setLogPath(const std::string& logPath);
+  	void setLogPath(Php::Parameters &param);
 
+  	//const std::string& getGroupName() const;
+  	Php::Value getGroupName();
+
+  	//void setGroupName(const std::string& groupname);
+  	void setGroupName(Php::Parameters &param);
+
+  	// void setAsyncPull(bool asyncFlag);
+	void setAsyncPull(Php::Parameters &param);
+
+  	// void setMessageTrace(bool messageTrace);
+  	void setMessageTrace(Php::Parameters &param);
+
+  	// bool getMessageTrace() const;
+  	Php::Value getMessageTrace();
+
+	// void setMaxCacheMsgSizePerQueue(int maxCacheSize);
+	void setMaxCacheMsgSizePerQueue(Php::Parameters &param);  
+
+  	// int getMaxCacheMsgSizePerQueue() const;
+  	Php::Value getMaxCacheMsgSizePerQueue();
+
+  	// void setConsumeMessageBatchMaxSize(int consumeMessageBatchMaxSize);
+  	void setConsumeMessageBatchMaxSize(Php::Parameters &param);
+
+  	// int getConsumeMessageBatchMaxSize() const;
+  	Php::Value getConsumeMessageBatchMaxSize();
+
+  	// void setPullMsgThreadPoolCount(int threadCount);
+	void setPullMsgThreadPoolCount(Php::Parameters &param);
+
+  	// int getPullMsgThreadPoolCount() const;
+  	Php::Value getPullMsgThreadPoolCount();
+
+  	// void setMaxReconsumeTimes(int maxReconsumeTimes);
+	void setMaxReconsumeTimes(Php::Parameters &param);
+
+  	// int getMaxReconsumeTimes() const;
+  	Php::Value getMaxReconsumeTimes();
+
+  	// void setConsumeThreadCount(int threadCount);
+  	void setConsumeThreadCount(Php::Parameters &param);
+
+  	// int getConsumeThreadCount() const;
+  	Php::Value getConsumeThreadCount();
+
+	
+        //const std::string& getNameSpace() const;
+  	Php::Value getNameSpace();
+
+	//void setNameSpace(const std::string& nameSpace);
+	void setNameSpace(Php::Parameters &param);
+
+  	// virtual std::string version();
+	Php::Value version();
 };
 
 void registerPushConsumer(Php::Namespace &rocketMQNamespace);

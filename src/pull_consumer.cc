@@ -151,51 +151,6 @@ void PullConsumer::persistConsumerOffset4PullConsumer(Php::Parameters &params){
     this->consumer->persistConsumerOffset4PullConsumer(messageQueue->getInstance());
 }
 
-Php::Value PullConsumer::getMessageModel(){
-    return this->consumer->getMessageModel();
-}
-void PullConsumer::setMessageModel(Php::Parameters &params){
-    this->consumer->setMessageModel(rocketmq::MessageModel((int)params[0]));
-}
-
-// void setTcpTransportPullThreadNum(int num);
-void PullConsumer::setTcpTransportPullThreadNum(Php::Parameters &param){
-    this->consumer->setTcpTransportPullThreadNum((int64_t)param[0]);
-}
-
-// const int getTcpTransportPullThreadNum() const;
-Php::Value PullConsumer::getTcpTransportPullThreadNum(){
-    return (int64_t)this->consumer->getTcpTransportPullThreadNum();
-}
-
-// void setTcpTransportConnectTimeout(uint64_t timeout);  // ms
-void PullConsumer::setTcpTransportConnectTimeout(Php::Parameters &param){
-    this->consumer->setTcpTransportConnectTimeout((int64_t)param[0]);
-}
-// const uint64_t getTcpTransportConnectTimeout() const;
-Php::Value PullConsumer::getTcpTransportConnectTimeout(){
-    return (int64_t)this->consumer->getTcpTransportConnectTimeout();
-}
-
-// void setTcpTransportTryLockTimeout(uint64_t timeout);  // ms
-void PullConsumer::setTcpTransportTryLockTimeout(Php::Parameters &param){
-    this->consumer->setTcpTransportTryLockTimeout((int64_t)param[0]);
-}
-
-// const uint64_t getTcpTransportConnectTimeout() const;
-Php::Value PullConsumer::getTcpTransportTryLockTimeout(){
-    return (int64_t)this->consumer->getTcpTransportTryLockTimeout();
-}
-
-//void setUnitName(std::string unitName);
-void PullConsumer::setUnitName(Php::Parameters &param){
-    this->consumer->setUnitName(param[0]);
-}
-//const std::string& getUnitName();
-Php::Value PullConsumer::getUnitName(){
-    return this->consumer->getUnitName();
-}
-
 void PullConsumer::setLogLevel(Php::Parameters &param){
     this->consumer->setLogLevel(rocketmq::elogLevel((int)param[0]));
 }
@@ -204,11 +159,13 @@ Php::Value PullConsumer::getLogLevel(){
     return this->consumer->getLogLevel();
 }
 
+void PullConsumer::setLogPath(Php::Parameters &param){
+    this->consumer->setLogPath(param[0]);
+}
+
 void PullConsumer::setLogFileSizeAndNum(Php::Parameters &param){
     this->consumer->setLogFileSizeAndNum(param[0], param[1]);
 }
-
-
 
 void registerPullConsumer(Php::Namespace &rocketMQNamespace){
     Php::Class<PullConsumer> pullConsumer("PullConsumer");
@@ -257,26 +214,21 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
             Php::ByVal("mq", MESSAGE_QUEUE_CLASS_NAME),
             Php::ByVal("fromStore", Php::Type::Bool),
             });
-    pullConsumer.method<&PullConsumer::getMessageModel>("getMessageModel");
-    pullConsumer.method<&PullConsumer::setMessageModel>("setMessageModel", { Php::ByVal("messageModel", Php::Type::Numeric), });
-
-    pullConsumer.method<&PullConsumer::getTcpTransportTryLockTimeout>("getTcpTransportTryLockTimeout");
-    pullConsumer.method<&PullConsumer::setTcpTransportTryLockTimeout>("setTcpTransportTryLockTimeout",{ Php::ByVal("timeout", Php::Type::Numeric), });
-
-    pullConsumer.method<&PullConsumer::getTcpTransportConnectTimeout>("getTcpTransportConnectTimeout");
-    pullConsumer.method<&PullConsumer::setTcpTransportConnectTimeout>("setTcpTransportConnectTimeout", {Php::ByVal("timeout", Php::Type::Numeric), });
-
-    pullConsumer.method<&PullConsumer::getTcpTransportPullThreadNum>("getTcpTransportPullThreadNum", {Php::ByVal("threadNum", Php::Type::Numeric), });
-    pullConsumer.method<&PullConsumer::setTcpTransportPullThreadNum>("setTcpTransportPullThreadNum", {Php::ByVal("threadNum", Php::Type::Numeric), });
-
-    pullConsumer.method<&PullConsumer::getUnitName>("getUnitName");
-    pullConsumer.method<&PullConsumer::setUnitName>("setUnitName", {Php::ByVal("unitName", Php::Type::String),});
 
     pullConsumer.method<&PullConsumer::setLogLevel>("setLogLevel", {Php::ByVal("inputLevel", Php::Type::Numeric),});
     pullConsumer.method<&PullConsumer::getLogLevel>("getLogLevel");
     pullConsumer.method<&PullConsumer::setLogFileSizeAndNum>("setLogFileSizeAndNum", {Php::ByVal("fileNum", Php::Type::Numeric),Php::ByVal("perFileSize", Php::Type::Numeric),});
+   pullConsumer.method<&PullConsumer::setLogPath>("setLogPath", {Php::ByVal("logPath", Php::Type::String),});
 
+   pullConsumer.method<&PullConsumer::setNameSpace>("setNameSpace", {Php::ByVal("nameSpace", Php::Type::String),});
+   pullConsumer.method<&PullConsumer::getNameSpace>("getNameSpace");
 
+   pullConsumer.method<&PullConsumer::getGroupName>("getGroupName");
+   pullConsumer.method<&PullConsumer::setGroupName>("setGroupName", {Php::ByVal("groupname", Php::Type::String),});
+
+   pullConsumer.method<&PullConsumer::getInstanceName>("getInstanceName");
+
+   pullConsumer.method<&PullConsumer::version>("version");
 
     rocketMQNamespace.add(pullConsumer);
 }

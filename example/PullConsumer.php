@@ -27,9 +27,6 @@ $consumer->setInstanceName("testGroup");
 $consumer->setTopic("TopicTest");
 $consumer->setNamesrvAddr("127.0.0.1:9876");
 
-$consumer->setTcpTransportConnectTimeout(100);
-$consumer->setTcpTransportPullThreadNum(1);
-$consumer->setTcpTransportTryLockTimeout(100);
 $consumer->start();
 $queues = $consumer->getQueues();
 

@@ -35,6 +35,7 @@ class MessageExt: public Php::Base {
             this->messageExt = message;
         }
 
+
         // static int parseTopicFilterType(int sysFlag);
         Php::Value parseTopicFilterType(Php::Parameters &params){
             return this->messageExt.parseTopicFilterType(params[0]);
@@ -162,6 +163,15 @@ class MessageExt: public Php::Base {
             Php::Value message(Php::Object(MESSAGE_CLASS_NAME, new Message(msg)));
             return message;
         }
+
+	Php::Value getBornHostString() { return this->messageExt.getBornHostString(); } 
+	Php::Value getBornHostNameString() { return this->messageExt.getBornHostNameString();}
+
+	Php::Value getStoreTimestamp() { return (int64_t)this->messageExt.getStoreTimestamp();}
+	void setStoreTimestamp(Php::Parameters &params) {
+		this->messageExt.setStoreTimestamp((int64_t)params[0]);
+	}
+
 };
 
 void registerMessageExt(Php::Namespace &rocketMQNamespace);

@@ -1,3 +1,5 @@
+<?php
+
 /**
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -15,42 +17,15 @@
  *  limitations under the License.
  */
 
-#ifndef ROCKETMQ_CLIENT_PHP_SEND_RESULT_H_
-#define ROCKETMQ_CLIENT_PHP_SEND_RESULT_H_
+namespace RocketMQ;
 
-#include "common.h"
-#include "message_queue.h"
-#include <rocketmq/SendResult.h>
 
-#define SEND_RESULT_CLASS_NAME NAMESPACE_NAME"\\SendResult"
-
-class SendResult: public Php::Base
-{
-    private:
-        rocketmq::SendResult sendResult;
-
-    public:
-        SendResult(rocketmq::SendResult& sendResult);
-
-        Php::Value getMsgId();
-
-        Php::Value getOffsetMsgId();
-
-        Php::Value getSendStatus();
-
-        Php::Value getMessageQueue();
-
-        Php::Value getQueueOffset();
-
-	Php::Value getTransactionId();
-	
-	Php::Value getRegionId();
-
-	void setRegionId(Php::Parameters &param);
-
-};
-
-void registerSendResult(Php::Namespace &rocketMQNamespace);
-
-#endif
-
+class ELogLevel {
+	const  eLOG_LEVEL_FATAL = 1;
+	const  eLOG_LEVEL_ERROR = 2;
+	const  eLOG_LEVEL_WARN = 3;
+	const  eLOG_LEVEL_INFO = 4;
+	const  eLOG_LEVEL_DEBUG = 5;
+	const  eLOG_LEVEL_TRACE = 6;
+	const  eLOG_LEVEL_LEVEL_NUM = 7;
+}

@@ -135,6 +135,19 @@ void Message::setBody(Php::Parameters &params){
     this->message.setBody(body);
 }
 
+//void setTransactionId(const std::string& id) { m_transactionId = id; }
+void Message::setTransactionId(Php::Parameters &params){
+    std::string id = params[0];
+    this->message.setTransactionId(id);
+}
+
+//std::string getTransactionId() const { return m_transactionId; }
+Php::Value Message::getTransactionId() {
+    return this->message.getTransactionId();
+}
+
+
+
 
 // std::map<std::string, std::string> getProperties() const;
 Php::Value Message::getProperties(){
@@ -205,6 +218,9 @@ void registerMessage(Php::Namespace &rocketMQNamespace){
 
     messageClass.method<&Message::getBody>("getBody");
     messageClass.method<&Message::setBody>("setBody", { Php::ByVal("body", Php::Type::String), });
+
+    messageClass.method<&Message::getTransactionId>("getTransactionId");
+    messageClass.method<&Message::setTransactionId>("setTransactionId", {Php::ByVal("id", Php::Type::String), });
 
     messageClass.method<&Message::getProperties>("getProperties");
     messageClass.method<&Message::setProperties>("setProperties", { Php::ByVal("properties", Php::Type::Array), });

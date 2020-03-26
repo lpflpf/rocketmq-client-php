@@ -91,6 +91,12 @@ class Message: public Php::Base {
         //void setBody(const std::string& body);
         void setBody(Php::Parameters &params);
 
+  	//void setTransactionId(const std::string& id) { m_transactionId = id; }
+  	void setTransactionId(Php::Parameters &params);
+
+  	//std::string getTransactionId() const { return m_transactionId; }
+  	Php::Value getTransactionId();
+
         // std::map<std::string, std::string> getProperties() const;
         Php::Value getProperties();
 

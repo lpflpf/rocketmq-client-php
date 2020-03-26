@@ -22,6 +22,7 @@
 #include <rocketmq/DefaultMQPullConsumer.h>
 #include "message.h"
 #include "message_queue.h"
+#include "pull_result.h"
 
 
 class PullConsumer:public Php::Base
@@ -70,36 +71,35 @@ class PullConsumer:public Php::Base
 
         void persistConsumerOffset4PullConsumer(Php::Parameters &params);
 
-        Php::Value getMessageModel();
-        void setMessageModel(Php::Parameters &params);
-
-        // void setTcpTransportPullThreadNum(int num);
-        void setTcpTransportPullThreadNum(Php::Parameters &param);
-
-        // const int getTcpTransportPullThreadNum() const;
-        Php::Value getTcpTransportPullThreadNum();
-
-        // void setTcpTransportConnectTimeout(uint64_t timeout);  // ms
-        void setTcpTransportConnectTimeout(Php::Parameters &param);
-        // const uint64_t getTcpTransportConnectTimeout() const;
-        Php::Value getTcpTransportConnectTimeout();
-
-        // void setTcpTransportTryLockTimeout(uint64_t timeout);  // ms
-        void setTcpTransportTryLockTimeout(Php::Parameters &param);
-        // const uint64_t getTcpTransportConnectTimeout() const;
-        Php::Value getTcpTransportTryLockTimeout();
-
-        //void setUnitName(std::string unitName);
-        void setUnitName(Php::Parameters &param);
-        //const std::string& getUnitName();
-        Php::Value getUnitName();
-
         //void setLogLevel(elogLevel inputLevel);
         void setLogLevel(Php::Parameters &param);
         //ELogLevel getLogLevel();
         Php::Value getLogLevel();
         //void setLogFileSizeAndNum(int fileNum, long perFileSize);  // perFileSize is MB unit
         void setLogFileSizeAndNum(Php::Parameters &param);
+
+	//const std::string& getGroupName() const;
+	Php::Value getGroupName();
+
+        //void setGroupName(const std::string& groupname);
+	void setGroupName(Php::Parameters &param);
+
+
+  	// const std::string& getNameSpace() const;
+  	Php::Value getNameSpace();
+
+	//void setNameSpace(const std::string& nameSpace);
+	void setNameSpace(Php::Parameters &param);
+
+
+  	//const std::string& getInstanceName() const;
+  	Php::Value getInstanceName();
+
+	// std::string version()
+	Php::Value version();
+
+  	//void setLogPath(const std::string& logPath);
+  	void setLogPath(Php::Parameters &logPath);
 };
 
 void registerPullConsumer(Php::Namespace &rocketMQNamespace);
