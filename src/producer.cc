@@ -53,6 +53,10 @@ void Producer::start(){
 	this->producer->start();
 }
 
+void Producer::shutdown(){
+	this->producer->shutdown();
+}
+
 Php::Value Producer::send(Message *message){
 	rocketmq::SendResult sr = this->producer->send(message->getMQMessage());
 	Php::Value pv(Php::Object(SEND_RESULT_CLASS_NAME, new SendResult(sr)));
@@ -286,6 +290,7 @@ void registerProducer(Php::Namespace &rocketMQNamespace){
 	producerClass.method<&Producer::setGroupName>("setGroupName", { Php::ByVal("groupName", Php::Type::String), });
 
 	producerClass.method<&Producer::start>("start");
+	producerClass.method<&Producer::shutdown>("shutdown");
 
 	producerClass.method<&Producer::send>("send", { Php::ByVal("message", Php::Type::Null), Php::ByVal("queue", Php::Type::Null, false), });
 	producerClass.method<&Producer::sendOneway>("sendOneway", { Php::ByVal("message", MESSAGE_CLASS_NAME), Php::ByVal("bSelectActiveBroker", Php::Type::Null, false) ,});

@@ -17,8 +17,8 @@
 
 #include "message_queue.h"
 
-MessageQueue::MessageQueue(rocketmq::MQMessageQueue& other){
-    this->messageQueue = &other;
+MessageQueue::MessageQueue(rocketmq::MQMessageQueue *other){
+    this->messageQueue = other;
 }
 
 void MessageQueue::__construct(Php::Parameters &params){
@@ -26,7 +26,6 @@ void MessageQueue::__construct(Php::Parameters &params){
     std::string brokerName = params[1];
     int queueId = params[2];
 
-    std::cout << topic << brokerName << queueId << std::endl;
     this->messageQueue = new rocketmq::MQMessageQueue(topic, brokerName, queueId);
 }
 

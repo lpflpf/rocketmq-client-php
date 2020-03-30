@@ -29,7 +29,7 @@ $producer->start();
 
 $messageQueue = new MessageQueue("TopicTest", "", 1);
 
-for ($i = 0; $i < 10000; $i ++){
+for ($i = 0; $i < 100; $i ++){
 	$message = new Message("TopicTest", "*", "hello world $i");
 	$sendResult = $producer->send($message);
 	printf("|%-30s|%-40s|\n", "msgId", $sendResult->getMsgId());
@@ -39,3 +39,5 @@ for ($i = 0; $i < 10000; $i ++){
     printf("|%-30s|%-40s|\n", "body", $message->getBody());
 	echo "-------------------------------------------------------------------------\n";
 }
+
+$producer->shutdown();

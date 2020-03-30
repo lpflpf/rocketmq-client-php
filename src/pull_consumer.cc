@@ -32,13 +32,17 @@ void PullConsumer::start(){
     this->consumer->start();
 }
 
+void PullConsumer::shutdown(){
+    this->consumer->shutdown();
+}
+
 Php::Value PullConsumer::getQueues(){
     Php::Array result;
     int idx = 0;
     this->consumer->fetchSubscribeMessageQueues(this->topicName, this->mqs);
     std::vector<rocketmq::MQMessageQueue>::iterator iter = mqs.begin();
-    for (; iter != mqs.end(); ++iter) {
-        rocketmq::MQMessageQueue mq = (*iter);
+    for (unsigned i = 0; i < mqs.size(); i ++ ){
+        rocketmq::MQMessageQueue *mq = new rocketmq::MQMessageQueue(mqs[i]);
         result[idx++] = Php::Object(MESSAGE_QUEUE_CLASS_NAME , new MessageQueue(mq)); 
     }
     return result;
@@ -173,6 +177,7 @@ void registerPullConsumer(Php::Namespace &rocketMQNamespace){
     pullConsumer.method<&PullConsumer::setInstanceName>("setInstanceName", { Php::ByVal("instance", Php::Type::String), });
     pullConsumer.method<&PullConsumer::setTopic>("setTopic", { Php::ByVal("topic", Php::Type::String), });
     pullConsumer.method<&PullConsumer::start>("start");
+    pullConsumer.method<&PullConsumer::shutdown>("shutdown");
     pullConsumer.method<&PullConsumer::getQueues>("getQueues");
 
     pullConsumer.method<&PullConsumer::setNamesrvAddr>("setNamesrvAddr", { Php::ByVal("namesrvAddr", Php::Type::String), });

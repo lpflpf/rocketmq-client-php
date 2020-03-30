@@ -27,79 +27,82 @@
 
 class PullConsumer:public Php::Base
 {
-    private:
-        std::string topicName;
-        rocketmq::DefaultMQPullConsumer *consumer;
-        std::vector<rocketmq::MQMessageQueue> mqs;
-    public:
-        PullConsumer(){
-            this->consumer = nullptr;
-        }
-        virtual ~PullConsumer(){
-            if (nullptr != this->consumer){
-                delete(this->consumer);
-            }
-        }
-        virtual void __construct(Php::Parameters &params);
+	private:
+		std::string topicName;
+		rocketmq::DefaultMQPullConsumer *consumer;
+		std::vector<rocketmq::MQMessageQueue> mqs;
+	public:
+		PullConsumer(){
+			this->consumer = nullptr;
+		}
+		virtual ~PullConsumer(){
+			//           if (nullptr != this->consumer){
+			//               delete(this->consumer);
+			//           }
+		}
+		virtual void __construct(Php::Parameters &params);
+		virtual void __destruct() {
+		}
 
-        void start();
+		void start();
+		void shutdown();
 
-        Php::Value getQueues();
+		Php::Value getQueues();
 
-        Php::Value getNamesrvDomain();
-        void setNamesrvDomain(Php::Parameters &param);
+		Php::Value getNamesrvDomain();
+		void setNamesrvDomain(Php::Parameters &param);
 
-        Php::Value getNamesrvAddr();
-        void setNamesrvAddr(Php::Parameters &param);
+		Php::Value getNamesrvAddr();
+		void setNamesrvAddr(Php::Parameters &param);
 
-        void setInstanceName(Php::Parameters &param);
+		void setInstanceName(Php::Parameters &param);
 
-        void setTopic(Php::Parameters &param);
+		void setTopic(Php::Parameters &param);
 
-        void setGroup(Php::Parameters &param);
+		void setGroup(Php::Parameters &param);
 
-        Php::Value pull(Php::Parameters &param);
-        Php::Value pullBlockIfNotFound(Php::Parameters &param);
+		Php::Value pull(Php::Parameters &param);
+		Php::Value pullBlockIfNotFound(Php::Parameters &param);
 
-        void setSessionCredentials(Php::Parameters &param);
-        Php::Value getSessionCredentials();
+		void setSessionCredentials(Php::Parameters &param);
+		Php::Value getSessionCredentials();
 
-        void updateConsumeOffset(Php::Parameters &params);
-        void removeConsumeOffset(Php::Parameters &params);
+		void updateConsumeOffset(Php::Parameters &params);
+		void removeConsumeOffset(Php::Parameters &params);
 
-        Php::Value fetchConsumeOffset(Php::Parameters &params);
+		Php::Value fetchConsumeOffset(Php::Parameters &params);
 
-        void persistConsumerOffset4PullConsumer(Php::Parameters &params);
+		void persistConsumerOffset4PullConsumer(Php::Parameters &params);
 
-        //void setLogLevel(elogLevel inputLevel);
-        void setLogLevel(Php::Parameters &param);
-        //ELogLevel getLogLevel();
-        Php::Value getLogLevel();
-        //void setLogFileSizeAndNum(int fileNum, long perFileSize);  // perFileSize is MB unit
-        void setLogFileSizeAndNum(Php::Parameters &param);
+		//void setLogLevel(elogLevel inputLevel);
+		void setLogLevel(Php::Parameters &param);
+		//ELogLevel getLogLevel();
+		Php::Value getLogLevel();
+		//void setLogFileSizeAndNum(int fileNum, long perFileSize);  // perFileSize is MB unit
+		void setLogFileSizeAndNum(Php::Parameters &param);
 
-	//const std::string& getGroupName() const;
-	Php::Value getGroupName();
+		//const std::string& getGroupName() const;
+		Php::Value getGroupName();
 
-        //void setGroupName(const std::string& groupname);
-	void setGroupName(Php::Parameters &param);
-
-
-  	// const std::string& getNameSpace() const;
-  	Php::Value getNameSpace();
-
-	//void setNameSpace(const std::string& nameSpace);
-	void setNameSpace(Php::Parameters &param);
+		//void setGroupName(const std::string& groupname);
+		void setGroupName(Php::Parameters &param);
 
 
-  	//const std::string& getInstanceName() const;
-  	Php::Value getInstanceName();
+		// const std::string& getNameSpace() const;
+		Php::Value getNameSpace();
 
-	// std::string version()
-	Php::Value version();
+		//void setNameSpace(const std::string& nameSpace);
+		void setNameSpace(Php::Parameters &param);
 
-  	//void setLogPath(const std::string& logPath);
-  	void setLogPath(Php::Parameters &logPath);
+
+		//const std::string& getInstanceName() const;
+		Php::Value getInstanceName();
+
+		// std::string version()
+		Php::Value version();
+
+		//void setLogPath(const std::string& logPath);
+		void setLogPath(Php::Parameters &logPath);
 };
 
 void registerPullConsumer(Php::Namespace &rocketMQNamespace);

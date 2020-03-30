@@ -48,6 +48,7 @@ class Producer : public Php::Base
 		Php::Value getGroupName();
 
 		void start();
+		void shutdown();
 
 		Php::Value send(Php::Parameters &params);
 		Php::Value send(Message *message);
@@ -116,7 +117,6 @@ class Producer : public Php::Base
 
 		virtual void __destruct(){
 			if (this->producer != nullptr){
-				producer->shutdown();
 				delete(this->producer);
 			}
 		}

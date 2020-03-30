@@ -25,7 +25,6 @@ function echo_msg($msg_ext){
         "tags" => $msg->getTags(),
         "storeHostString" => $msg_ext->getStoreHostString(),
         "bornTimestamp" => $msg_ext->getBornTimestamp(),
-        "queueId" => $msg_ext->getQueue(),
         "getBornTimestamp" => $msg_ext->getBornTimestamp(),
         "offsetMsgId" => $msg_ext->getOffsetMsgId(),
         "bodyCRC" => $msg_ext->getBodyCRC(),
