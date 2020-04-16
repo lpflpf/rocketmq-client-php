@@ -1,6 +1,8 @@
 # rocketmq-client-php
 
-A Php Client for Apache RocketMQ.
+A Php Client for Apache RocketMQ.   【**有问题可以加微信 f123816 反馈,备注RocketMQ Php Client**】
+
+
 
 # dependence
 * [rocketmq-client-cpp](https://github.com/apache/rocketmq-client-cpp)
