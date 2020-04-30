@@ -1,6 +1,6 @@
 # rocketmq-client-php
 
-A Php Client for Apache RocketMQ.   【**有问题可以加微信 f123816 反馈,备注RocketMQ Php Client**】
+A Php Client for Apache RocketMQ.   【有问题可以加微信 **f124816** 反馈,备注RocketMQ Php Client】
 
 
 
