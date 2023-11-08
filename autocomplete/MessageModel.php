@@ -20,8 +20,9 @@
 namespace RocketMQ;
 
 
-class MessageModel{
-	const BROADCASTING = 0;//广播模式
-	const CLUSTERING = 1;//集群负载均衡模式
+class MessageModel
+{
+	const BROADCASTING = 0; //广播模式
+	const CLUSTERING = 1; //集群负载均衡模式
 }
 

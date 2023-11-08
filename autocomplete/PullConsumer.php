@@ -24,162 +24,102 @@ namespace RocketMQ;
  * Pull method consumer.
  *
  */
-class PullConsumer{
+class PullConsumer
+{
 
 
-	public function __construct(string $instanceName){}
+	public function __construct(string $instanceName)
+	{
+	}
+
+	public function start()
+	{
+	}
+	public function shutdown()
+	{
+	}
+	public function version()
+	{
+	}
 
 	/**
-	 * 实例名,用来组合生成client_id
-	 * @param $instanceName
-	 *
+	 * @param string $groupId
 	 */
-	public function setInstanceName($instanceName){}
+	public function setGroupId($groupId)
+	{
+	}
 
 	/**
-	 * 设置名字服务链接地址
-	 * @param $address
+	 * @return string
 	 */
-	public function setNamesrvAddr($address){}
+	public function getGroupId()
+	{
+	}
 
 	/**
-	 * 获取名字服务链接地址
+	 * @param string $address
 	 */
-	public function getNamesrvAddr(){}
+	public function setNameServerAddress($address)
+	{
+	}
 
 	/**
-	 * 设置获取名字服务配置的http接口
-	 * 比如http://nameserver.abc.com/get/nameserver 这个接口返回值是127.0.0.1:9876则程序会
-	 * 自动链接到该地址，不需要显示的设置,便于更新
-	 * @param $nameserver
+	 * @param string $domain
 	 */
-	public function setNamesrvDomain($nameserver){}
-
-	public function getNamesrvDomain(){}
+	public function setNameServerDomain($domain)
+	{
+	}
 
 	/**
-	 * 注册topic
-	 * @param $topic
+	 * @param string $access_key
+	 * @param string $secret_key
+	 * @param string $one_channel
 	 */
-	public function setTopic($topic){}
-
-	public function start(){}
+	public function setSessionCredentials($access_key, $secret_key, $one_channel)
+	{
+	}
 
 	/**
-	 * 获取队列对象(MessageQueue)列表
-	 * return array
+	 * @param string $log_path
 	 */
-	public function getQueues(){}
+	public function setLogPath($log_path)
+	{
+	}
 
 	/**
-	 * 设置分组名
-	 * @param string $group
+	 * @param int $file_num
+	 * @param int $file_size
 	 */
-	public function setGroup(string $group){}
+	public function setLogFileNumAndSize($file_num, $file_size)
+	{
+	}
 
 	/**
-	 * 拉取消息
-	 * @param MessageQueue $messageQueue /指定对象
-	 * @param string $subExpression //tag表达式
-	 * @param int $offset //偏移值
-	 * @param int $maxNums //每次最多取多少条消息
+	 * @param int $level
+	 * @see ELogLevel
 	 */
-	public function pull(MessageQueue $messageQueue, string $subExpression, int $offset, int $maxNums){}
+	public function setLogLevel($level)
+	{
+	}
 
 	/**
-	 * 批量取消息
-	 * @param MessageQueue $messageQueue
-	 * @param string $subExpression
+	 * @param strng $topic
+	 * @param MesageQueues
+	 * @return int
+	 */
+	public function fetchSubscriptionMessageQueues()
+	{
+	}
+
+	/**
+	 * @param MessageQueues $message_queues
+	 * @param int $queue_index
+	 * @param string $sub_expression
 	 * @param int $offset
-	 * @param int $maxNums
+	 * @param int $max_number
+	 * @return PullResult
 	 */
-	public function pullBlockIfNotFound(MessageQueue $messageQueue, string $subExpression, int $offset, int $maxNums){}
-
-	/**
-	 * 阿里云的商用版本会用到
-	 */
-	public function getSessionCredentials(){}
-
-	public function setSessionCredentials(string $accessKey, string $secretKey, string $authChannel){}
-
-	/**
-	 * 更新消费队列偏移
-	 * @param MessageQueue $messageQueue
-	 * @param int $offset
-	 */
-	public function updateConsumeOffset(MessageQueue $messageQueue, int $offset){}
-
-	public function removeConsumeOffset(MessageQueue $messageQueue){}
-
-	/**
-	 * 获取偏移数
-	 * @param MessageQueue $messageQueue
-	 * @param string $fromStore
-	 */
-	public function fetchConsumeOffset(MessageQueue $messageQueue, string $fromStore){}
-
-	public function persistConsumerOffset4PullConsumer(Message $messageQueue){}
-	/**
-	 * 设置消息模式,广播消息或者集群消息
-	 * @param $model
-	 */
-	public function setMessageModel($model){}
-
-	public function getMessageModel($model){}
-
-	/**
-	 * 设置传出链接线程数 默认是cpu core的数值
-	 * @param int $num
-	 */
-	public function setTcpTransportPullThreadNum(int $num){}
-
-	public function getTcpTransportPullThreadNum(){}
-
-	/**
-	 * 设置tcp链接超时时间
-	 * @param int $timeout
-	 */
-	public function setTcpTransportConnectTimeout(int $timeout){}
-
-	public function getTcpTransportConnectTimeout(){}
-
-	/**
-	 * 设置申请锁超时时间
-	 * @param int $timeout
-	 */
-	public function setTcpTransportTryLockTimeout(int $timeout){}
-
-	public function getTcpTransportTryLockTimeout(){}
-
-	/**
-	 * 同一个实例链接多套rocketmq的时候需要传入，可以区别生成clientId
-	 * @param string $unitName
-	 */
-	public function setUnitName(string $unitName){}
-
-	public function getUnitName(){}
-
-	/**
-	 * 获取模式
-	 */
-	public function getConsumeFromWhere(){}
-
-	public function setConsumeFromWhere(int $consumeFromWhere){}
-
-	public function setLogLevel(int $inputLevel){}
-
-	public function getLogLevel(){}
-
-	public function setLogFileSizeAndNum($fileNum, $perFileSize){}
-
-	public function setLogPath(string $logPath){}
-
-	public function getNameSpace(){}
-	public function setNameSpace(){}
-
-	public function getGroupName(){}
-	public function setGroupName(){}
-
-	public function getInstanceName(){}
-	public function version(){}
+	public function pull($message_queues, $queue_index, $sub_expression, $offset, $max_number)
+	{
+	}
 }

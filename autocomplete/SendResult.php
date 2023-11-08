@@ -20,21 +20,27 @@
 namespace RocketMQ;
 
 
-class SendResult{
-	public function getMsgId(){
+class SendResult
+{
+	/**
+	 * Summary of getMsgId
+	 * @return string
+	 */
+	public function getMsgId()
+	{
 	}
-	public function getOffsetMsgId(){
+	/**
+	 * Summary of getOffsetMsgId
+	 * @return string
+	 */
+	public function getOffset()
+	{
 	}
-	public function getSendStatus(){
+	/**
+	 * Summary of getSendStatus
+	 * @return int
+	 */
+	public function getSendStatus()
+	{
 	}
-	public function getMessageQueue(){
-	}
-	public function getQueueOffset(){
-	}
-
-	public function getRegionId(){}
-
-	public function setRegionId(){}
-
-	public function getTransactionId(){}
 }

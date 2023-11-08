@@ -20,12 +20,13 @@
 namespace RocketMQ;
 
 
-class ELogLevel {
-	const  eLOG_LEVEL_FATAL = 1;
-	const  eLOG_LEVEL_ERROR = 2;
-	const  eLOG_LEVEL_WARN = 3;
-	const  eLOG_LEVEL_INFO = 4;
-	const  eLOG_LEVEL_DEBUG = 5;
-	const  eLOG_LEVEL_TRACE = 6;
-	const  eLOG_LEVEL_LEVEL_NUM = 7;
+class ELogLevel
+{
+	const FATAL = 1;
+	const ERROR = 2;
+	const WARN = 3;
+	const INFO = 4;
+	const DEBUG = 5;
+	const TRACE = 6;
+	const LEVEL_NUM = 7;
 }

@@ -24,74 +24,68 @@ namespace RocketMQ;
  * Class Producer
  * @package RocketMQ
  */
-class Producer {
+class Producer
+{
 
 	/**
 	 * Producer constructor.
-	 * @param string $instanceName  实例名,用来组合生成client_id
+	 * @param string $groupId 
 	 */
-	public function __construct(string $instanceName){}
+	public function __construct(string $groupId)
+	{
+	}
 
 	/**
-	 * 获取实例名
+	 * 启动
 	 */
-	public function getInstanceName(){}
+	public function start()
+	{
+	}
+
+	public function shutdown()
+	{
+	}
 
 	/**
-	 * 设置实例名
-	 * @param string $instanceName  实例名
+	 * @return version
 	 */
-	public function setInstanceName(string $instanceName){}
-
-	/**
-	 * 获取名字服务链接地址
-	 */
-	public function getNamesrvAddr(){}
+	public function version()
+	{
+	}
 
 	/**
 	 * 设置名字服务链接地址
 	 * @param string $nameserver
 	 */
-	public function setNamesrvAddr(string $nameserver){}
+	public function setNameServerAddress(string $nameserver)
+	{
+	}
 
 	/**
-	 * 设置获取名字服务配置的http接口
-	 * 比如http://nameserver.abc.com/get/nameserver 这个接口返回值是127.0.0.1:9876则程序会
-	 * 自动链接到该地址，不需要显示的设置,便于更新
-	 * @param $nameserver
+	 * 设置名字服务domain
+	 * @param string domain$
 	 */
-	public function setNamesrvDomain($nameserver){}
-
-	/**
-	 *  获取分组名称
-	 */
-	public function getGroupName(){}
+	public function setNameServerDomain(string $domain)
+	{
+	}
 
 	/**
 	 * 设置分组名
 	 * @param string $groupName
 	 */
-	public function setGroupName(string $groupName){}
+	public function setGroupName(string $groupName)
+	{
+	}
+
 
 	/**
-	 * 发送消息
-	 * @param Message | array $message 消息对象
-	 * @param MessageQueue | bool $queue
+	 * 设置实例名
+	 * @param string $instanceName  实例名
 	 */
-	public function send(Message $message, $queue){}
+	public function setInstanceName(string $instanceName)
+	{
+	}
 
-	/**
-	 * 发送消息
-	 * @param Message | array $message 消息对象
-	 * @param MessageQueue | bool $queue
-	 */
-
-	public function sendOneway(Message $message, $queue){}
-
-	/**
-	 * 阿里云商用版本需要使用这个方法链接，开源版本不需要管
-	 */
-	public function getSessionCredentials(){}
 
 	/**
 	 * 阿里云商用版本需要使用这个方法链接，开源版本不需要管
@@ -99,162 +93,156 @@ class Producer {
 	 * @param string $secretKey
 	 * @param string $autChannel
 	 */
-	public function setSessionCredentials(string $accessKey, string $secretKey, string $autChannel){}
+	public function setSessionCredentials(string $accessKey, string $secretKey, string $autChannel)
+	{
+	}
 
 	/**
-	 * 启动
+	 *  设置日志路径
 	 */
-	public function start(){}
-
-	/**
-	 * 设置发送失败重试次数
-	 * @param int $retryTimes 重试次数,默认重试5次
-	 */
-	public function setRetryTimes(int $retryTimes){}
-
-	/**
-	 * 获取发送失败重试次数
-	 */
-	public function getRetryTimes(){}
-
-	/**
-	 * 获取发送消息超时时间
-	 */
-	public function getSendMsgTimeout(){}
-
-	/**
-	 * 发送消息超时时间
-	 * @param $sendMsgTimeout 单位是毫秒  默认3000毫秒
-	 */
-	public function setSendMsgTimeout($sendMsgTimeout){}
-
-	/**
-	 * 获取消息最大限制
-	 */
-	public function  getCompressMsgBodyOverHowmuch(){}
-
-	/**
-	 * 设置消息最大限制
-	 * @param $compressMsgBodyOverHowmuch //最大限制 单位是Bit,默认是4MB
-	 */
-	public function setCompressMsgBodyOverHowmuch($compressMsgBodyOverHowmuch){}
-
-
-	/**
-	 * 获取 消息压缩等级 level = [-1, 9] 默认是5
-	 */
-	public function getCompressLevel(){}
-
-
-	/**
-	 * 设置消息压缩等级   level = [-1, 9]
-	 * @param $compressLevel //默认是5
-	 */
-	public function setCompressLevel($compressLevel){}
-
-	/**
-	 * 获取消息长度最大限制
-	 */
-	public function getMaxMessageSize(){}
-
-	/**
-	 * 设置消息长度最大限制
-	 * @param $messageSize
-	 */
-	public function setMaxMessageSize($messageSize){}
-
-	// default = cpu core.
-
-	/**
-	 * 设置传出链接线程数 默认是cpu core的数值
-	 * @param int $num //default = cpu core.
-	 */
-	public function setTcpTransportPullThreadNum(int $num){}
-
-	/**
-	 * 获取传出链接线程数 默认是cpu core的数值
-	 * @param int $num //default = cpu core.
-	 */
-	public function getTcpTransportPullThreadNum(){}
-
-
-	/**
-	 * 设置tcp链接超时时间
-	 * @param int $timeout //单位是毫秒 default = 3000 ms
-	 */
-	public function setTcpTransportConnectTimeout(int $timeout){}
-
-	/**
-	 * 获取tcp链接超时时间
-	 */
-	public function getTcpTransportConnectTimeout(){}
-
-	/**
-	 * 设置申请锁超时时间
-	 * @param int $timeout //单位是毫秒,默认3000ms
-	 */
-	public function setTcpTransportTryLockTimeout(int $timeout){}
-
-	/**
-	 * 获取申请锁超时时间
-	 */
-	public function getTcpTransportTryLockTimeout(){}
-
-	// default unitName = ""
-
-	/**
-	 * 同一个实例链接多套rocketmq的时候需要传入，可以区别生成clientId
-	 * @param string $unitName
-	 */
-	public function setUnitName(string $unitName){}
-
-	public function getUnitName(){}
-
-	/**
-	 * 设置日志等级
-	 * @param int $inputLevel
-	 */
-	public function setLogLevel(int $inputLevel){}
-
-	/**
-	 * 获取日志等级
-	 */
-	public function getLogLevel(){}
+	public function setLogPath(string $logPath)
+	{
+	}
 
 	/**
 	 * 设置日志生成规则
 	 * @param $fileNum //保留日志数目
 	 * @param $perFileSize //每个日志多大
 	 */
-	public function setLogFileSizeAndNum($fileNum, $perFileSize){}
+	public function setLogFileNumAndSize($fileNum, $perFileSize)
+	{
+	}
 
 	/**
-	*  设置日志路径
-	*  
-	*/
-	public function setLogPath(string $logPath){}
+	 * 设置日志等级
+	 * @param int $inputLevel
+	 */
+	public function setLogLevel(int $inputLevel)
+	{
+	}
 
 	/**
-	*
-	* @return string
-	*/
-	public function getNameSpace(){}
-
-	public function setNameSpace(string $nameSpace){}
-
+	 * 发送消息超时时间
+	 * @param $sendMsgTimeout 单位是毫秒  默认3000毫秒
+	 */
+	public function setSendMsgTimeout($sendMsgTimeout)
+	{
+	}
 
 	/**
-	*
-	* @return version
-	*/
-	public function version(){}
+	 * 设置消息压缩等级   level = [-1, 9]
+	 * @param $compressLevel //默认是5
+	 */
+	public function setCompressLevel($compressLevel)
+	{
+	}
 
+	/**
+	 * 设置消息长度最大限制
+	 * @param $messageSize
+	 */
+	public function setMaxMessageSize($messageSize)
+	{
+	}
 
-	public function getRetryTimes4Async(){}
-	public function setRetryTimes4Async(int $times){}
+	/**
+	 * @param int traceModel
+	 * @return int
+	 * @see TraceModel
+	 */
+	public function setMessageTrace($traceModel)
+	{
+	}
 
+	/**
+	 * @param Message $message
+	 * @return int
+	 */
+	public function setMessageSync($message)
+	{
 
-	public function getMessageTrace(){}
-	public function setMessageTrace(bool $messageTrace){}
+	}
+
+	/**
+	 * Summary of setMessageAsync
+	 * @param Message $message
+	 * @param callable $successCallback function(SendResult $sendresult, Message $message, $userData) 
+	 * @param callable $exceptionCallback function(MQException $exception, Message $message, $userData) 
+	 * @param mixed $userData
+	 * @return void
+	 */
+	public function sendMessageAsync($message, $successCallback, $exceptionCallback, $userData)
+	{
+
+	}
+
+	/**
+	 * @param Message $message
+	 * @return int
+	 */
+	public function sendMessageOneway($message)
+	{
+
+	}
+
+	/**
+	 * @param \RocketMQ\Message $message
+	 * @param callable $selector function (int $size, Message $message, $userData)
+	 * @param mixed $userData
+	 * @return void
+	 */
+	public function sendMessageOnewayOrderly(Message $message,callable $selector, $userData)
+	{
+
+	}
+
+	/**
+	 * @param \RocketMQ\Message $message
+	 * @param callable $selector function (int $size, Message $message, $userData)
+	 * @param mixed $userData
+	 * @param int $retryTimes
+	 * @param \RocketMQ\SendResult $sendResult
+	 * @return void
+	 */
+	public function sendMessageOrderly(Message $message, callable $selector, $userData, int $retryTimes, SendResult $sendResult)
+	{
+
+	}
+
+	/**
+	 * @param \RocketMQ\Message $message
+	 * @param string $shardingKey
+	 * @param \RocketMQ\SendResult $result
+	 * @return void
+	 */
+	public function sendMessageOrderlyByShardingKey(Message $message, string $shardingKey, SendResult $result)
+	{
+
+	}
+
+	/**
+	 * @param \RocketMQ\Message $message
+	 * @param callable $callback function(Message $message, $userData)
+	 * @param mixed $userData
+	 * @param \RocketMQ\SendResult $sendResult
+	 * @return void
+	 */
+	public function sendMessageTranscation(Message $message, callable $callback, $userData, SendResult $sendResult)
+	{
+
+	}
+
+	/**
+	 * @param \RocketMQ\Message $message
+	 * @param callable $callback function(Message $message, $userData)
+	 * @param mixed $userData
+	 * @param callable $successCallback function (SendResult $sendResult)
+	 * @param callable $exceptionCallback function(MQException $mqException)
+	 * @return void
+	 */
+	public function sendMessageOrderlyAsync(Message $message, callable $callback, $userData, callable $successCallback, callable $exceptionCallback)
+	{
+
+	}
 }
 

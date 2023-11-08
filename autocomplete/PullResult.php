@@ -19,19 +19,53 @@
 
 namespace RocketMQ;
 
-class PullResult implements Countable, Iterator{
-	public function getMessage($index){
+class PullResult implements \Countable, \SeekableIterator
+{
+	public function getPullStatus()
+	{
 	}
 
-	public function getPullStatus(){
+	public function getNextBeginOffset()
+	{
 	}
 
-	public function getNextBeginOffset(){
+	public function getMinOffset()
+	{
 	}
 
-	public function getMinOffset(){
+	public function getMaxOffset()
+	{
 	}
 
-	public function getMaxOffset(){
+	public function get($index)
+	{}
+
+	public function count()
+	{
+
+	}
+
+	public function current()
+	{
+
+	}
+	
+	public function key(){
+	}
+
+	public function seek($index){
+
+	}
+
+	public function next(){
+
+	}
+
+	public function rewind(){
+
+	}
+
+	public function valid(){
+
 	}
 }

@@ -24,87 +24,85 @@ namespace RocketMQ;
  * Class Message
  * @package RocketMQ
  */
-class Message {
+class Message
+{
 
     /**
      *
      * Message constructor.
      * @param string $topic //topic
-     * @param string $tags //tags
-     * @param string $body //消息内容
-     * @param string|NULL $keys //可以设置业务相关标识，用于消费处理判定，或消息追踪查询
      */
-	public function __construct(string $topic, string $tags, string $body, string $keys = NULL){}
+    public function __construct(string $topic)
+    {
+    }
+
+    public function getOriginMessageTopic()
+    {
+    }
+
+    public function setMessageTopic(string $topic)
+    {
+    }
 
     /**
-     * @param string $name
-     * @param string $value\
+     * @return string
      */
-	public function setProperty(string $name, string $value){}
+    public function getOriginMessageTags(){
 
-	public function getProperty(){}
-
-	public function getTopic(){}
-
-	public function setTopic(string $topic){}
+    }
 
     /**
      * 在消费消息时可以通过tag进行消息过滤判定
      * @param string $tags
      */
-	public function setTags(string $tags){}
+    public function setMessageTags(string $tags)
+    {
+    }
 
-	public function getKeys(){}
+    public function getOriginMessageKeys()
+    {
+    }
 
     /**
      * 可以设置业务相关标识，用于消费处理判定，或消息追踪查询
      * @param string $keys
      */
-	public function setKeys(string $keys){}
+    public function setMessageKeys(string $keys)
+    {
+    }
 
-	public function getDelayTimeLevel(){}
+    public function getOriginDelayTimeLevel()
+    {
+    }
 
     /**
      * 消息延迟处理级别，不同级别对应不同延迟时间
-     * @param int $delayTimeLevel
+     * @param int $delayTimeLevel second
      */
-	public function setDelayTimeLevel(int $delayTimeLevel){}
-
-	public function isWaitStoreMsgOK(){}
+    public function setDelayTimeLevel(int $delayTimeLevel)
+    {
+    }
 
     /**
-     * 在同步刷盘情况下是否需要等待数据落地才认为消息发送成功
-     * @param bool $waitStoreMsgOK
+     * @return string
      */
-	public function setWaitStoreMsgOK(bool $waitStoreMsgOK){}
-
-	public function getFlag(){}
-
-	public function setFlag(int $flag){}
-
-	public function getSysFlag(){}
-
-    /**
-     * 记录一些系统标志的开关状态，MessageSysFlag中定义了系统标识
-     * @param int $sysFlag
-     */
-	public function setSysFlag(int $sysFlag){}
-
-	public function getBody(){}
+    public function getOriginMessageBody()
+    {
+    }
 
     /**
      * Producer要发送的实际消息内容，以字节数组形式进行存储。Message消息有一定大小限制。
      * @param string $body
      */
-	public function setBody(string $body){}
+    public function setMessageBody(string $body)
+    {
+    }
 
-	public function getProperties(){}
+    public function getOriginMessageProperty(string $key)
+    {
+    }
 
-	public function setProperties(array $properties){}
-
-	public function getTransactionId();
-	public function setTransactionId();
-
-	public function toString(){}
-
+    public function setMessageProperty($key, $value)
+    {
+    }
 }

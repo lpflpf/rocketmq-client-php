@@ -1,0 +1,7 @@
+ARG_ENABLE('rocketmq_client_php', 'rocketmq_client_php support', 'no');
+
+if (PHP_ROCKETMQ_CLIENT_PHP != 'no') {
+	AC_DEFINE('HAVE_ROCKETMQ_CLIENT_PHP', 1, 'rocketmq_client_php support enabled');
+
+	EXTENSION('rocketmq_client_php', 'rocketmq_client_php.c', null, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1');
+}

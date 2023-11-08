@@ -24,29 +24,36 @@ namespace RocketMQ;
  * Class MessageQueue
  * @package RocketMQ
  */
-class MessageQueue{
+class MessageQueue
+{
 
     /**
      * 获取Topic
      */
-    public function getTopic(){
+    public function getTopic()
+    {
     }
 
-    public function setTopic(){
+    public function setTopic()
+    {
     }
 
     /**
      * 
      */
-    public function getBrokerName(){
+    public function getBrokerName()
+    {
     }
 
-    public function setBrokerName(){
+    public function setBrokerName()
+    {
     }
 
-    public function getQueueId(){
+    public function getQueueId()
+    {
     }
 
-    public function setQueueId(){
+    public function setQueueId()
+    {
     }
 }
