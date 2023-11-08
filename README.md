@@ -24,6 +24,7 @@ A Php Client for Apache RocketMQ.
 
 ## help
 
-![](https://raw.githubusercontent.com/lpflpf/lpflpf.github.io/main/assets/images/wechat.jpg)
+<img src="https://raw.githubusercontent.com/lpflpf/lpflpf.github.io/main/assets/images/wechat.jpg" width="300" >  
 
-![](https://raw.githubusercontent.com/lpflpf/lpflpf.github.io/main/assets/images/WechatIMG19005.jpg)
+## 赞赏
+<img src="https://raw.githubusercontent.com/lpflpf/lpflpf.github.io/main/assets/images/WechatIMG19005.jpg" width="300">
