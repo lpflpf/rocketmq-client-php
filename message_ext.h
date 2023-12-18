@@ -18,7 +18,6 @@
 #ifndef MQ_ROCKETMQ_MESSAGE_EXT_H_
 #define MQ_ROCKETMQ_MESSAGE_EXT_H_
 
-#endif // DEBUG
 #include "common.h"
 #include "php.h"
 
