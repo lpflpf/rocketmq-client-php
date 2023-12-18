@@ -2,10 +2,8 @@
 
 A Php Client for Apache RocketMQ.   
 
-> 微信 **f124816**
-
 # dependence
-* [rocketmq-client-cpp](https://github.com/apache/rocketmq-client-cpp)
+* [rocketmq-client-cpp](https://github.com/apache/rocketmq-client-cpp), please use version 2.2
 * php7/php8
 
 ## INSTALL
