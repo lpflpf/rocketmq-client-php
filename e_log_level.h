@@ -15,9 +15,13 @@
  *  limitations under the License.
  */
 
-#pragma once
+#ifndef PHP_ROCKETMQ_E_LOG_LEVEL_H_
+#define PHP_ROCKETMQ_E_LOG_LEVEL_H_
+
 #include "common.h"
 #include "php.h"
 
 #define CLASS_NAME_E_LOG_LEVEL ZEND_NS_NAME( ROCKETMQ_NS, "ELogLevel")
 void minit_e_log_level();
+
+#endif

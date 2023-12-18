@@ -15,7 +15,8 @@
  *  limitations under the License.
  */
 
-#pragma once
+#ifndef PHP_ROCKETMQ_MESSAGE_H_
+#define PHP_ROCKETMQ_MESSAGE_H_
 
 #include "common.h"
 #include "php.h"
@@ -30,3 +31,5 @@ typedef struct _message_obj {
 } message_obj;
 
 void minit_message();
+
+#endif

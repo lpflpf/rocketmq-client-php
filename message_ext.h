@@ -15,7 +15,10 @@
  *  limitations under the License.
  */
 
-#pragma once
+#ifndef MQ_ROCKETMQ_MESSAGE_EXT_H_
+#define MQ_ROCKETMQ_MESSAGE_EXT_H_
+
+#endif // DEBUG
 #include "common.h"
 #include "php.h"
 
@@ -29,3 +32,5 @@ typedef struct _message_ext_obj {
 } message_ext_obj;
 
 void minit_message_ext();
+
+#endif

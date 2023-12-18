@@ -14,8 +14,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+#ifndef PHP_ROCKETMQ_MQ_EXCEPTION_H_
+#define PHP_ROCKETMQ_MQ_EXCEPTION_H_
 
-#pragma once
 #include "common.h"
 #include "php.h"
 
@@ -30,3 +31,5 @@ typedef struct _mq_exception_obj {
 } mq_exception_obj;
 
 void minit_mq_exception();
+
+#endif

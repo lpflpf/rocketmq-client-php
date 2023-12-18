@@ -15,7 +15,8 @@
  *  limitations under the License.
  */
 
-#pragma once
+#ifndef PHP_ROCKETMQ_PULL_RESULT_H_
+#define PHP_ROCKETMQ_PULL_RESULT_H_
 
 #include "common.h"
 #include "php.h"
@@ -31,3 +32,5 @@ typedef struct _pull_result_obj{
 } pull_result_obj;
 
 void minit_pull_result();
+
+#endif

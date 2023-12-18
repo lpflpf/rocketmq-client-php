@@ -15,9 +15,13 @@
  *  limitations under the License.
  */
 
-#pragma once
+#ifndef PHP_ROCKETMQ_MESSAGE_MODEL_H_
+#define PHP_ROCKETMQ_MESSAGE_MODEL_H_
+
 #include "common.h"
 #include "php.h"
 
 #define CLASS_NAME_MESSAGE_MODEL ZEND_NS_NAME( ROCKETMQ_NS, "MessageModel")
 void minit_message_model();
+
+#endif

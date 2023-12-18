@@ -15,9 +15,13 @@
  *  limitations under the License.
  */
 
-#pragma once
+#ifndef PHP_ROCKETMQ_SEND_STATUS_H_
+#define PHP_ROCKETMQ_SEND_STATUS_H_
+
 #include "common.h"
 #include "php.h"
 
 #define CLASS_NAME_SEND_STATUS ZEND_NS_NAME( ROCKETMQ_NS, "SendStatus")
 void minit_send_status();
+
+#endif

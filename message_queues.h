@@ -15,7 +15,9 @@
  *  limitations under the License.
  */
 
-#pragma once
+#ifndef PHP_ROCKETMQ_MESSAGE_QUEUES_H_
+#define PHP_ROCKETMQ_MESSAGE_QUEUES_H_
+
 #include "common.h"
 #include "php.h"
 
@@ -31,3 +33,5 @@ typedef struct _message_queues_obj {
 } message_queues_obj;
 
 void minit_message_queues();
+
+#endif

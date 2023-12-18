@@ -15,7 +15,8 @@
  *  limitations under the License.
  */
 
-#pragma once
+#ifndef PHP_ROCKETMQ_PUSH_CONSUMER_H_
+#define PHP_ROCKETMQ_PUSH_CONSUMER_H_
 
 #include "common.h"
 #include "php.h"
@@ -31,3 +32,5 @@ typedef struct _push_consumer_obj{
 } push_consumer_obj;
 
 void minit_push_consumer();
+
+#endif

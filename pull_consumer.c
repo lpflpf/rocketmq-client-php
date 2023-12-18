@@ -21,7 +21,6 @@ zend_object_handlers pull_consumer_object_handlers;
 
 #define GET_PULL_CONSUMER_OBJ()  ROCKETMQ_ZVAL_GET_OBJECT(pull_consumer_obj, getThis())
 
-#pragma region ctor/dtor
 void pull_consumer_object_free_storage(zend_object *object) {
   pull_consumer_obj *intern = ROCKETMQ_GET_OBJECT(pull_consumer_obj, object);
   zend_object_std_dtor(&intern->std);
@@ -41,8 +40,6 @@ static zend_object *pull_consumer_object_create(zend_class_entry *type) {
   obj->std.handlers = &pull_consumer_object_handlers;
   return &obj->std;
 }
-
-#pragma endregion
 
 // __construct args
 ZEND_BEGIN_ARG_INFO_EX(arg_pull_consumer__construct, 0, 0, 1)

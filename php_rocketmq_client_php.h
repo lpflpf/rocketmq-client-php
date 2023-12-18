@@ -15,8 +15,8 @@
  *  limitations under the License.
  */
 
-#ifndef PHP_ROCKETMQ_CLIENT_PHP_H
-# define PHP_ROCKETMQ_CLIENT_PHP_H
+#ifndef PHP_ROCKETMQ_CLIENT_PHP_H_
+#define PHP_ROCKETMQ_CLIENT_PHP_H_
 
 extern zend_module_entry rocketmq_client_php_module_entry;
 # define phpext_rocketmq_client_php_ptr &rocketmq_client_php_module_entry

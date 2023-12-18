@@ -15,9 +15,13 @@
  *  limitations under the License.
  */
 
-#pragma once
+#ifndef MQ_ROCKETMQ_CONSUME_FROM_WHERE_H_
+#define MQ_ROCKETMQ_CONSUME_FROM_WHERE_H_
+
 #include "common.h"
 #include "php.h"
 
 #define CLASS_NAME_CONSUME_FROM_WHERE ZEND_NS_NAME( ROCKETMQ_NS, "ConsumeFromWhere")
 void minit_consume_from_where();
+
+#endif

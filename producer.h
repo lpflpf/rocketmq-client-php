@@ -15,7 +15,9 @@
  *  limitations under the License.
  */
 
-#pragma once
+#ifndef PHP_ROCKETMQ_PRODUCER_H_
+#define PHP_ROCKETMQ_PRODUCER_H_
+
 #include "batch_message.h"
 #include "common.h"
 #include "message.h"
@@ -38,3 +40,5 @@ typedef struct _producer_obj {
 } producer_obj;
 
 void minit_producer();
+
+#endif

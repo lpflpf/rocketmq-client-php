@@ -15,7 +15,8 @@
  *  limitations under the License.
  */
 
-#pragma once
+#ifndef PHP_ROCKETMQ_PULL_CONSUMER_H_
+#define PHP_ROCKETMQ_PULL_CONSUMER_H_
 
 #include "common.h"
 #include "php.h"
@@ -32,3 +33,5 @@ typedef struct _pull_consumer_obj{
 } pull_consumer_obj;
 
 void minit_pull_consumer();
+
+#endif

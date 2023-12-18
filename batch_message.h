@@ -15,7 +15,8 @@
  *  limitations under the License.
  */
 
-#pragma once
+#ifndef PHP_ROCKETMQ_BATCH_MESSAGE_H_
+#define PHP_ROCKETMQ_BATCH_MESSAGE_H_
 
 #include "common.h"
 #include "php.h"
@@ -31,3 +32,5 @@ typedef struct _batch_message_obj {
 } batch_message_obj;
 
 void minit_batch_message();
+
+#endif
